@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Session 1 · Design & extraction quality | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <span>Session 1 overview</span></nav>
+    <div class="page-header">
+      <h1>Session 1 overview · Design &amp; extraction quality</h1>
+      <div class="page-header__meta"><span>⏱ 2 × 2 hours</span><span>🖥 Remote, hands-on</span></div>
+    </div>
+
+<div class="lesson">
+<h2 class="lesson-title">👋 About this page</h2>
+<p><strong>Who this is for.</strong> Developers who already build IXP and DU automations. The <a href="theory-foundations.html">Foundations</a> page is a short refresher of the vocabulary used in the labs; skip it if you know DU well.</p>
+<p><strong>How to use this session.</strong> Each agenda block has a theory page followed by its hands-on lab. Follow the order in the sidebar, or the <strong>Next</strong> button at the bottom of each page: theory, then its lab, then the next theory. Read each theory page before its lab (10–15 minutes), or follow along while the trainer presents it. Each theory page ends with key takeaways, a button to the lab and the official sources.</p>
+<div class="read-first">📖 <strong>New to UiPath?</strong> Start with <a href="theory-foundations.html">Foundations</a> before the session. If you already know Document Understanding, skim the glossary and jump to <a href="theory-kickoff.html#ixp-well">Using IXP well</a>.</div>
+</div>
+
+<div class="lesson"><h2 class="lesson-title">🗓 Agenda</h2>
+<h3>Day 1 · 2 hours</h3><div class="table-wrap"><table class="comparison-table"><thead><tr><th style="width:15%;">Time</th><th>Block</th><th style="width:22%;">Type</th></tr></thead><tbody><tr><td style="white-space:nowrap;">0:00–0:10</td><td><strong>Kickoff</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Goals, agenda, a short overview of your projects</span><br><a class="theory-link" href="theory-kickoff.html#kickoff">Read the theory →</a></td><td>Discussion</td></tr><tr><td style="white-space:nowrap;">0:10–0:30</td><td><strong>Using IXP well</strong><br><span style="font-size:.84rem;color:var(--gray-600);">IXP-first approach; IXP vs. sending a PDF straight to an LLM; the generally available (GA) ways to consume IXP today</span><br><a class="theory-link" href="theory-kickoff.html#ixp-well">Read the theory →</a></td><td>Theory + discussion</td></tr><tr><td style="white-space:nowrap;">0:30–1:15</td><td><strong>Instructions &amp; taxonomy design</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Overall, field group and field instructions; data types; model choice; reading the scores (precision, recall, F1)</span><br><a class="theory-link" href="theory-instructions.html">Read the theory →</a></td><td>Theory + Lab 1</td></tr><tr><td style="white-space:nowrap;">1:15–1:20</td><td><strong>Break</strong></td><td></td></tr><tr><td style="white-space:nowrap;">1:20–1:55</td><td><strong>Repeating data</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Several accounts in one document with one field group; reviewing them in Validation Station</span><br><a class="theory-link" href="theory-repeating-data.html">Read the theory →</a></td><td>Theory + Lab 2</td></tr><tr><td style="white-space:nowrap;">1:55–2:00</td><td><strong>Recap</strong><br><span style="font-size:.84rem;color:var(--gray-600);">What we changed, what the scores showed, homework for Day 2</span></td><td>Discussion</td></tr></tbody></table></div><h3>Day 2 · 2 hours</h3><div class="table-wrap"><table class="comparison-table"><thead><tr><th style="width:15%;">Time</th><th>Block</th><th style="width:22%;">Type</th></tr></thead><tbody><tr><td style="white-space:nowrap;">0:00–0:05</td><td><strong>Recap</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Questions from Day 1</span></td><td>Discussion</td></tr><tr><td style="white-space:nowrap;">0:05–0:45</td><td><strong>Multi-document files</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Classify and split first, or not? Trade-offs in effort, accuracy and complexity</span><br><a class="theory-link" href="theory-multi-document.html">Read the theory →</a></td><td>Theory + Lab 3</td></tr><tr><td style="white-space:nowrap;">0:45–0:50</td><td><strong>Break</strong></td><td></td></tr><tr><td style="white-space:nowrap;">0:50–1:45</td><td><strong>Lean workflow, confidence &amp; validation</strong><br><span style="font-size:.84rem;color:var(--gray-600);">IXP without the full DU framework; confidence; thresholds; validation only when needed</span><br><a class="theory-link" href="theory-lean-workflow.html">Read the theory →</a></td><td>Theory + Lab 4</td></tr><tr><td style="white-space:nowrap;">1:45–2:00</td><td><strong>Wrap-up</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Best-practice checklist, open questions, what a follow-up could cover</span><br><a class="theory-link" href="wrapup-session-1.html#wrap-up">Read the theory →</a></td><td>Discussion</td></tr></tbody></table></div>
+</div>
+
+<div class="lesson"><h2 class="lesson-title">🧭 Your path through the session</h2>
+<p>Theory first, then its lab. The sidebar and the <strong>Next</strong> buttons follow this order.</p>
+<div class="table-wrap"><table class="comparison-table">
+<thead><tr><th>Day</th><th>Theory (read first)</th><th>Then the lab</th><th>Lab time</th></tr></thead>
+<tbody>
+<tr><td>Before Day 1</td><td><a href="theory-foundations.html">Foundations</a> (optional refresher)</td><td>–</td><td>–</td></tr>
+<tr><td>Day 1</td><td><a href="theory-kickoff.html">Kickoff &amp; using IXP well</a></td><td>–</td><td>–</td></tr>
+<tr><td>Day 1</td><td><a href="theory-instructions.html">Instructions &amp; taxonomy design</a></td><td><a href="lab-1-instructions.html">Lab 1</a></td><td>~35 min</td></tr>
+<tr><td>Day 1</td><td><a href="theory-repeating-data.html">Repeating data</a></td><td><a href="lab-2-repeating-data.html">Lab 2</a></td><td>~25 min</td></tr>
+<tr><td>Day 2</td><td><a href="theory-multi-document.html">Multi-document files</a></td><td><a href="lab-3-multi-document.html">Lab 3</a></td><td>~30 min</td></tr>
+<tr><td>Day 2</td><td><a href="theory-lean-workflow.html">Lean workflow, confidence &amp; validation</a></td><td><a href="lab-4-lean-workflow.html">Lab 4</a></td><td>~40 min</td></tr>
+<tr><td>Day 2</td><td colspan="3"><a href="wrapup-session-1.html">Wrap-up &amp; what's next</a>, with the worksheet</td></tr>
+</tbody>
+</table></div>
+<div class="admonition admonition--note"><div class="admonition-title">ℹ️ Note</div><div class="admonition-body">
+<p>The lab steps focus on decisions and best practices, not on every click. Screen names and activity properties can differ slightly between versions; where that matters, the lab says so.</p>
+</div></div>
+</div>
+
+<div class="lesson"><h2 class="lesson-title">🧰 Before you start</h2>
+<p><strong>Environment</strong> (details on <a href="setup.html">Setup &amp; access</a>)</p>
+<ul>
+<li>You can sign in to the workshop Automation Cloud tenant and open <strong>IXP</strong>.</li>
+<li>Studio Web opens on the same tenant (needed for Lab 4).</li>
+<li>You can create IXP projects (or the trainer has created one for you).</li>
+</ul>
+<p><strong>Sample documents</strong> (all fictional data, also on the <a href="resources.html">Resources</a> page)</p>
+<div class="table-wrap"><table class="comparison-table">
+<thead><tr><th>File</th><th>Content</th><th>Used in</th></tr></thead>
+<tbody>
+<tr><td><a download="" href="../assets/samples/bank_statement_A_4_accounts.pdf"><code>bank_statement_A_4_accounts.pdf</code></a></td><td>One bank statement, 4 accounts (ILS, USD, EUR, GBP)</td><td>Labs 2, 4</td></tr>
+<tr><td><a download="" href="../assets/samples/bank_statement_B_3_accounts.pdf"><code>bank_statement_B_3_accounts.pdf</code></a></td><td>One bank statement, 3 accounts</td><td>Labs 1, 2, 4</td></tr>
+<tr><td><a download="" href="../assets/samples/bank_statement_C_2_accounts.pdf"><code>bank_statement_C_2_accounts.pdf</code></a></td><td>One bank statement, 2 accounts</td><td>Labs 1, 2</td></tr>
+<tr><td><a download="" href="../assets/samples/customer_packet_1.pdf"><code>customer_packet_1.pdf</code></a></td><td>One PDF: invoice + multi-currency bank statement + payslip</td><td>Lab 3</td></tr>
+<tr><td><a download="" href="../assets/samples/customer_packet_2.pdf"><code>customer_packet_2.pdf</code></a></td><td>Same 3 document types in a different order (payslip, statement, invoice); 4 pages</td><td>Lab 3</td></tr>
+<tr><td><a download="" href="../assets/samples/customer_packet_3.pdf"><code>customer_packet_3.pdf</code></a></td><td>Challenge packet: a mixed file closer to real life; 5 pages</td><td>Lab 3</td></tr>
+<tr><td><a download="" href="../assets/samples/lab3_split_parts.zip"><code>lab3_split_parts.zip</code></a></td><td>Packets 1 and 2 split into one PDF per document, for approach A</td><td>Lab 3</td></tr>
+</tbody>
+</table></div>
+<p>You can use your own anonymized documents instead, if they have a similar structure.</p>
+<p><strong>Ground rules for all labs</strong></p>
+<ul>
+<li><strong>Never blind-confirm.</strong> IXP scores measure agreement with the values you confirmed. If you confirm a wrong value, it becomes the "right" answer and the score goes up anyway.</li>
+<li><strong>Change one thing at a time</strong> and evaluate after each change. Otherwise you can't tell what helped.</li>
+<li><strong>Write down the score after every change</strong> (a simple table is enough). You'll need it in the wrap-up.</li>
+</ul>
+</div>
+
+<p><a href="theory-kickoff.html" class="btn btn-primary">▶ Start: Kickoff &amp; using IXP well</a></p>
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="setup.html" class="btn btn-outline">← Setup &amp; access</a>
+      <div></div>
+      <a href="theory-foundations.html" class="btn btn-primary">Foundations →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('session-1');</script>
+</body>
+</html>

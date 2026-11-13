@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Theory · Instructions & taxonomy design | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <a href="session-1.html">Session 1</a> <span aria-hidden="true">›</span> <span>Theory · Instructions &amp; taxonomy design</span></nav>
+    <div class="page-header">
+      <h1>Theory · Instructions &amp; taxonomy design</h1>
+      <div class="page-header__meta"><span>📅 Day 1</span><span>📖 Theory</span><span>Then: Lab 1</span></div>
+    </div>
+
+<section class="lesson theory-block" id="instructions">
+<h2 class="lesson-title">✍️ Instructions &amp; taxonomy design</h2>
+<p class="theory-block__meta">⏱ Day 1 · 0:30–1:15 · Theory + <a href="lab-1-instructions.html">Lab 1</a></p>
+<p><strong>Takeaway:</strong> design a small taxonomy around what the process needs, let data types do the formatting, put each instruction at the lowest level where it is always true, and change one thing at a time with a score before and after.</p>
+
+<div class="concept">
+<h3>Taxonomy, field groups and data types</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>The taxonomy is the extraction schema. Field groups hold fields; each field has a data type. Each field group is a table and its fields are the columns. Hierarchy uses the <code>&gt;</code> sign, for example <code>Statement &gt; Accounts</code>.</div>
+<div><strong>What it does</strong>It defines the JSON shape the model fills. The data type normalises the value: <em>Exact Text</em> appears word for word (names, IDs, IBANs (International Bank Account Numbers), phone numbers); <em>Inferred Text</em> can be derived from context; <em>Number</em>, <em>Date</em> and <em>Monetary Quantity</em> have a fixed output format; <em>Boolean</em> is true/false; a custom <em>Choice</em> type maps values to a closed list.</div>
+<div class="concept-grid__when"><strong>When to use</strong>Always, before you review a single document. One field group per logical section or entity; extract only what the downstream process uses. <em>When not:</em> there are no loose "generic" fields – put document-level values in a parent group for that document type.</div>
+<div><strong>How to use</strong><ol><li>Build → Manage Taxonomy: create the field group, then add fields inside it.</li><li>Use pre-configured types first; a phone number is Exact Text, not Number.</li><li>Create a Choice type only for a closed set of values.</li><li>Save: all inline edits land as one new project version.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Splitting one entity across several groups (Customer Name, Customer Address as separate groups). Use one <em>Customers</em> group with three fields.</li><li>Copying a pre-configured type as a text type (a "Currency Amount" text type instead of Monetary Quantity) – you lose the built-in normalisation.</li><li>Changing types after review: a field type's data type cannot be changed once configured, and annotations cannot be remapped to a type with an incompatible data type.</li><li>Ignoring the documented limits: up to 32 fields per field group and 128 characters per field name.</li></ul></div>
+</div>
+</div>
+
+<div class="concept">
+<h3>The four instruction levels</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>Plain-language instructions at four levels: <strong>overall extraction instructions</strong> (whole project), <strong>field group</strong>, <strong>field</strong>, and <strong>field type</strong> (shared by every field of that type). The model sees all of them together.</div>
+<div><strong>What it does</strong><em>Overall:</em> industry, document type, usual sections, and whether one file can contain several documents. <em>Group:</em> what this section or entity is, why it matters, where it sits, how to tell instances apart. <em>Field:</em> what the value means, where it appears, a real example. <em>Field type:</em> rules true for every field of that type (for example "all amounts are in USD").</div>
+<div class="concept-grid__when"><strong>When to use</strong>Write a short overall instruction first, then group instructions, then tighten field instructions where scores show errors. Put each rule at the <strong>lowest level where it is always true</strong>. <em>When not:</em> do not use instructions to set formats for Date, Number or Monetary Quantity – the data type fixes those. (Inferred Text is the exception: an instruction can normalise it.)</div>
+<div><strong>How to use</strong><ol><li>Field pattern: <em>what + where + real example</em>.</li><li>Group pattern: section meaning + location ("header of page 1, under the title").</li><li>Describe the right value positively; avoid "do not…".</li><li>Edit in Manage Taxonomy or from the annotation pane (… → Edit field); use Change history to compare or restore.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Contradictions between levels: the model gets mixed signals.</li><li>A project-wide rule that is not true for every field (Lab 1, step 10 shows the damage).</li><li>Vague one-liners ("capture the amount") give wrong values; over-narrow labels give missed values.</li><li>Expecting a parent group's instructions to reach its child group: they do not.</li><li>Very long instructions. The January 2026 release notes raised the per-instruction limit to 4,096 characters, while the design-time FAQ (frequently asked questions) page still shows 2,048 – check your tenant, and keep instructions short anyway.</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 320" role="img" aria-labelledby="s1d4-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d4-t">Layered prompt: overall extraction instructions wrap field group instructions, which wrap the field instruction and its data type. Field type instructions are shared by every field of that type. The model reads all levels together and returns typed JSON.</title>
+<defs><marker id="s1d4-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<text x="20" y="24" font-size="15" font-weight="700" fill="#182126">One prompt, built from four levels</text>
+<rect x="20" y="40" width="560" height="265" fill="#F6F6F6" stroke="#3C464B" stroke-width="1.5"/>
+<text x="36" y="64" font-size="14" font-weight="700" fill="#182126">Overall extraction instructions</text>
+<text x="36" y="84" font-size="13" fill="#3C464B">Every field: industry, document type, several documents per file?</text>
+<rect x="44" y="100" width="512" height="185" fill="#A5E2F0" stroke="#0BA2B3" stroke-width="1.5"/>
+<text x="60" y="124" font-size="14" font-weight="700" fill="#182126">Field group instructions</text>
+<text x="60" y="144" font-size="13" fill="#182126">What this section is, where it sits, how to tell instances apart</text>
+<rect x="68" y="160" width="464" height="105" fill="#FFFFFF" stroke="#FA4616" stroke-width="2"/>
+<text x="84" y="185" font-size="14" font-weight="700" fill="#182126">Field instruction</text>
+<text x="84" y="206" font-size="13" fill="#3C464B">What the value means + where + a real example</text>
+<line x1="84" y1="220" x2="516" y2="220" stroke="#D9D9D9" stroke-width="1"/>
+<text x="84" y="240" font-size="13" fill="#3C464B">Data type fixes the format (Date, Number,</text>
+<text x="84" y="257" font-size="13" fill="#3C464B">Monetary Quantity) – not the instruction</text>
+<rect x="620" y="40" width="240" height="90" fill="#182126"/>
+<text x="740" y="78" font-size="14" font-weight="600" text-anchor="middle" fill="#FFFFFF">Model reads all levels</text>
+<text x="740" y="100" font-size="14" text-anchor="middle" fill="#FFFFFF">together → typed JSON</text>
+<line x1="580" y1="85" x2="618" y2="85" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d4-a)"/>
+<rect x="620" y="170" width="240" height="90" fill="#FDE8E1" stroke="#CE340B" stroke-width="1.5"/>
+<text x="740" y="200" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Field type instructions</text>
+<text x="740" y="222" font-size="13" text-anchor="middle" fill="#3C464B">shared by every field</text>
+<text x="740" y="240" font-size="13" text-anchor="middle" fill="#3C464B">of that type</text>
+<line x1="620" y1="215" x2="534" y2="215" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d4-a)"/>
+</svg>
+<figcaption>Rules flow inward: an overall rule reaches every field, a field rule reaches one. Parent group instructions do not flow to child groups. Lab 1 (step 7) has the matching "where does the fix go?" decision flow.</figcaption>
+</figure>
+
+<div class="foundation-box"><div class="foundation-box__title">Precision, recall and F1 in plain words</div><p><strong>Precision:</strong> of the values the model returned, how many were right. <strong>Recall:</strong> of the values that are really in the documents, how many the model found. <strong>F1</strong> combines both and is high only when both are high: F1 = 2 × P × R / (P + R). All three compare predictions with <em>your annotations</em>, so they are only as good as your review.</p></div>
+
+<div class="concept">
+<h3>Measuring and iterating: annotations, scores and model settings</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>The build loop: review predictions, confirm or correct them (annotations), read the scores on the Build and Measure tabs, change one thing, refresh predictions, compare. Model configuration (Build → Model configuration) sets the extraction model and intelligent pre-processing.</div>
+<div><strong>What it does</strong>Annotations are the reference answers; the model does <strong>not</strong> learn from them. Improvement comes only from instructions and model configuration. Gemini is the recommended extraction model and the default for new projects; GPT-4o is the alternative. Pre-processing: <em>None</em>, <em>Table model - mini</em> (simple or several tables, faster) or <em>Table model</em> (complex tables, more latency, relies on Gemini). Switching model creates a new version and new predictions.</div>
+<div class="concept-grid__when"><strong>When to use</strong>After every meaningful change, on the same document set. The docs recommend reviewing 2–3 documents first, testing instructions on 20–30 representative documents, and at least 10 annotated examples per field for meaningful statistics. <em>When not:</em> do not change model and instructions in the same iteration.</div>
+<div><strong>How to use</strong><ol><li>Read F1 per field, not only the project score.</li><li>Low precision → tighten (label, location, disambiguator). Low recall → broaden (format variants, synonyms).</li><li>Switch model only if it fixes a real problem; instructions tuned for one model can score lower on another.</li><li>Record every score in a table.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Blind-confirming: a wrong confirmed value counts as correct and inflates the score.</li><li>Leaving documents partially annotated: they are left out of the metrics.</li><li>Reading small score changes as real: LLM output varies slightly between runs.</li><li>Trying to fix OCR or layout problems with instructions; try pre-processing instead.</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 280" role="img" aria-labelledby="s1d5-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d5-t">How each kind of error moves the scores. Extra values lower precision; incorrect values lower both precision and recall; missed values lower recall. Fix low precision by tightening the instruction and low recall by broadening it. F1 combines both.</title>
+<text x="20" y="24" font-size="15" font-weight="700" fill="#182126">How each kind of error moves the scores</text>
+<rect x="20" y="44" width="190" height="64" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="115" y="70" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Correct</text>
+<text x="115" y="92" font-size="13" text-anchor="middle" fill="#3C464B">matches annotation</text>
+<rect x="240" y="44" width="190" height="64" fill="#FFFFFF" stroke="#CE340B" stroke-width="2"/>
+<text x="335" y="70" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Extra</text>
+<text x="335" y="92" font-size="13" text-anchor="middle" fill="#3C464B">value where none is</text>
+<rect x="460" y="44" width="190" height="64" fill="#FFFFFF" stroke="#CE340B" stroke-width="2"/>
+<text x="555" y="70" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Incorrect</text>
+<text x="555" y="92" font-size="13" text-anchor="middle" fill="#3C464B">wrong value returned</text>
+<rect x="680" y="44" width="190" height="64" fill="#FFFFFF" stroke="#CE340B" stroke-width="2"/>
+<text x="775" y="70" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Missed</text>
+<text x="775" y="92" font-size="13" text-anchor="middle" fill="#3C464B">there, not found</text>
+<text x="115" y="134" font-size="13" text-anchor="middle" fill="#616161">raises both</text>
+<line x1="335" y1="108" x2="335" y2="160" stroke="#3C464B" stroke-width="1.5"/>
+<line x1="530" y1="108" x2="420" y2="160" stroke="#3C464B" stroke-width="1.5"/>
+<line x1="580" y1="108" x2="600" y2="160" stroke="#3C464B" stroke-width="1.5"/>
+<line x1="775" y1="108" x2="740" y2="160" stroke="#3C464B" stroke-width="1.5"/>
+<rect x="150" y="160" width="300" height="64" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="300" y="186" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Precision drops</text>
+<text x="300" y="208" font-size="13" text-anchor="middle" fill="#3C464B">Fix: tighten – label, location</text>
+<rect x="470" y="160" width="300" height="64" fill="#A5E2F0" stroke="#0BA2B3" stroke-width="2"/>
+<text x="620" y="186" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Recall drops</text>
+<text x="620" y="208" font-size="13" text-anchor="middle" fill="#3C464B">Fix: broaden – formats, synonyms</text>
+<text x="440" y="262" font-size="14" text-anchor="middle" fill="#182126">F1 = 2 × P × R / (P + R): high only when precision and recall are both high</text>
+</svg>
+<figcaption>Error classes as the Measure page counts them (incorrect, missed, extra). An incorrect value is a wrong prediction and a missed true value at the same time.</figcaption>
+</figure>
+
+<div class="why-box"><div class="why-box__title">💬 "What does each prompt level do: overall, field group, field?"</div>
+<p><strong>Overall</strong> gives context for the whole project: the industry, the document type and its sections, and whether one file can hold several documents. <strong>Field group</strong> explains one section or entity: what it is, where it is, and how to recognise each instance. <strong>Field</strong> explains one value: what it means, where it is, and an example. A fourth level, <strong>field type</strong>, holds rules shared by all fields of one type. The model reads them all at once, so they must not contradict each other. Rule of thumb: one wrong field → fix the field; a whole section wrong → the group; wrong context or language → overall. Leave date and amount formats to the data type.</p></div>
+
+<div class="admonition admonition--tip"><div class="admonition-title">💡 Key takeaways</div><div class="admonition-body"><ul>
+<li>Field level is the default place for a fix; go higher only when the rule is true for everything below.</li>
+<li>Good instructions say what, where and an example, and leave formatting to the data type.</li>
+<li>Annotations are the reference answers: they produce the scores, they do not train the model.</li>
+<li>One change, one measurement, one row in your score table.</li>
+</ul></div></div>
+<p class="source-list"><strong>Sources:</strong>
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/defining-taxonomy" target="_blank" rel="noopener">Defining the taxonomy</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/creating-and-configuring-fields" target="_blank" rel="noopener">Managing the taxonomy</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/best-practices" target="_blank" rel="noopener">Best practices</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/generating-and-reviewing-predictions" target="_blank" rel="noopener">Reviewing predictions</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/validating-extractions" target="_blank" rel="noopener">Validating extraction predictions</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/evaluating-model-performance" target="_blank" rel="noopener">Evaluating model performance</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/configuring-the-model" target="_blank" rel="noopener">Configuring the model</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-design-time" target="_blank" rel="noopener">FAQ – design time</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/release-notes/ucd-january-2026" target="_blank" rel="noopener">Release notes – January 2026</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/release-notes/ucd-december-2025" target="_blank" rel="noopener">Release notes – December 2025</a>
+</p>
+</section>
+
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="theory-kickoff.html" class="btn btn-outline">← Kickoff &amp; using IXP well</a>
+      <div></div>
+      <a href="lab-1-instructions.html" class="btn btn-primary">Lab 1 · Instructions &amp; taxonomy →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('theory-instructions');</script>
+</body>
+</html>

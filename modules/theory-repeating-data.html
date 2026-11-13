@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Theory · Repeating data | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <a href="session-1.html">Session 1</a> <span aria-hidden="true">›</span> <span>Theory · Repeating data</span></nav>
+    <div class="page-header">
+      <h1>Theory · Repeating data</h1>
+      <div class="page-header__meta"><span>📅 Day 1</span><span>📖 Theory</span><span>Then: Lab 2</span></div>
+    </div>
+
+<section class="lesson theory-block" id="repeating-data">
+<h2 class="lesson-title">🔁 Repeating data</h2>
+<p class="theory-block__meta">⏱ Day 1 · 1:20–1:55 · Theory + <a href="lab-2-repeating-data.html">Lab 2</a></p>
+<p><strong>Takeaway:</strong> when the same information appears several times – accounts, line items, parties – model it as <strong>one field group</strong>. The model returns one row (one extraction) per occurrence, whether there are 2 or 20.</p>
+
+<div class="concept">
+<h3>One field group, one row per occurrence</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>A field group is a table: its fields are columns and each occurrence the model finds in the document is a row, called an extraction. The <em>Account</em> group with Account Number, Currency and balances returns 4 rows for a 4-account statement.</div>
+<div><strong>What it does</strong>It replaces numbered fields (Account 1 Balance, Account 2 Balance…) with one definition that works for any count. A key field (such as the account number) in the group keeps occurrences apart and makes each row traceable.</div>
+<div class="concept-grid__when"><strong>When to use</strong>Any value set that repeats: accounts per currency, invoice lines, policy holders, transactions. <em>When not:</em> values that appear once per document (bank name, statement date) belong in a separate header group, so they are not repeated on every row.</div>
+<div><strong>How to use</strong><ol><li>Create one group (for example <code>Account</code>) with the per-occurrence fields.</li><li>Group instruction: "One occurrence per bank account listed. Each account has its own section… Extract every account, in the order they appear."</li><li>Say which part of the document to use if the same data also appears in a summary table.</li><li>Use Monetary Quantity for amounts so the currency travels with the value.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Numbered fields: they break as soon as the count changes and leave empty slots on shorter documents.</li><li>The same account picked up twice, from a summary table and from its detail section. Fix it in the group instruction.</li><li>No unique key field: two accounts with the same currency become hard to tell apart.</li><li>Exceeding 32 fields in one group: split the entity, or use a child group.</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 310" role="img" aria-labelledby="s1d6-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d6-t">Flat numbered fields versus one field group. Flat fields need new fields for a fifth account. One Account field group returns one row per account, so six accounts simply give six rows without changing the taxonomy.</title>
+<text x="20" y="24" font-size="15" font-weight="700" fill="#182126">Same statement, two designs</text>
+<text x="20" y="58" font-size="14" font-weight="700" fill="#CE340B">Flat fields (avoid)</text>
+<rect x="20" y="70" width="290" height="30" fill="#FFFFFF" stroke="#D9D9D9"/>
+<text x="34" y="90" font-size="13" fill="#3C464B">Account 1 Number</text>
+<rect x="20" y="104" width="290" height="30" fill="#FFFFFF" stroke="#D9D9D9"/>
+<text x="34" y="124" font-size="13" fill="#3C464B">Account 1 Balance</text>
+<rect x="20" y="138" width="290" height="30" fill="#FFFFFF" stroke="#D9D9D9"/>
+<text x="34" y="158" font-size="13" fill="#3C464B">Account 2 Number … Account 4 Balance</text>
+<rect x="20" y="172" width="290" height="30" fill="#FFFFFF" stroke="#D9D9D9"/>
+<text x="34" y="192" font-size="13" fill="#3C464B">2-account file: half fields empty</text>
+<rect x="20" y="206" width="290" height="30" fill="#FDE8E1" stroke="#CE340B" stroke-dasharray="5 4"/>
+<text x="34" y="226" font-size="13" fill="#CE340B">5th account? Add new fields</text>
+<text x="345" y="156" font-size="14" font-weight="700" text-anchor="middle" fill="#616161">vs</text>
+<text x="380" y="58" font-size="14" font-weight="700" fill="#0BA2B3">Field group Account – one row per account</text>
+<rect x="380" y="70" width="180" height="32" fill="#182126"/>
+<rect x="560" y="70" width="120" height="32" fill="#182126"/>
+<rect x="680" y="70" width="180" height="32" fill="#182126"/>
+<text x="470" y="91" font-size="13" text-anchor="middle" fill="#FFFFFF">Account Number</text>
+<text x="620" y="91" font-size="13" text-anchor="middle" fill="#FFFFFF">Currency</text>
+<text x="770" y="91" font-size="13" text-anchor="middle" fill="#FFFFFF">Closing Balance</text>
+<rect x="380" y="102" width="480" height="32" fill="#FFFFFF" stroke="#D9D9D9"/>
+<rect x="380" y="134" width="480" height="32" fill="#F6F6F6" stroke="#D9D9D9"/>
+<rect x="380" y="166" width="480" height="32" fill="#FFFFFF" stroke="#D9D9D9"/>
+<rect x="380" y="198" width="480" height="32" fill="#F6F6F6" stroke="#D9D9D9"/>
+<line x1="560" y1="102" x2="560" y2="230" stroke="#D9D9D9"/>
+<line x1="680" y1="102" x2="680" y2="230" stroke="#D9D9D9"/>
+<text x="470" y="123" font-size="13" text-anchor="middle" fill="#616161">row 1</text>
+<text x="620" y="123" font-size="13" text-anchor="middle" fill="#182126">ILS</text>
+<text x="770" y="123" font-size="13" text-anchor="middle" fill="#616161">amount + ILS</text>
+<text x="470" y="155" font-size="13" text-anchor="middle" fill="#616161">row 2</text>
+<text x="620" y="155" font-size="13" text-anchor="middle" fill="#182126">USD</text>
+<text x="770" y="155" font-size="13" text-anchor="middle" fill="#616161">amount + USD</text>
+<text x="470" y="187" font-size="13" text-anchor="middle" fill="#616161">row 3</text>
+<text x="620" y="187" font-size="13" text-anchor="middle" fill="#182126">EUR</text>
+<text x="770" y="187" font-size="13" text-anchor="middle" fill="#616161">amount + EUR</text>
+<text x="470" y="219" font-size="13" text-anchor="middle" fill="#616161">row 4</text>
+<text x="620" y="219" font-size="13" text-anchor="middle" fill="#182126">GBP</text>
+<text x="770" y="219" font-size="13" text-anchor="middle" fill="#616161">amount + GBP</text>
+<rect x="20" y="256" width="840" height="40" fill="#182126"/>
+<text x="440" y="281" font-size="14" text-anchor="middle" fill="#FFFFFF">Next month a statement has 6 accounts? Same group, 6 rows – no taxonomy change.</text>
+</svg>
+<figcaption>bank_statement_A_4_accounts.pdf modelled two ways. Lab 2 builds both so you can compare the scores.</figcaption>
+</figure>
+
+<div class="concept">
+<h3>Parent and child field groups (nested repeating data)</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>A child group sits under a parent group, written <code>Parent &gt; Child</code>, for example <code>Account &gt; Transactions</code> or the docs' <code>Invoice &gt; Line Items</code>.</div>
+<div><strong>What it does</strong>The parent acts as a gate: if no parent is predicted, the child returns nothing. The parent's instructions do <strong>not</strong> influence the child, so the child needs its own instruction.</div>
+<div class="concept-grid__when"><strong>When to use</strong>A repeating structure inside another one: transactions per account, line items per invoice, assets per portfolio. <em>When not:</em> do not nest unrelated data under one parent (address and holdings under "Account Owner") – the hierarchy should mirror the document.</div>
+<div><strong>How to use</strong><ol><li>Manage Taxonomy → on the parent group select Add → New field group.</li><li>Write a child instruction that stands on its own (what a row is, where the table is).</li><li>Include the parent's key field if you need to join rows later.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Relying on the parent instruction to explain the child table.</li><li>A parent group that is rarely found, which silently hides all child rows.</li><li>Unrelated child groups under one parent, which confuses the model.</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 230" role="img" aria-labelledby="s1d7-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d7-t">Parent and child groups: if the parent group Account is found, Account greater-than Transactions rows are extracted per account; if not, no transactions are returned. Parent instructions do not flow to the child.</title>
+<defs><marker id="s1d7-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<text x="20" y="24" font-size="15" font-weight="700" fill="#182126">Parent &gt; child: the parent is a gate</text>
+<rect x="20" y="80" width="230" height="80" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="135" y="113" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Parent Account</text>
+<text x="135" y="134" font-size="13" text-anchor="middle" fill="#3C464B">found in the document?</text>
+<line x1="250" y1="105" x2="328" y2="72" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d7-a)"/>
+<text x="282" y="78" font-size="13" fill="#616161">yes</text>
+<line x1="250" y1="140" x2="328" y2="170" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d7-a)"/>
+<text x="282" y="172" font-size="13" fill="#616161">no</text>
+<rect x="330" y="42" width="270" height="62" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="465" y="68" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Account &gt; Transactions</text>
+<text x="465" y="89" font-size="13" text-anchor="middle" fill="#3C464B">rows extracted per account</text>
+<rect x="330" y="140" width="270" height="62" fill="#F6F6F6" stroke="#616161" stroke-width="2"/>
+<text x="465" y="166" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">No Transactions</text>
+<text x="465" y="187" font-size="13" text-anchor="middle" fill="#3C464B">child returns nothing</text>
+<rect x="640" y="42" width="220" height="160" fill="#A5E2F0" stroke="#0BA2B3" stroke-width="1.5"/>
+<text x="750" y="72" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Instructions do not</text>
+<text x="750" y="92" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">flow down</text>
+<text x="750" y="122" font-size="13" text-anchor="middle" fill="#182126">The child never sees</text>
+<text x="750" y="141" font-size="13" text-anchor="middle" fill="#182126">the parent's text.</text>
+<text x="750" y="168" font-size="13" text-anchor="middle" fill="#182126">Give each child group</text>
+<text x="750" y="187" font-size="13" text-anchor="middle" fill="#182126">its own instruction.</text>
+</svg>
+<figcaption>Documented behaviour of field group hierarchies (Managing the taxonomy). Lab 2's stretch goal builds Account &gt; Transactions.</figcaption>
+</figure>
+
+<div class="concept">
+<h3>Reviewing repeating data</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>At design time: the <strong>table view</strong> on the Validate predictions page. At runtime: Validation Station, where IXP Unstructured and complex documents results are always validated as tables.</div>
+<div><strong>What it does</strong>Shows each occurrence as a row so a reviewer can compare row by row with the document, add a missing row, and confirm correct rows. Field filters in Validation Station help reviewers focus on what is left to check.</div>
+<div class="concept-grid__when"><strong>When to use</strong>Every time a group can repeat. <em>When not:</em> do not bulk-confirm a whole group unless every row is correct.</div>
+<div><strong>How to use</strong><ol><li>Validate predictions → select the table icon.</li><li>Check row count against the document first, then values.</li><li>Confirm correct rows; correct or add the rest; submit the document.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Confirming a whole group when only some rows are right: the wrong rows become "correct".</li><li>Checking values but not the row count: a missing account is a missed prediction too.</li></ul></div>
+</div>
+</div>
+
+<div class="why-box"><div class="why-box__title">💬 "The same information appears several times (4 bank accounts, one per currency). How do we extract it?"</div>
+<p>Create one field group, for example <em>Account</em>, with the fields one account has: account number, currency, opening and closing balance. The model returns one row per account it finds, so the same design works for 2, 4 or 10 accounts. Add a group instruction that says what one account is and which section to read, and keep the account number as a key. If each account also has transactions, add a child group <em>Account &gt; Transactions</em> with its own instruction. Review the result in table view, row by row.</p></div>
+
+<div class="admonition admonition--tip"><div class="admonition-title">💡 Key takeaways</div><div class="admonition-body"><ul>
+<li>Repeating information = one field group, one row per occurrence.</li>
+<li>Use a unique key field and say which part of the document to read.</li>
+<li>Child groups need their own instruction and only appear when the parent is found.</li>
+<li>Review repeating data in table view, row by row.</li>
+</ul></div></div>
+<p class="source-list"><strong>Sources:</strong>
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/creating-and-configuring-fields" target="_blank" rel="noopener">Managing the taxonomy</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/defining-taxonomy" target="_blank" rel="noopener">Defining the taxonomy</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/best-practices" target="_blank" rel="noopener">Best practices</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-design-time" target="_blank" rel="noopener">FAQ – design time</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/validating-extractions" target="_blank" rel="noopener">Validating extraction predictions</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-runtime" target="_blank" rel="noopener">FAQ – runtime</a> ·
+<a href="https://docs.uipath.com/action-center/automation-cloud/latest/user-guide/validation-station-field-filters" target="_blank" rel="noopener">Field filters in the Validation Station</a>
+</p>
+</section>
+
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="lab-1-instructions.html" class="btn btn-outline">← Lab 1 · Instructions &amp; taxonomy</a>
+      <div></div>
+      <a href="lab-2-repeating-data.html" class="btn btn-primary">Lab 2 · Repeating data →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('theory-repeating-data');</script>
+</body>
+</html>

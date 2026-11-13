@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>IXP best-practice checklist | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <span>IXP best-practice checklist</span></nav>
+    <div class="page-header">
+      <h1>IXP best-practice checklist</h1>
+      <div class="page-header__meta"><span>📋 Checklist</span><span>🖨 Printable</span></div>
+    </div>
+
+<div class="checklist-toolbar"><span>Tick items as you apply them. Ticks are saved in this browser.</span><button class="btn btn-outline btn-sm" data-reset-checklist="best-practices">Reset all ticks</button><button class="btn btn-outline btn-sm" onclick="window.print()">Print</button></div>
+<p>Use this checklist when you design, build, test and run an IXP project for unstructured and complex documents.</p>
+<div class="lesson"><h2 class="lesson-title"><ol>
+<li>Choosing the approach</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-2:1" type="checkbox"/><span>Start from the use case (what data, for which decision), not from the tool.</span></label></li>
+<li><label><input data-check-id="best-practices-2:2" type="checkbox"/><span>Use IXP for unstructured and complex documents where the layout varies and values need understanding, not only position.</span></label></li>
+<li><label><input data-check-id="best-practices-2:3" type="checkbox"/><span>Prefer the platform over a raw LLM call when you need measurement, confidence, human validation, versioning and governance.</span></label></li>
+<li><label><input data-check-id="best-practices-2:4" type="checkbox"/><span>Check data constraints early: data residency, the customer's AI Trust Layer policy, and whether the customer wants to use their own LLM subscription (BYOS, Preview).</span></label></li>
+<li><label><input data-check-id="best-practices-2:5" type="checkbox"/><span>Decide early how the model will be consumed: Studio activities or the DU API (generally available), or a coded workflow or IXP in Flow (both Preview).</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="2">
+<li>Taxonomy design</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-3:1" type="checkbox"/><span>One field group per logical section or entity (e.g. Header, Account, Transaction).</span></label></li>
+<li><label><input data-check-id="best-practices-3:2" type="checkbox"/><span>Keep field names short and business-meaningful. Use the same names your downstream system uses.</span></label></li>
+<li><label><input data-check-id="best-practices-3:3" type="checkbox"/><span>Only extract what the process actually needs. Every extra field costs accuracy, time and review effort.</span></label></li>
+<li><label><input data-check-id="best-practices-3:4" type="checkbox"/><span>Use <strong>repeatable field groups</strong> for anything that can occur more than once (accounts, line items, parties).</span></label></li>
+<li><label><input data-check-id="best-practices-3:5" type="checkbox"/><span>Don't split one concept across two fields in different groups.</span></label></li>
+<li><label><input data-check-id="best-practices-3:6" type="checkbox"/><span>Agree on the taxonomy with the business before you build. Changing it later means re-reviewing documents.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="3">
+<li>Instruction writing</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-4:1" type="checkbox"/><span>Know the four levels:
+</span></label><ul class="checklist">
+<li><label><input data-check-id="best-practices-4:2" type="checkbox"/><span><strong>Overall instructions:</strong> rules that apply to every field (document context, language, general conventions).</span></label></li>
+<li><label><input data-check-id="best-practices-4:3" type="checkbox"/><span><strong>Field group instructions:</strong> what the section or entity is and how to recognise each instance.</span></label></li>
+<li><label><input data-check-id="best-practices-4:4" type="checkbox"/><span><strong>Field instructions:</strong> what this one value is, where it appears, and an example.</span></label></li>
+<li><label><input data-check-id="best-practices-4:17" type="checkbox"/><span><strong>Field type instructions:</strong> rules shared by every field of that type (e.g. "all amounts are in USD"). Only text that is true for all of those fields.</span></label></li>
+</ul></li>
+<li><label><input data-check-id="best-practices-4:5" type="checkbox"/><span>Put a rule at the lowest level where it is always true. A project-level rule that doesn't hold for every field belongs at group or field level.</span></label></li>
+<li><label><input data-check-id="best-practices-4:6" type="checkbox"/><span>Each field instruction says <strong>what</strong> + <strong>where</strong> + a <strong>real example</strong> (e.g. "Labelled 'IBAN' in the account summary box on page 1. Example: IL62 0108 0000 0009 9999 999").</span></label></li>
+<li><label><input data-check-id="best-practices-4:7" type="checkbox"/><span>Write clear, specific instructions that say what the value means, where it is and give an example. "Extract the date" is too vague.</span></label></li>
+<li><label><input data-check-id="best-practices-4:8" type="checkbox"/><span>Maximum <strong>4,096 characters</strong> per instruction, at every level (raised from 2,048 in January 2026; the design-time FAQ may still show the older figure). Shorter, focused instructions are easier to debug.</span></label></li>
+<li><label><input data-check-id="best-practices-4:9" type="checkbox"/><span><strong>No format patterns</strong> in instructions (e.g. "Format: DD/MM/YYYY"). Date, Number and Monetary Quantity fix the output format, and an instruction cannot change it. Inferred Text is the exception: there an instruction can normalise the output.</span></label></li>
+<li><label><input data-check-id="best-practices-4:10" type="checkbox"/><span>Check for contradictions between the overall, field group, field and field type levels after every change.</span></label></li>
+<li><label><input data-check-id="best-practices-4:11" type="checkbox"/><span>Describe the right value by its label, role and location. Avoid long lists of "do not return X".</span></label></li>
+<li><label><input data-check-id="best-practices-4:12" type="checkbox"/><span>Change one thing at a time, then re-evaluate. Keep the previous version so you can roll back.</span></label></li>
+</ul>
+<p><strong>Data types</strong></p>
+<ul class="checklist">
+<li><label><input data-check-id="best-practices-4:13" type="checkbox"/><span>Reuse the pre-configured field types first: <strong>Exact Text</strong>, <strong>Inferred Text</strong>, <strong>Number</strong>, <strong>Date</strong>, <strong>Monetary Quantity</strong>, <strong>Boolean</strong>. Settle types before you review: a field type's data type cannot be changed once configured.</span></label></li>
+<li><label><input data-check-id="best-practices-4:14" type="checkbox"/><span><strong>Exact Text</strong> for values copied verbatim (names, IDs, IBANs). <strong>Inferred Text</strong> for values that are derived and don't appear verbatim.</span></label></li>
+<li><label><input data-check-id="best-practices-4:15" type="checkbox"/><span><strong>Monetary Quantity</strong> for any amount. Don't create your own "Currency Amount" type.</span></label></li>
+<li><label><input data-check-id="best-practices-4:16" type="checkbox"/><span>Create a custom field type with the <strong>Choice</strong> data type for a closed list of allowed values (e.g. document category, currency set). Only when the complete list is known and authoritative.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="4">
+<li>Repeating data</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-5:1" type="checkbox"/><span>Model repeated entities (e.g. 4 bank accounts, one per currency) as <strong>one repeatable field group</strong>, not as Account1/Account2/… fields.</span></label></li>
+<li><label><input data-check-id="best-practices-5:2" type="checkbox"/><span>In the group instructions, explain how to tell one instance from the next (e.g. "one instance per account section, each with its own currency and account number").</span></label></li>
+<li><label><input data-check-id="best-practices-5:3" type="checkbox"/><span>Include the distinguishing field (currency, account number) in every instance.</span></label></li>
+<li><label><input data-check-id="best-practices-5:4" type="checkbox"/><span>Review each instance separately. Confirm only the correct ones.</span></label></li>
+<li><label><input data-check-id="best-practices-5:5" type="checkbox"/><span>In Validation Station, IXP results are validated as tables: use Confirm All Cells to confirm a whole table, and in the compact view use field filters (e.g. hide Confirmed) to see only what is left to check.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="5">
+<li>Model &amp; pre-processing</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-6:1" type="checkbox"/><span>Pick pre-processing by layout:
+</span></label><ul class="checklist">
+<li><label><input data-check-id="best-practices-6:2" type="checkbox"/><span><strong>None</strong> (<code>none</code>, the default setting) – simple documents, no tables</span></label></li>
+<li><label><input data-check-id="best-practices-6:3" type="checkbox"/><span><strong>Table model - mini</strong> (<code>table_mini</code>) – simple or several tables, optimised for speed; our recommended starting point</span></label></li>
+<li><label><input data-check-id="best-practices-6:4" type="checkbox"/><span><strong>Table model</strong> (<code>table</code>) – complex nested tables, merged cells, multi-page tables; adds latency and relies on Gemini</span></label></li>
+</ul></li>
+<li><label><input data-check-id="best-practices-6:5" type="checkbox"/><span>For hard or long documents, try a second model from the model picker and compare scores on the same test set.</span></label></li>
+<li><label><input data-check-id="best-practices-6:6" type="checkbox"/><span>Check where a model's requests are routed before choosing it. The model picker shows the <strong>routing region</strong> when a model does not stay in your tenant's region, and data residency is not guaranteed for some Preview models.</span></label></li>
+<li><label><input data-check-id="best-practices-6:7" type="checkbox"/><span>Record the model and pre-processing choice with each version, so results are comparable.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="6">
+<li>Labelling &amp; measurement</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-7:1" type="checkbox"/><span>Review and confirm <strong>field by field</strong>, not whole documents at once.</span></label></li>
+<li><label><input data-check-id="best-practices-7:2" type="checkbox"/><span><strong>Never blind-confirm.</strong> Metrics measure agreement with <em>your confirmed labels</em>. A wrong value you confirm becomes "correct".</span></label></li>
+<li><label><input data-check-id="best-practices-7:3" type="checkbox"/><span>Correct a wrong prediction to the true value, then submit the document: partially annotated documents are left out of the scores. Corrections do not train the model; improve the score through instructions and model settings.</span></label></li>
+<li><label><input data-check-id="best-practices-7:4" type="checkbox"/><span>Mark a field as missing only when it is genuinely absent from the document.</span></label></li>
+<li><label><input data-check-id="best-practices-7:5" type="checkbox"/><span>Build a <strong>representative test set</strong>: all layouts, languages, scan qualities and edge cases you expect in production.</span></label></li>
+<li><label><input data-check-id="best-practices-7:6" type="checkbox"/><span>After a meaningful change, refresh predictions and compare the scores (Build and Measure tabs) with the previous version on the same documents. In IXP in Flow (Preview) you start each evaluation yourself with Run evaluation.</span></label></li>
+<li><label><input data-check-id="best-practices-7:7" type="checkbox"/><span>Track <strong>per-field precision and recall</strong>, not only the overall score. Low precision means wrong values; low recall means missed values. They need different fixes.</span></label></li>
+<li><label><input data-check-id="best-practices-7:8" type="checkbox"/><span>Always note which model version a score belongs to.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="7">
+<li>Multi-document files</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-8:1" type="checkbox"/><span>Decide whether you need to split: do the documents in one file need different taxonomies or different routing?</span></label></li>
+<li><label><input data-check-id="best-practices-8:2" type="checkbox"/><span>If yes: classify and split first, then send each part to the right IXP project.</span></label></li>
+<li><label><input data-check-id="best-practices-8:3" type="checkbox"/><span>If all parts share one taxonomy, consider extracting from the whole file and identifying the source document in a field.</span></label></li>
+<li><label><input data-check-id="best-practices-8:4" type="checkbox"/><span>Validate classification and splitting separately from extraction, so errors don't compound.</span></label></li>
+<li><label><input data-check-id="best-practices-8:5" type="checkbox"/><span>Keep track of page ranges, so extracted values can be traced back to the right sub-document.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="8">
+<li>Integration</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-9:1" type="checkbox"/><span>Publish and tag the IXP model version and consume it in <strong>Extract Document Data</strong> (project + tag). You don't need the full DU framework for simple processes. Consuming the model as a <strong>solution resource</strong> (To folder deployment) is Preview.</span></label></li>
+<li><label><input data-check-id="best-practices-9:2" type="checkbox"/><span>Use the DU framework when you need its full pipeline (classification, splitting, validation, exception handling) out of the box.</span></label></li>
+<li><label><input data-check-id="best-practices-9:3" type="checkbox"/><span>Use <strong>coded workflows</strong> (<code>du.ExtractDocumentData</code>, <code>du.ClassifyDocument</code>) when you prefer code or use coding agents. The DU coded automation APIs are Preview.</span></label></li>
+<li><label><input data-check-id="best-practices-9:4" type="checkbox"/><span>Consider <strong>IXP in Flow</strong> (Extract + Validate extraction nodes, Preview) for end-to-end document flows built on the Maestro canvas. Validate extraction works only with a model built in the same flow.</span></label></li>
+<li><label><input data-check-id="best-practices-9:5" type="checkbox"/><span>Use the <strong>API</strong> for non-UiPath callers or high-volume integrations.</span></label></li>
+<li><label><input data-check-id="best-practices-9:6" type="checkbox"/><span>Use the PDF activities for input handling. Extract Attachments from PDF and Convert Email/HTML/Text to PDF are Preview (Create PDF from Images is in the Preview PDF coded APIs); Redact Document (IntelligentOCR, Windows) is generally available.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="9">
+<li>Confidence &amp; validation</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-10:1" type="checkbox"/><span>Set confidence thresholds <strong>per field</strong>, based on test-set results, not one global number.</span></label></li>
+<li><label><input data-check-id="best-practices-10:2" type="checkbox"/><span>Combine confidence with <strong>business rules</strong> (totals add up, IBAN checksum, date ranges, mandatory fields).</span></label></li>
+<li><label><input data-check-id="best-practices-10:3" type="checkbox"/><span>Send only documents or fields that fail a threshold or rule to Validation Station.</span></label></li>
+<li><label><input data-check-id="best-practices-10:4" type="checkbox"/><span>Recalibrate thresholds after OCR, model or instruction changes.</span></label></li>
+<li><label><input data-check-id="best-practices-10:5" type="checkbox"/><span>If you use your own LLM subscription (BYOS, Preview) or a Preview model, test how confidence behaves before relying on it for routing: confidence can behave differently from the default models (for example, very uniform values), and a token-limit overflow returns 0.</span></label></li>
+<li><label><input data-check-id="best-practices-10:6" type="checkbox"/><span>Measure the validation rate (share of documents that go to a human) as a KPI.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="10">
+<li>Performance</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-11:1" type="checkbox"/><span>Measure first: OCR, pre-processing, extraction call, validation wait and robot overhead separately.</span></label></li>
+<li><label><input data-check-id="best-practices-11:2" type="checkbox"/><span>Only extract fields you need. Fewer fields means faster, cheaper, more accurate.</span></label></li>
+<li><label><input data-check-id="best-practices-11:3" type="checkbox"/><span>Remove unneeded pages before extraction (cover pages, appendices).</span></label></li>
+<li><label><input data-check-id="best-practices-11:4" type="checkbox"/><span>Choose the lightest pre-processing that gives good results.</span></label></li>
+<li><label><input data-check-id="best-practices-11:5" type="checkbox"/><span>Compare model options for latency vs. accuracy on your own documents.</span></label></li>
+<li><label><input data-check-id="best-practices-11:6" type="checkbox"/><span>Process documents in parallel (several jobs, queues) instead of one by one.</span></label></li>
+<li><label><input data-check-id="best-practices-11:7" type="checkbox"/><span>At design time, don't re-evaluate after every small change. Batch changes, then evaluate.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="11">
+<li>Versioning &amp; deployment</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-12:1" type="checkbox"/><span><strong>Publish</strong> a version and tag it (Staging or Production in the IXP UI; <code>live</code> or <code>staging</code> in the CLI and API) for callers that resolve by tag (Extract Document Data, DU Project Extractor, DU API).</span></label></li>
+<li><label><input data-check-id="best-practices-12:2" type="checkbox"/><span><strong>Deploy</strong> a version to an Orchestrator folder (To folder option, Preview) for callers that resolve by folder (solution resources, Flow).</span></label></li>
+<li><label><input data-check-id="best-practices-12:3" type="checkbox"/><span>Know which one your process uses. Publishing doesn't deploy, and deploying doesn't move the tag.</span></label></li>
+<li><label><input data-check-id="best-practices-12:4" type="checkbox"/><span>Keep a version log: what changed, scores before and after, who approved it.</span></label></li>
+<li><label><input data-check-id="best-practices-12:5" type="checkbox"/><span>Roll back by moving the tag back to a previous published version, or by re-deploying a previous version. Test the rollback once before go-live.</span></label></li>
+<li><label><input data-check-id="best-practices-12:6" type="checkbox"/><span>Changing a shared folder deployment changes what every caller gets. Coordinate first.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="12">
+<li>Governance</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="best-practices-13:1" type="checkbox"/><span>Control who can build and change projects with IXP roles: IXP Project Creator or IXP Service Admin creates projects, and project roles (IXP Project Admin, Developer, Model Trainer, Viewer) grant rights per project. Turn on runtime permission checks so only roles with the Project Execute permission can call a project.</span></label></li>
+<li><label><input data-check-id="best-practices-13:2" type="checkbox"/><span>Apply AI Trust Layer policies (allowed models, data handling, audit) agreed with the customer.</span></label></li>
+<li><label><input data-check-id="best-practices-13:3" type="checkbox"/><span>Use anonymised or test documents for development where possible.</span></label></li>
+<li><label><input data-check-id="best-practices-13:4" type="checkbox"/><span>Document the model, region and data path for the customer's security review.</span></label></li>
+</ul></div>
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="wrapup-session-1.html" class="btn btn-outline">← Session 1 wrap-up</a>
+      <div></div>
+      <a href="migration-checklist.html" class="btn btn-primary">Migration checklist →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('best-practices');</script>
+</body>
+</html>

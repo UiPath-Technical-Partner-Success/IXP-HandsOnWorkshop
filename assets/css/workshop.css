@@ -1,0 +1,343 @@
+/* =============================================
+   IXP Hands-on Workshop - workshop.css
+   Additions on top of main.css / course.css:
+   step cards, checklists, agenda, question map
+   ============================================= */
+
+/* ---- Theme tokens for the workshop additions (dark values at the end of this file) ---- */
+:root {
+  --tint-success:    #ECFDF5;
+  --success-text:    #047857;
+  --pill-ga-bg:      #D1FAE5;
+  --pill-ga-text:    #065F46;
+  --pill-preview-bg: #FEF3C7;
+  --pill-preview-text: #92400E;
+  --tint-foundation: #EEF8FA;
+  --foundation-text: #076d79;
+  --tint-answer:     #F2FAFB;
+  --instr-bg:        #F7FCFD;
+  --instr-border:    #D5E9EC;
+  --callout-bg:      #FFF7ED;
+  --callout-title:   #c2410c;
+  --callout-text:    #4b5563;
+}
+
+/* ---- Tables that scroll on small screens ---- */
+.table-wrap { overflow-x: auto; margin: 1.25rem 0; }
+.table-wrap .comparison-table { margin: 0; min-width: 520px; }
+
+/* ---- Code blocks ---- */
+pre {
+  position: relative;
+  background: var(--uipath-dark);
+  color: #E6EDF3;
+  padding: 1rem 1.1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.copy-btn {
+  position: absolute; top: 6px; right: 6px;
+  background: var(--uipath-dark-3); color: #fff; border: none;
+  font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.6rem; cursor: pointer;
+}
+.copy-btn:hover { background: var(--fill-orange); }
+
+/* ---- Lab step cards ---- */
+.steps-progress {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-size: 0.82rem; color: var(--gray-600); margin: 0.5rem 0 1rem;
+}
+.steps-progress .progress-bar-wrap { flex: 1; max-width: 260px; }
+.lab-steps { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+.lab-step {
+  display: grid;
+  grid-template-columns: 28px 30px 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  background: var(--surface);
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--uipath-orange);
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.6rem;
+  transition: opacity .15s, border-color .15s;
+}
+.lab-step__check { display: flex; align-items: center; justify-content: center; padding-top: 3px; cursor: pointer; }
+.lab-step__check input { width: 18px; height: 18px; accent-color: var(--success); cursor: pointer; }
+.lab-step__num {
+  background: var(--fill-orange); color: var(--white);
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.78rem; margin-top: 1px;
+}
+.lab-step__text { font-size: 0.92rem; line-height: 1.55; }
+.lab-step__text p { margin: 0 0 0.4rem; }
+.lab-step__extra { font-size: 0.82rem; color: var(--gray-600); margin-top: 0.35rem; }
+.lab-step__expected {
+  margin-top: 0.5rem;
+  background: var(--tint-success);
+  border-left: 3px solid var(--success);
+  padding: 0.4rem 0.7rem;
+  font-size: 0.85rem;
+  color: var(--gray-800);
+}
+.lab-step__expected strong:first-child { color: var(--success-text); }
+.lab-step.done { opacity: 0.6; border-left-color: var(--success); }
+.lab-step.done .lab-step__num { background: var(--fill-success); }
+
+/* ---- Setup step cards (setup page) ---- */
+.setup-step {
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--uipath-teal);
+  padding: 1rem 1.2rem 0.6rem;
+  margin: 1rem 0;
+  background: var(--surface);
+}
+.setup-step h3 { display: flex; align-items: center; gap: 0.6rem; font-size: 1rem; margin-bottom: 0.6rem; }
+.setup-step h3 input { width: 18px; height: 18px; accent-color: var(--success); }
+.setup-step.done { opacity: 0.6; border-left-color: var(--success); }
+.expected-line {
+  background: var(--tint-success); border-left: 3px solid var(--success);
+  padding: 0.45rem 0.75rem; font-size: 0.88rem; margin: 0.6rem 0;
+}
+
+/* ---- Checklists ---- */
+ul.checklist { list-style: none; padding-left: 0; }
+ul.checklist ul.checklist { padding-left: 1.6rem; margin-top: 0.35rem; }
+ul.checklist li { margin: 0.4rem 0; }
+ul.checklist label { display: flex; gap: 0.6rem; align-items: flex-start; cursor: pointer; font-size: 0.92rem; line-height: 1.5; }
+ul.checklist input { margin-top: 4px; width: 16px; height: 16px; accent-color: var(--success); flex-shrink: 0; }
+ul.checklist li.checked > label { color: var(--gray-400); text-decoration: line-through; }
+.checklist-toolbar { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin: 0.5rem 0 1.25rem; font-size: 0.85rem; color: var(--gray-600); }
+
+/* ---- Question map (index) ---- */
+.q-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.q-card {
+  display: block; text-decoration: none; color: inherit;
+  background: var(--surface); border: 1px solid var(--gray-200);
+  border-top: 3px solid var(--uipath-teal);
+  padding: 1rem 1.1rem; transition: box-shadow .15s;
+}
+.q-card:hover { box-shadow: var(--shadow-md); }
+.q-card__q { font-weight: 600; font-size: 0.92rem; color: var(--heading); margin-bottom: 0.5rem; }
+.q-card__where { font-size: 0.8rem; color: var(--orange-text); font-weight: 600; }
+
+/* ---- Status pills (resources) ---- */
+.pill { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0.1rem 0.55rem; border-radius: 999px; white-space: nowrap; }
+.pill--ga { background: var(--pill-ga-bg); color: var(--pill-ga-text); }
+.pill--preview { background: var(--pill-preview-bg); color: var(--pill-preview-text); }
+
+/* ---- Downloads ---- */
+.download-list { list-style: none; padding: 0; display: grid; gap: 0.6rem; }
+.download-list a {
+  display: flex; gap: 0.8rem; align-items: center; text-decoration: none; color: inherit;
+  border: 1px solid var(--gray-200); padding: 0.75rem 1rem; background: var(--surface);
+}
+.download-list a:hover { border-color: var(--uipath-orange); }
+.download-list .dl-icon { font-size: 1.4rem; }
+.download-list .dl-name { font-weight: 600; font-size: 0.9rem; }
+.download-list .dl-desc { font-size: 0.82rem; color: var(--gray-600); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 640px) {
+  .lab-step { grid-template-columns: 24px 1fr; }
+  .lab-step__num { display: none; }
+}
+
+@media print {
+  .site-header, .course-sidebar, .module-nav, .sidebar-toggle-btn, .copy-btn, .steps-progress, .theme-toggle { display: none !important; }
+  .course-layout { display: block; }
+  .lab-step, .setup-step { break-inside: avoid; }
+}
+
+.info-card h4 + h4, .info-card ul + h4, .info-card p + h4 { margin-top: 0.9rem; }
+
+/* ---- Mobile fixes ---- */
+.course-layout > * { min-width: 0; }
+.course-content { overflow-wrap: anywhere; }
+@media (max-width: 900px) {
+  .sidebar-toggle-btn { display: none; }
+  .course-sidebar .sidebar-nav__list li a.sidebar-nav__sub { display: none; }
+  .course-sidebar .sidebar-nav__list li a.sidebar-nav__sub.active { display: block; }
+  .course-sidebar .sidebar-progress { display: none; }
+  .objectives-box .table-wrap, .lesson .table-wrap { margin-left: 0; margin-right: 0; }
+}
+@media (max-width: 640px) {
+  .site-header { flex-wrap: wrap; gap: 0.4rem; padding-top: 0.6rem; padding-bottom: 0.6rem; height: auto; }
+  .site-header nav { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .site-header nav a { font-size: 0.8rem; margin: 0; }
+  .logo-text { font-size: 0.95rem; }
+  .container { padding-left: 16px; padding-right: 16px; }
+  .hero { padding-left: 16px; padding-right: 16px; }
+  .hero h1 { font-size: 1.9rem; }
+}
+
+/* ---- Theory pages (Session 1 & 2): shared components ---- */
+.theory-block { scroll-margin-top: 80px; }
+.theory-block__meta { font-size: .82rem; color: var(--gray-600); margin: -.4rem 0 1rem; }
+.concept { border: 1px solid var(--gray-200); background: var(--surface); padding: 1.1rem 1.3rem; margin: 1.2rem 0; }
+.concept > h3 { margin-top: 0; }
+.concept-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem 1.2rem; margin-top: .6rem; }
+.concept-grid > div { background: var(--gray-50); padding: .7rem .9rem; border-left: 3px solid var(--uipath-teal); }
+.concept-grid > div > strong:first-child { display: block; font-family: var(--font-head); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--heading-2); margin-bottom: .25rem; }
+.concept-grid > div.concept-grid__when { border-left-color: var(--uipath-orange); }
+.concept-grid > div.concept-grid__wide { grid-column: 1 / -1; }
+.foundation-box { background: var(--tint-foundation); border-left: 4px solid var(--uipath-teal); padding: .9rem 1.2rem; margin: 1rem 0; }
+.foundation-box__title { font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--foundation-text); margin-bottom: .35rem; }
+.foundation-box__title::before { content: "🌱 Foundations · "; }
+.glossary { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 0; border: 1px solid var(--gray-200); margin: 1rem 0; }
+.glossary dt, .glossary dd { margin: 0; padding: .55rem .8rem; border-bottom: 1px solid var(--gray-100); }
+.glossary dt { font-weight: 600; background: var(--gray-50); }
+figure.diagram { margin: 1.4rem 0; padding: 1rem; background: var(--surface); border: 1px solid var(--gray-200); }
+figure.diagram svg { display: block; width: 100%; height: auto; max-width: 880px; margin: 0 auto; }
+figure.diagram figcaption { font-size: .82rem; color: var(--gray-600); margin-top: .6rem; text-align: center; }
+.theory-link { display: inline-block; font-size: .8rem; font-weight: 600; margin-top: .25rem; color: var(--orange-text); text-decoration: none; }
+.theory-link:hover { text-decoration: underline; }
+.read-first { background: var(--uipath-orange-light); border-left: 4px solid var(--uipath-orange); padding: .7rem 1.1rem; margin: 0 0 1.2rem; font-size: .9rem; }
+.why-box { background: var(--gray-50); border-left: 4px solid var(--uipath-dark-3); padding: .8rem 1.1rem; margin: 1rem 0; font-size: .92rem; }
+.why-box__title { font-family: var(--font-head); font-weight: 600; font-size: .85rem; margin-bottom: .3rem; }
+.source-list { font-size: .82rem; color: var(--gray-600); }
+.source-list a { word-break: break-word; }
+.page-toc { background: var(--gray-50); padding: .9rem 1.2rem; margin: 1rem 0 1.6rem; }
+.page-toc ol { margin: .3rem 0 0 1.1rem; padding: 0; columns: 2; column-gap: 2rem; }
+@media (max-width: 720px) {
+  .concept-grid { grid-template-columns: minmax(0, 1fr); }
+  .glossary { grid-template-columns: minmax(0, 1fr); }
+  .glossary dt { border-bottom: none; }
+  .page-toc ol { columns: 1; }
+}
+/* Long code blocks inside lab steps must scroll, not widen the step */
+.lab-step__body, .lab-step__text, .setup-step > * { min-width: 0; }
+.lab-step pre, .setup-step pre, .concept pre { max-width: 100%; overflow-x: auto; }
+
+/* Checkpoint answers and ready-to-use instructions (expandable) */
+.cp-answer, .instr-block { margin: .4rem 0 .8rem; }
+.cp-answer > summary, .instr-block > summary {
+  cursor: pointer; font-weight: 600; font-size: .85rem; color: var(--teal-text); width: fit-content;
+}
+.cp-answer > summary:hover, .instr-block > summary:hover { text-decoration: underline; }
+.cp-answer__body {
+  margin-top: .4rem; padding: .6rem .8rem; background: var(--tint-answer); border-left: 3px solid #0BA2B3; font-size: .9rem;
+}
+.instr-block { border: 1px solid var(--instr-border); background: var(--instr-bg); padding: .5rem .8rem; }
+.instr-block__body > p { font-size: .88rem; margin: .5rem 0; }
+.instr-item__label { font-weight: 600; font-size: .82rem; margin-top: .6rem; }
+.instr-item pre { white-space: pre-wrap; word-break: break-word; margin: .3rem 0 .4rem; padding-right: 4.5rem; }
+@media print { .cp-answer, .instr-block { display: none; } }
+.cp-answer__body pre { white-space: pre-wrap; word-break: break-word; padding-right: 4.5rem; }
+.cp-answer__label { font-weight: 600; font-size: .82rem; margin: .6rem 0 0; }
+.cp-answer__body ul, .cp-answer__body ol { margin: .3rem 0 .5rem 1.2rem; }
+
+/* Day labels in the sidebar (Session 1 theory → lab order) */
+.sidebar-nav__list li.sidebar-nav__day {
+  padding: .7rem 1rem .2rem 2rem; font-size: .68rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--gray-500);
+}
+@media (max-width: 900px) { .course-sidebar .sidebar-nav__list li.sidebar-nav__day { display: none; } }
+
+/* Undo "Mark as complete" and reset progress */
+.mark-complete-btn.completed { cursor: pointer; }
+.mark-complete-btn.completed:hover::after { content: ' · Undo'; }
+.progress-reset-btn {
+  background: none; border: none; padding: 0; margin-top: .5rem; display: block;
+  font-size: .75rem; color: var(--gray-600, #5F6B73); text-decoration: underline; cursor: pointer;
+}
+.progress-reset-btn:hover { color: var(--uipath-orange, #FA4616); }
+.progress-summary .progress-reset-btn { color: rgba(255,255,255,.7); margin-top: .7rem; }
+.progress-summary .progress-reset-btn:hover { color: #fff; }
+@media print { .progress-reset-btn { display: none; } }
+
+
+/* =============================================
+   Light/dark theme
+   Light is the default. Dark applies only when the visitor picks it with the
+   header toggle (nav.js); the choice is kept in localStorage
+   ('tps-theme') and applied by a one-line script in each page's <head>.
+   Everything dark sits inside @media screen, so printing always uses the light palette.
+   ============================================= */
+
+/* ---- Toggle button (injected into the header nav by nav.js) ---- */
+.site-header nav { display: flex; align-items: center; }
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 34px; height: 34px; margin-left: 1.5rem; padding: 0;
+  background: transparent; color: rgba(255,255,255,.85);
+  border: 1px solid rgba(255,255,255,.32); border-radius: 6px;
+  cursor: pointer; transition: background .15s, border-color .15s, color .15s;
+}
+.theme-toggle:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.65); color: #fff; }
+.theme-toggle:focus-visible { outline: 2px solid var(--uipath-orange); outline-offset: 2px; }
+.theme-toggle svg { width: 18px; height: 18px; display: block; }
+.theme-toggle .theme-toggle__sun,
+.theme-toggle[aria-pressed="true"] .theme-toggle__moon { display: none; }
+.theme-toggle[aria-pressed="true"] .theme-toggle__sun { display: block; }
+@media (max-width: 640px) {
+  .theme-toggle { margin-left: auto; width: 32px; height: 32px; }
+}
+
+/* ---- Dark palette ---- */
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page-bg:      #12191D;
+    --surface:      #1A2328;
+    --gray-50:      #1F292E;
+    --gray-100:     #2A353B;
+    --gray-200:     #3A474E;
+    --gray-400:     #8E9BA2;
+    --gray-500:     #8E9BA2;
+    --gray-600:     #B0BBC1;
+    --gray-700:     #C8D0D4;
+    --gray-800:     #E2E7EA;
+    --heading:      #F2F4F5;
+    --heading-2:    #D5DCE0;
+    --link:         #FF7A4D;
+    --orange-text:  #FF8A65;
+    --uipath-orange-light: #3A2621;
+    --teal-text:    #5FD3E0;
+    --tint-teal:    #143A40;
+    --tint-blue:    #173445;
+    --tint-success: #12332A;
+    --success-text: #5EE0A8;
+    --pill-ga-bg:   #12422F;
+    --pill-ga-text: #86EFAC;
+    --pill-preview-bg:   #45340F;
+    --pill-preview-text: #FCD34D;
+    --tint-foundation: #12313A;
+    --foundation-text: #6FD6E2;
+    --tint-answer:  #14303A;
+    --instr-bg:     #172A31;
+    --instr-border: #2B4A53;
+    --callout-bg:    #3A2519;
+    --callout-title: #FF9A6B;
+    --callout-text:  #C8D0D4;
+    --shadow:    0 1px 4px rgba(0,0,0,.45);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.45);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,.55);
+  }
+
+  /* Surfaces that use the brand dark as a background need an edge on a dark page */
+  [data-theme="dark"] .site-header { border-bottom: 1px solid #2A353B; }
+  [data-theme="dark"] .site-footer { border-top: 1px solid #2A353B; }
+  [data-theme="dark"] .progress-summary { border: 1px solid var(--gray-100); }
+  [data-theme="dark"] pre { background: #0D1316; border: 1px solid var(--gray-200); }
+  [data-theme="dark"] .comparison-table th { background: #2D3A41; }
+  [data-theme="dark"] .why-box { border-left-color: #6B7A82; }
+  [data-theme="dark"] .btn-outline-dark { color: var(--link); border-color: var(--link); }
+  [data-theme="dark"] .mark-complete-btn.completed { background: #4A575E; }
+
+  /* Diagrams: the inline SVGs are drawn for a white background, so each figure
+     stays a light card and keeps the light palette for its caption too. */
+  [data-theme="dark"] figure.diagram {
+    color-scheme: light;
+    --surface: #FFFFFF; --gray-50: #F6F6F6; --gray-100: #EBEBEB; --gray-200: #D9D9D9;
+    --gray-400: #6B6B6B; --gray-500: #5F6B73; --gray-600: #616161; --gray-700: #484848; --gray-800: #343434;
+    --heading: #182126; --link: #B93509;
+    color: var(--gray-800);
+    border-color: transparent;
+    border-radius: 10px;
+  }
+}

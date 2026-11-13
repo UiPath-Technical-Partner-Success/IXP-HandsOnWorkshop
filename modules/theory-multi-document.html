@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Theory · Multi-document files | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <a href="session-1.html">Session 1</a> <span aria-hidden="true">›</span> <span>Theory · Multi-document files</span></nav>
+    <div class="page-header">
+      <h1>Theory · Multi-document files</h1>
+      <div class="page-header__meta"><span>📅 Day 2</span><span>📖 Theory</span><span>Then: Lab 3</span></div>
+    </div>
+
+<section class="lesson theory-block" id="multi-document">
+<h2 class="lesson-title">📚 Multi-document files (packets)</h2>
+<p class="theory-block__meta">⏱ Day 2 · 0:05–0:45 · Theory + <a href="lab-3-multi-document.html">Lab 3</a></p>
+<p><strong>Takeaway:</strong> IXP extraction doesn't split a packet into documents: it returns your fields, not document boundaries. Either send the whole packet to one IXP project with a field group per document type (option B), or put a DU classifier in front that returns page ranges and send each range to its own project (option A). Choose by number of types, order, length and routing needs – and measure.</p>
+
+<div class="foundation-box"><div class="foundation-box__title">Packets, classification and splitting</div><p>A <strong>packet</strong> is one file with several documents inside, for example invoice + bank statement + payslip in one PDF. <strong>Classification</strong> decides which document type something is. <strong>Splitting</strong> finds where each document starts and ends and returns a <strong>page range</strong> per document ("pages 2–3: bank statement").</p></div>
+
+<div class="concept">
+<h3>IXP is extraction only</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>The Unstructured and complex documents capability doesn't classify documents or find where one ends and the next begins. It extracts the fields you define from whatever file you send.</div>
+<div><strong>What it does</strong>It can read a stack of several document types in one file without splitting it first – the docs list this as a use case. But nothing in the output tells you where one document ends unless you ask for it in your taxonomy.</div>
+<div class="concept-grid__when"><strong>When to use</strong>Know this before choosing A or B. <em>When not:</em> do not expect IXP to detect document boundaries or types for you, and do not send packets beyond your extraction model's page limit (per the model configuration page: GPT-4o up to 50 pages, Gemini 2.5 Flash up to 500 pages per call; pages beyond the limit are not processed). The <strong>Advanced</strong> extraction strategy (preview) reads a long or field-dense document in several passes, but it still returns one result, not a page range per document.</div>
+<div><strong>How to use</strong><ol><li>Write down the document types a packet can contain and how they vary in order and length.</li><li>Check packet length against the model's page limit.</li><li>Decide A or B with the decision tree below.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Believing "IXP will split my packet", including with the Advanced strategy.</li><li>Assuming one file equals one document.</li><li>Losing the page range, so a value cannot be traced back to its document.</li></ul></div>
+</div>
+</div>
+
+<div class="concept">
+<h3>Option B: one IXP project on the whole packet</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>One project whose taxonomy has one field group per document type (Invoice, Bank Account, Payslip). The whole file is sent as-is.</div>
+<div><strong>What it does</strong>One call, fewer moving parts. Each group instruction tells the model how to recognise its document ("Use only the document titled TAX INVOICE"), so fields are read from the right pages.</div>
+<div class="concept-grid__when"><strong>When to use</strong>Few, predictable document types, stable order, packets within the page limit, one downstream process. Fastest way to a proof of concept. <em>When not:</em> many types, variable order or count, long packets, or each type needs its own routing, reviewer or tuning.</div>
+<div><strong>How to use</strong><ol><li>One field group per document type; a key field per group.</li><li>Group instruction = visible clues (title, header text, typical labels) + what to ignore.</li><li>Review every group for values taken from the wrong document.</li><li>Re-evaluate all groups after any change.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Weak group instructions: an account number from the payslip lands in Bank Account.</li><li>A taxonomy that grows with every new type: a change for one type can shift results for others.</li><li>Not checking packets in a different order (Lab 3, packet 2).</li></ul></div>
+</div>
+</div>
+
+<div class="concept">
+<h3>Option A: classify and split first, then IXP per type</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>A DU classifier reads the packet and returns one entry per document: its type and page range. Your workflow sends each range to the IXP project for that type. In a Studio desktop (Windows) project this is typically a Classify Document Scope with the Intelligent Keyword Classifier, which is documented as able to split packages.</div>
+<div><strong>What it does</strong>Separates concerns: small, focused taxonomies per type, per-type scores, per-type routing and reuse in other processes. Consumption is metered per page, and a classifier in front of IXP is metered separately. When every page is extracted, A and B consume about the same; A saves only when it lets you skip pages you do not need. Check the licensing FAQ for your plan.</div>
+<div class="concept-grid__when"><strong>When to use</strong>Many types, variable order, long packets, per-type routing or review, or reuse of per-type projects. <em>When not:</em> small, predictable packets, where the extra step adds failure points without benefit. The DU trainable splitter is labelled Preview – do not base a production plan on it.</div>
+<div><strong>How to use</strong><ol><li>Classify, then loop over the returned page ranges.</li><li>Send each range to the matching IXP project; keep the page range with each result.</li><li>Route unknown or low-confidence ranges to a person instead of guessing.</li><li>Measure splitting accuracy separately from extraction accuracy.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Not checking the split: a wrong boundary silently sends the wrong pages to the wrong project.</li><li>Over-splitting: a 2-page statement cut into two 1-page parts loses fields that span pages.</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 300" role="img" aria-labelledby="s1d8-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d8-t">Decision tree for multi-document files. One document per file: skip classification. Few types, stable order, within the page limit: option B, one project with a group per type. Many types, variable order or own routing: option A, classify and split first. Unsure: pilot both on real packets and compare accuracy, mix-ups, time and pages processed. IXP only extracts.</title>
+<defs><marker id="s1d8-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<text x="20" y="24" font-size="15" font-weight="700" fill="#182126">Split first, or one project for the whole packet?</text>
+<rect x="20" y="44" width="190" height="64" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="115" y="71" font-size="13" text-anchor="middle" fill="#182126">One document</text>
+<text x="115" y="90" font-size="13" text-anchor="middle" fill="#182126">per file, always?</text>
+<rect x="240" y="44" width="190" height="64" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="335" y="71" font-size="13" text-anchor="middle" fill="#182126">Few types, stable</text>
+<text x="335" y="90" font-size="13" text-anchor="middle" fill="#182126">order, within limit?</text>
+<rect x="460" y="44" width="190" height="64" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="555" y="71" font-size="13" text-anchor="middle" fill="#182126">Many types, variable</text>
+<text x="555" y="90" font-size="13" text-anchor="middle" fill="#182126">order or own routing?</text>
+<rect x="680" y="44" width="190" height="64" fill="#F6F6F6" stroke="#616161" stroke-width="2"/>
+<text x="775" y="71" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">Pilot A and B</text>
+<text x="775" y="90" font-size="13" text-anchor="middle" fill="#3C464B">on real packets</text>
+<line x1="210" y1="76" x2="238" y2="76" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d8-a)"/>
+<text x="224" y="68" font-size="13" text-anchor="middle" fill="#616161">no</text>
+<line x1="430" y1="76" x2="458" y2="76" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d8-a)"/>
+<text x="444" y="68" font-size="13" text-anchor="middle" fill="#616161">no</text>
+<line x1="650" y1="76" x2="678" y2="76" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d8-a)"/>
+<text x="664" y="68" font-size="13" text-anchor="middle" fill="#616161">no</text>
+<line x1="115" y1="108" x2="115" y2="148" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d8-a)"/>
+<text x="124" y="134" font-size="13" fill="#616161">yes</text>
+<line x1="335" y1="108" x2="335" y2="148" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d8-a)"/>
+<text x="344" y="134" font-size="13" fill="#616161">yes</text>
+<line x1="555" y1="108" x2="555" y2="148" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d8-a)"/>
+<text x="564" y="134" font-size="13" fill="#616161">yes</text>
+<line x1="775" y1="108" x2="775" y2="148" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d8-a)"/>
+<text x="784" y="134" font-size="13" fill="#616161">compare</text>
+<rect x="20" y="150" width="190" height="64" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="115" y="177" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">No classification</text>
+<text x="115" y="196" font-size="13" text-anchor="middle" fill="#3C464B">one IXP project</text>
+<rect x="240" y="150" width="190" height="64" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="335" y="177" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">Option B</text>
+<text x="335" y="196" font-size="13" text-anchor="middle" fill="#3C464B">a group per type</text>
+<rect x="460" y="150" width="190" height="64" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="555" y="177" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">Option A</text>
+<text x="555" y="196" font-size="13" text-anchor="middle" fill="#3C464B">classify + split first</text>
+<rect x="680" y="150" width="190" height="64" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+<text x="775" y="177" font-size="13" text-anchor="middle" fill="#182126">Accuracy, mix-ups,</text>
+<text x="775" y="196" font-size="13" text-anchor="middle" fill="#182126">time, pages</text>
+<rect x="20" y="240" width="850" height="42" fill="#182126"/>
+<text x="445" y="266" font-size="14" text-anchor="middle" fill="#FFFFFF">Either way, IXP extraction doesn't split – any split comes from a classifier in front.</text>
+</svg>
+<figcaption>Check the questions from left to right and stop at the first "yes". Lab 3 has the A vs B pipeline picture and the comparison table to fill in.</figcaption>
+</figure>
+
+<div class="why-box"><div class="why-box__title">💬 "Several documents in one file: DU splitter then IXP, or a better way?"</div>
+<p>It depends, and IXP extraction doesn't split packets for you. If your packets hold a few predictable document types and fit the page limit, start with one IXP project and one field group per type, with clear "how to recognise this document" instructions. If you have many types, a changing order, long packets, or each type needs its own routing or review, classify and split first with a DU classifier and send each page range to a dedicated IXP project. With a DU modern project classifier, the two consume about the same when every page is extracted; splitting saves only when you can skip irrelevant pages. Other classifiers are metered differently, so check the licensing pages. The real trade-off is complexity versus mix-ups, so pilot both on real packets and compare.</p></div>
+
+<div class="admonition admonition--tip"><div class="admonition-title">💡 Key takeaways</div><div class="admonition-body"><ul>
+<li>IXP extracts; splitting, if you need it, comes from a classifier in front of IXP.</li>
+<li>Option B for few, predictable types; option A for many types, variable order, long packets or per-type routing.</li>
+<li>Check the split before extraction and watch for over-splitting.</li>
+<li>Write your rule down: "We split first when …".</li>
+</ul></div></div>
+<p class="source-list"><strong>Sources:</strong>
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/faq-choosing-the-correct-ixp-capability" target="_blank" rel="noopener">FAQ – choosing the correct IXP capability</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/choosing-the-correct-capability" target="_blank" rel="noopener">Choosing the correct capability</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/configuring-the-model" target="_blank" rel="noopener">Configuring the model</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/faq-licensing-and-pricing" target="_blank" rel="noopener">FAQ – licensing and pricing</a> ·
+<a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/metering-charging-logic" target="_blank" rel="noopener">DU metering and charging logic</a> ·
+<a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/document-classification-overview" target="_blank" rel="noopener">Document classification overview</a> ·
+<a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/intelligent-keyword-classifier" target="_blank" rel="noopener">Intelligent Keyword Classifier</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/best-practices" target="_blank" rel="noopener">Best practices</a>
+</p>
+</section>
+
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="lab-2-repeating-data.html" class="btn btn-outline">← Lab 2 · Repeating data</a>
+      <div></div>
+      <a href="lab-3-multi-document.html" class="btn btn-primary">Lab 3 · Multi-document files →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('theory-multi-document');</script>
+</body>
+</html>

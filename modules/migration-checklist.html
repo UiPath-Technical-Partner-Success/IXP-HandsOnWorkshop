@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Modern DU → IXP migration checklist | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <span>Modern DU → IXP migration checklist</span></nav>
+    <div class="page-header">
+      <h1>Modern DU → IXP migration checklist</h1>
+      <div class="page-header__meta"><span>📋 Checklist</span><span>🖨 Printable</span></div>
+    </div>
+
+<div class="checklist-toolbar"><span>Use one copy per migration project. Ticks are saved in this browser.</span><button class="btn btn-outline btn-sm" data-reset-checklist="migration">Reset all ticks</button><button class="btn btn-outline btn-sm" onclick="window.print()">Print</button></div>
+<p>Use this checklist to move a document process from a Modern DU project to IXP (unstructured and complex documents).</p>
+<div class="lesson"><h2 class="lesson-title"><ol>
+<li>Assess fit</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="migration-2:1" type="checkbox"/><span>Why migrate? Write down the problem (e.g. constant retraining, low accuracy on new layouts, unstructured content).</span></label></li>
+<li><label><input data-check-id="migration-2:2" type="checkbox"/><span>Are the documents a good fit for IXP (variable layouts, free text, values that need understanding)?</span></label></li>
+<li><label><input data-check-id="migration-2:3" type="checkbox"/><span>Any constraints: data residency, allowed models, customer's own LLM subscription, deployment (Cloud vs. on-prem)?</span></label></li>
+<li><label><input data-check-id="migration-2:4" type="checkbox"/><span>Who signs off on the migration (business owner, customer IT, security)?</span></label></li>
+<li><label><input data-check-id="migration-2:5" type="checkbox"/><span>What does success look like? Agree on acceptance criteria now (see section 5).</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="2">
+<li>Inventory the current solution</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="migration-3:1" type="checkbox"/><span><strong>Taxonomy:</strong> all document types, fields, data types, tables</span></label></li>
+<li><label><input data-check-id="migration-3:2" type="checkbox"/><span><strong>Document types &amp; samples:</strong> layouts, languages, scan quality, page counts</span></label></li>
+<li><label><input data-check-id="migration-3:3" type="checkbox"/><span><strong>Volumes:</strong> documents per day/month, peaks, SLA</span></label></li>
+<li><label><input data-check-id="migration-3:4" type="checkbox"/><span><strong>Classification &amp; splitting:</strong> how documents are classified and split today</span></label></li>
+<li><label><input data-check-id="migration-3:5" type="checkbox"/><span><strong>Validation rules:</strong> business rules, mandatory fields, cross-field checks</span></label></li>
+<li><label><input data-check-id="migration-3:6" type="checkbox"/><span><strong>Confidence thresholds:</strong> per field, and what happens below them</span></label></li>
+<li><label><input data-check-id="migration-3:7" type="checkbox"/><span><strong>Validation process:</strong> who validates, in which tool, current validation rate</span></label></li>
+<li><label><input data-check-id="migration-3:8" type="checkbox"/><span><strong>Downstream consumers:</strong> systems, queues, reports that use the extracted output, and the exact field names and formats they expect</span></label></li>
+<li><label><input data-check-id="migration-3:9" type="checkbox"/><span><strong>Current performance baseline:</strong> per-field accuracy, validation rate, processing time per document</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="3">
+<li>Map the taxonomy</li>
+</ol></h2><p>Fill in one row per Modern DU field.</p>
+<div class="table-wrap"><table class="comparison-table">
+<thead>
+<tr>
+<th>Modern DU document type</th>
+<th>Modern DU field</th>
+<th>Type</th>
+<th>IXP field group</th>
+<th>IXP field</th>
+<th>IXP data type</th>
+<th>Repeatable group?</th>
+<th>Field instructions (what + where + example)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Checks:</p>
+<ul class="checklist">
+<li><label><input data-check-id="migration-4:1" type="checkbox"/><span>Tables and repeated sections → <strong>repeatable field groups</strong></span></label></li>
+<li><label><input data-check-id="migration-4:2" type="checkbox"/><span>Amounts → <strong>Monetary Quantity</strong>; dates → <strong>Date</strong>; verbatim IDs → <strong>Exact Text</strong>; derived values → <strong>Inferred Text</strong>; closed lists → <strong>Choice</strong></span></label></li>
+<li><label><input data-check-id="migration-4:3" type="checkbox"/><span>Fields that are no longer needed are dropped, not migrated "just in case"</span></label></li>
+<li><label><input data-check-id="migration-4:4" type="checkbox"/><span>New fields the business wants (that Modern DU couldn't handle well) are added now</span></label></li>
+<li><label><input data-check-id="migration-4:5" type="checkbox"/><span>Output field names match what downstream consumers expect, or a mapping is planned</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="4">
+<li>Build &amp; write instructions</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="migration-5:1" type="checkbox"/><span>Create the IXP project and upload representative documents (all layouts and edge cases).</span></label></li>
+<li><label><input data-check-id="migration-5:2" type="checkbox"/><span>Pick pre-processing by layout (<code>none</code> / <code>table_mini</code> / <code>table</code>) and a model. Note the model's region.</span></label></li>
+<li><label><input data-check-id="migration-5:3" type="checkbox"/><span>Write overall, field group and field instructions (what + where + example; no format patterns).</span></label></li>
+<li><label><input data-check-id="migration-5:4" type="checkbox"/><span>Review predictions field by field. Confirm only correct values.</span></label></li>
+<li><label><input data-check-id="migration-5:5" type="checkbox"/><span>Iterate on instructions for the weakest fields, one change at a time, re-evaluating after each batch of changes.</span></label></li>
+<li><label><input data-check-id="migration-5:6" type="checkbox"/><span>Publish or deploy a candidate version for testing.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="5">
+<li>Test set &amp; acceptance criteria</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="migration-6:1" type="checkbox"/><span>Build a <strong>test set</strong> the model hasn't been tuned on, covering all layouts and edge cases.</span></label></li>
+<li><label><input data-check-id="migration-6:2" type="checkbox"/><span>Run <strong>Modern DU and IXP side by side on the same documents</strong>.</span></label></li>
+<li><label><input data-check-id="migration-6:3" type="checkbox"/><span>Compare:
+</span></label><ul class="checklist">
+<li><label><input data-check-id="migration-6:4" type="checkbox"/><span>Per-field accuracy (precision / recall)</span></label></li>
+<li><label><input data-check-id="migration-6:5" type="checkbox"/><span>Validation rate (share of documents or fields sent to a human)</span></label></li>
+<li><label><input data-check-id="migration-6:6" type="checkbox"/><span>Processing time per document</span></label></li>
+<li><label><input data-check-id="migration-6:7" type="checkbox"/><span>Business rule pass rate</span></label></li>
+</ul></li>
+<li><label><input data-check-id="migration-6:8" type="checkbox"/><span>Acceptance criteria agreed and written down, e.g.:</span></label></li>
+</ul>
+<div class="table-wrap"><table class="comparison-table">
+<thead>
+<tr>
+<th>Metric</th>
+<th>Modern DU baseline</th>
+<th>IXP target</th>
+<th>IXP result</th>
+<th>Pass?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field accuracy (critical fields)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Field accuracy (other fields)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Validation rate</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Processing time / document</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<ul class="checklist">
+<li><label><input data-check-id="migration-6:9" type="checkbox"/><span>Business owner reviews the results and signs off.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="6">
+<li>Workflow changes</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="migration-7:1" type="checkbox"/><span>Deploy the IXP model as a <strong>solution resource</strong> (preview) to the target Orchestrator folder.</span></label></li>
+<li><label><input data-check-id="migration-7:2" type="checkbox"/><span>Swap the extractor in the existing workflow:
+</span></label><ul class="checklist">
+<li><label><input data-check-id="migration-7:3" type="checkbox"/><span><strong>Extract Document Data</strong> pointed at the IXP model, or</span></label></li>
+<li><label><input data-check-id="migration-7:4" type="checkbox"/><span><strong>DU Project Extractor</strong> using the IXP model (if you stay in the DU framework)</span></label></li>
+</ul></li>
+<li><label><input data-check-id="migration-7:5" type="checkbox"/><span>Update <strong>classification / splitting</strong> if the document mix changes.</span></label></li>
+<li><label><input data-check-id="migration-7:6" type="checkbox"/><span>Update <strong>confidence thresholds</strong> per field, based on IXP test results (don't copy Modern DU thresholds).</span></label></li>
+<li><label><input data-check-id="migration-7:7" type="checkbox"/><span>Re-implement <strong>business rules</strong> and validation routing.</span></label></li>
+<li><label><input data-check-id="migration-7:8" type="checkbox"/><span>Check <strong>Validation Station</strong> with the new taxonomy (field groups, repeated instances).</span></label></li>
+<li><label><input data-check-id="migration-7:9" type="checkbox"/><span><strong>Map the output</strong> to what downstream consumers expect (names, formats, nested groups).</span></label></li>
+<li><label><input data-check-id="migration-7:10" type="checkbox"/><span>Update logging, exception handling and reporting.</span></label></li>
+<li><label><input data-check-id="migration-7:11" type="checkbox"/><span>Run the full process end to end in a test environment.</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="7">
+<li>Cutover &amp; rollback</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="migration-8:1" type="checkbox"/><span>Cutover plan: date, scope (all documents or one document type first), who is on call.</span></label></li>
+<li><label><input data-check-id="migration-8:2" type="checkbox"/><span>Consider a <strong>pilot</strong>: route a share of documents or one document type to IXP first.</span></label></li>
+<li><label><input data-check-id="migration-8:3" type="checkbox"/><span>Keep the Modern DU process <strong>deployable</strong> until IXP is stable.</span></label></li>
+<li><label><input data-check-id="migration-8:4" type="checkbox"/><span>Rollback plan written down and tested: how to switch back, who decides, how long it takes.</span></label></li>
+<li><label><input data-check-id="migration-8:5" type="checkbox"/><span>Communicate the change to validators (new Validation Station layout, fewer or different fields).</span></label></li>
+</ul></div>
+<div class="lesson"><h2 class="lesson-title"><ol start="8">
+<li>After go-live</li>
+</ol></h2><ul class="checklist">
+<li><label><input data-check-id="migration-9:1" type="checkbox"/><span>Monitor daily for the first weeks: validation rate, exceptions, processing time, business rule failures.</span></label></li>
+<li><label><input data-check-id="migration-9:2" type="checkbox"/><span>Collect documents that failed or needed many corrections. Add them to the IXP project as new examples.</span></label></li>
+<li><label><input data-check-id="migration-9:3" type="checkbox"/><span>Review per-field scores regularly. Improve instructions for weak fields.</span></label></li>
+<li><label><input data-check-id="migration-9:4" type="checkbox"/><span>Recalibrate thresholds when you change the model, pre-processing or instructions.</span></label></li>
+<li><label><input data-check-id="migration-9:5" type="checkbox"/><span>Keep a version log (what changed, scores before and after, approval).</span></label></li>
+<li><label><input data-check-id="migration-9:6" type="checkbox"/><span>Decommission the Modern DU project once the agreed stability period has passed.</span></label></li>
+</ul></div>
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="best-practices.html" class="btn btn-outline">← Best-practice checklist</a>
+      <div></div>
+      <a href="resources.html" class="btn btn-primary">Resources &amp; downloads →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('migration');</script>
+</body>
+</html>

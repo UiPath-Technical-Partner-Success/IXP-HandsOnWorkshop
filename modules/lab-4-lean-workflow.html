@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Lab 4 – Lean workflow, confidence &amp; validation | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <a href="session-1.html">Session 1: Design &amp; quality</a> <span aria-hidden="true">›</span> <span>Lab 4 · Lean workflow, confidence &amp; validation</span></nav>
+    <div class="page-header">
+      <h1>Lab 4 · Lean workflow, confidence &amp; validation</h1>
+      <div class="page-header__meta"><span>⏱ ~40 min</span><span>🔨 Hands-on</span><span>Session 1</span></div>
+    </div>
+
+<div class="read-first">📖 <strong>Read first:</strong> <a href="theory-lean-workflow.html">Session 1 theory – Lean workflow, confidence &amp; validation</a>. It explains when a single Extract Document Data activity is enough instead of the full DU (Document Understanding) framework, where IXP (Intelligent Xtraction and Processing) confidence scores come from, and how to decide which documents a person must check.</div>
+
+<div class="why-box"><div class="why-box__title">What you are doing and why</div>
+<p><strong>Goal:</strong> in Lab 2 you taught an IXP model to read bank statements. A model does nothing on its own until an automation calls it. Here you build the smallest useful automation: a Studio workflow that sends a PDF to the model, checks the answers, asks a person to look only when something seems off, and saves the result.</p>
+<p><strong>What you will have at the end:</strong> a Studio process <code>Lab4_LeanIXP</code> that extracts the bank-statement fields, flags risky documents using confidence plus business rules, opens a validation task only for flagged documents, writes an output file and logs how long each step took.</p>
+<p><strong>How it maps to a real project:</strong> this is the core of most production automations for one document type. In a customer project you add a trigger in front (mailbox, shared folder, queue), send the output to the downstream system instead of a file, and add error handling. The thresholds and rules you write here decide how much work still lands on people, so they are the part the business will ask about.</p></div>
+
+<div class="objectives-box"><h3>🎯 Objective</h3><p>Build a light Studio workflow that uses an IXP model <strong>without the full DU framework</strong>:</p>
+<pre><code>Get file → Extract (IXP model) → Check confidence + business rules
+        → valid?  yes → output
+                  no  → validation task (Validation Station) → output
+</code></pre>
+<p>You'll also measure how long each step takes.</p></div>
+<div class="info-card"><h4>📋 Before you begin</h4><h4>✔️ Prerequisites</h4><ul>
+<li>Studio Web open on the workshop tenant (Setup &amp; access, steps 3–5)</li>
+<li>The <strong>UiPath.DocumentUnderstanding.Activities</strong> package added to your Studio Web project, in a version that supports IXP models. The <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/building-and-consuming-a-workflow" target="_blank" rel="noopener">IXP docs</a> list the minimum version; check it in the project's package manager (the IXP model option may not appear in older versions).</li>
+<li>An Orchestrator folder you can use, with a storage bucket for the validation task (prepared on the lab tenant)</li>
+<li>Your Lab 2 project (bank statements)</li>
+</ul><h4>📎 Input files</h4><p><a download="" href="../assets/samples/bank_statement_A_4_accounts.pdf"><code>bank_statement_A_4_accounts.pdf</code></a>, <a download="" href="../assets/samples/bank_statement_B_3_accounts.pdf"><code>bank_statement_B_3_accounts.pdf</code></a></p></div>
+
+<div class="foundation-box" id="terms"><div class="foundation-box__title">Terms used in this lab</div>
+<p>This lab adds no new terms. Everything it uses is explained earlier: Studio, robot, Orchestrator, Action Center, DU and IXP in <a href="theory-foundations.html">Session 1 – Foundations</a>; Document Data, confidence, Validation Station and HITL (human in the loop) in <a href="theory-foundations.html#glossary">Session 1 – Glossary</a>; Extract Document Data in <a href="theory-kickoff.html#ixp-well">Using IXP well</a>; the DU framework, thresholds and business rules in <a href="theory-lean-workflow.html">Lean workflow, confidence &amp; validation</a>; the Account field group in <a href="lab-2-repeating-data.html">Lab 2</a>.</p></div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 260" role="img" aria-label="Lean IXP workflow: input file, Extract Document Data, rules and per-field confidence checks, then a decision. If review is needed a validation task in Action Center runs and its validated data goes to output; otherwise the data goes straight to output.">
+<title>Lean IXP workflow with conditional validation</title>
+<defs><marker id="l4arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<g font-family="Inter, Arial, sans-serif" text-anchor="middle">
+<rect x="20" y="60" width="110" height="60" fill="#F6F6F6" stroke="#D9D9D9"/>
+<text x="75" y="86" font-size="15" fill="#182126" font-weight="600">Input file</text>
+<text x="75" y="106" font-size="13" fill="#616161">bank statement</text>
+<rect x="160" y="60" width="180" height="60" fill="#FDE8E1" stroke="#FA4616"/>
+<text x="250" y="86" font-size="13" fill="#182126" font-weight="600">Extract Document Data</text>
+<text x="250" y="106" font-size="13" fill="#616161">IXP model (Lab 2)</text>
+<rect x="370" y="60" width="170" height="60" fill="#F6F6F6" stroke="#D9D9D9"/>
+<text x="455" y="86" font-size="13" fill="#182126" font-weight="600">Business rules +</text>
+<text x="455" y="106" font-size="13" fill="#182126" font-weight="600">per-field thresholds</text>
+<path d="M560,90 L630,45 L700,90 L630,135 z" fill="#FFFFFF" stroke="#CE340B" stroke-width="1.5"/>
+<text x="630" y="87" font-size="14" fill="#182126" font-weight="600">Needs</text>
+<text x="630" y="104" font-size="14" fill="#182126" font-weight="600">review?</text>
+<rect x="740" y="60" width="120" height="60" fill="#A5E2F0" stroke="#0BA2B3"/>
+<text x="800" y="86" font-size="15" fill="#182126" font-weight="600">Output</text>
+<text x="800" y="106" font-size="13" fill="#3C464B">Excel / JSON</text>
+<rect x="550" y="180" width="160" height="60" fill="#FDE8E1" stroke="#FA4616"/>
+<text x="630" y="206" font-size="14" fill="#182126" font-weight="600">Validation task</text>
+<text x="630" y="226" font-size="13" fill="#616161">Action Center</text>
+<text x="250" y="145" font-size="13" fill="#616161">Document Data: value + confidence per field</text>
+<text x="720" y="82" font-size="13" fill="#3C464B" font-weight="600">No</text>
+<text x="650" y="162" font-size="13" fill="#CE340B" font-weight="600">Yes</text>
+<text x="765" y="232" font-size="13" fill="#3C464B">validated data</text>
+</g>
+<g stroke="#3C464B" stroke-width="1.5" fill="none">
+<line x1="130" y1="90" x2="158" y2="90" marker-end="url(#l4arrow)"/>
+<line x1="340" y1="90" x2="368" y2="90" marker-end="url(#l4arrow)"/>
+<line x1="540" y1="90" x2="558" y2="90" marker-end="url(#l4arrow)"/>
+<line x1="700" y1="90" x2="738" y2="90" marker-end="url(#l4arrow)"/>
+<line x1="630" y1="135" x2="630" y2="178" marker-end="url(#l4arrow)"/>
+<path d="M710,210 L800,210 L800,122" marker-end="url(#l4arrow)"/>
+</g>
+<text x="20" y="232" font-family="Inter, Arial, sans-serif" font-size="13" fill="#616161">Share sent to review = validation rate (key metric)</text>
+</svg>
+<figcaption>The lab in one picture. Parts 1–2 build every box; the "Needs review?" decision is the code you write in steps 7–9.</figcaption>
+</figure>
+<div class="lesson"><h2 class="lesson-title">🔨 Part 1 – Make the model available at runtime</h2><div class="steps-progress" data-for="lab-4-1-t0"><span class="steps-count"></span><div class="progress-bar-wrap"><div class="progress-bar-fill steps-fill" style="width:0%"></div></div></div><ol class="lab-steps" id="lab-4-1-t0"><li class="lab-step" data-step-id="lab-4-1:t0:0"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 1 done</span></label><div class="lab-step__num">1</div><div class="lab-step__body"><div class="lab-step__text">In your Lab 2 project, <strong>publish</strong> the latest model version, then in the <strong>Publish</strong> tab use the ellipsis next to it and select <strong>Mark as production</strong>.</div><div class="why-box"><div class="why-box__title">Why</div>Studio can only call a <strong>published</strong> model version. Publishing freezes a snapshot of your instructions; the tag (Staging or Production in the IXP UI) tells consumers which snapshot to use, so later edits in IXP do not change what the robot runs until you publish a new version and mark it as production.</div><div class="lab-step__expected"><strong>Expected result:</strong> A published version marked as <code>Production</code>.</div></div></li><li class="lab-step" data-step-id="lab-4-1:t0:1"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 2 done</span></label><div class="lab-step__num">2</div><div class="lab-step__body"><div class="lab-step__text">Note the <strong>IXP project name</strong> and check which version carries the <code>Production</code> tag. You select both in Studio in step 4.</div><div class="foundation-box"><div class="foundation-box__title">Orchestrator folder</div>A folder in Orchestrator groups robots, processes and resources and controls who can use them. In this lab the validation task (step 9) is created in your Orchestrator folder, and the documents and data it needs are stored in an Orchestrator storage bucket.</div><div class="lab-step__expected"><strong>Expected result:</strong> You know the project name and tag to select in Studio.</div></div></li></ol></div>
+<div class="lesson"><h2 class="lesson-title">🔨 Part 2 – Build the workflow</h2><div class="steps-progress" data-for="lab-4-2-t0"><span class="steps-count"></span><div class="progress-bar-wrap"><div class="progress-bar-fill steps-fill" style="width:0%"></div></div></div><ol class="lab-steps" id="lab-4-2-t0"><li class="lab-step" data-step-id="lab-4-2:t0:0"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 3 done</span></label><div class="lab-step__num">3</div><div class="lab-step__body"><div class="lab-step__text">Create a new process <code>Lab4_LeanIXP</code> in Studio Web. Add a variable for the input file path and a <strong>log message with a timestamp</strong> at the start.</div><div class="why-box"><div class="why-box__title">How and why</div>In Studio, a <strong>process</strong> is a project a robot runs from start to end. In Studio Web the process runs on a cloud robot, which can't read files on your computer. Make the sample PDF available to the robot first, for example by adding it to the project files or reading it from the workshop storage bucket, and point the file path variable at it. The trainer shows the way that works on the workshop tenant. Add a <strong>Log Message</strong> activity with a message such as <code>"Start " + Now.ToString("HH:mm:ss.fff")</code> (VB) or <code>"Start " + DateTime.Now.ToString("HH:mm:ss.fff")</code> (C#). These timestamps feed the timing table in Part 4.</div><div class="lab-step__expected"><strong>Expected result:</strong> Empty process with a start time log.</div></div></li><li class="lab-step" data-step-id="lab-4-2:t0:1"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 4 done</span></label><div class="lab-step__num">4</div><div class="lab-step__body"><div class="lab-step__text">Add <strong>Extract Document Data</strong> (Document Understanding activities). Select your IXP project, its <code>Production</code> tag and the input file. Save the output to a variable. <em>(Property names may differ slightly by version.)</em></div><div class="foundation-box"><div class="foundation-box__title">What this activity does and what to expect</div>This single activity replaces the separate digitize and extract steps of the DU framework. IXP only extracts (it does not classify), and the activity reads the field list straight from your IXP model, so you do not define a taxonomy in the workflow. In its properties you pick the <strong>Project</strong>, the <strong>Version</strong> (tag) and the <strong>Document Type</strong>. The input is a file, the output is a <strong>Document Data</strong> variable.</div><div class="lab-step__expected"><strong>Expected result:</strong> The activity returns extraction results.</div></div></li><li class="lab-step" data-step-id="lab-4-2:t0:2"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 5 done</span></label><div class="lab-step__num">5</div><div class="lab-step__body"><div class="lab-step__text">Log a timestamp after extraction.</div><div class="lab-step__expected"><strong>Expected result:</strong> You can see the extraction time in the logs.</div></div></li><li class="lab-step" data-step-id="lab-4-2:t0:3"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 6 done</span></label><div class="lab-step__num">6</div><div class="lab-step__body"><div class="lab-step__text">Loop through the extracted fields (including every occurrence of the <code>Account</code> group). For each field, read its <strong>value</strong> and <strong>confidence</strong>.</div><div class="foundation-box"><div class="foundation-box__title">Field groups and confidence</div>The <code>Account</code> field group repeats once per account on the statement, so you need two loops: one over the group occurrences (one per account) and one over the fields inside each occurrence. For each field read the <strong>value</strong> and the <strong>Extraction Confidence Score</strong>. The IXP design screens do not show confidence; this log is the first place you see it, which is why later thresholds must come from runtime output like this.</div><div class="lab-step__expected"><strong>Expected result:</strong> Values and confidences printed to the log.</div></div></li><li class="lab-step" data-step-id="lab-4-2:t0:4"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 7 done</span></label><div class="lab-step__num">7</div><div class="lab-step__body"><div class="lab-step__text">Add the <strong>confidence rule</strong>: if any key field (e.g. <code>Account Number</code>, <code>Closing Balance</code>) is below your threshold (start with 0.8), mark the document as "needs review".</div><div class="why-box"><div class="why-box__title">What the score means</div>The score (0 to 1) is how sure the model was about that value. It is not a calibrated probability: high-but-wrong and low-but-right both happen, so 0.8 is only a starting point. Use a separate threshold per field – stricter for amounts and IDs, looser for descriptive text. One documented case to recognise: a value of <strong>0</strong> can also mean the model's token limit was exceeded (the response then returns occurrence and extraction confidence values of 0), not just "very uncertain".</div><div class="lab-step__expected"><strong>Expected result:</strong> Flag set correctly.</div></div></li><li class="lab-step" data-step-id="lab-4-2:t0:5"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 8 done</span></label><div class="lab-step__num">8</div><div class="lab-step__body"><div class="lab-step__text">Add at least one <strong>business rule</strong> that doesn't rely on confidence, e.g.: the number of accounts &gt; 0; every account has a currency; <code>Closing Balance</code> is not empty. If a rule fails, mark "needs review".</div><div class="why-box"><div class="why-box__title">Why</div>Rules catch errors that confidence misses: a value the model was confident about but that is wrong, or a field it skipped entirely. Rules are deterministic, so they behave the same after a model or instruction change; confidence does not.</div><div class="lab-step__expected"><strong>Expected result:</strong> Flag also set by business rules.</div></div></li><li class="lab-step" data-step-id="lab-4-2:t0:6"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 9 done</span></label><div class="lab-step__num">9</div><div class="lab-step__body"><div class="lab-step__text">If "needs review": create a <strong>validation task</strong> (Action Center / Validation Station) and wait for it to complete – use <strong>Create Validation Task and Wait</strong>, or <strong>Create Validation Task</strong> followed by <strong>Wait for Validation Task and Resume</strong>. If not: skip validation. <em>(Activity names may differ slightly by version.)</em></div><div class="foundation-box"><div class="foundation-box__title">Validation task: settings and what to expect</div>Pass the Document Data from step 4 as the extracted data and give the task a clear <strong>Action Title</strong> (e.g. the file name) and a <strong>priority</strong> (Low, Medium, High, Critical; default Medium). Set <strong>Display Mode</strong> to <strong>Compact</strong>: field groups and the field filters used in Part 3 are supported in the compact view only. The <strong>Extracted fields validation confidence %</strong> property sets the upper limit confidence score used for filtering extracted fields, so reviewers can focus on fields below your bar. The task appears in <strong>Action Center</strong>; the robot pauses until a person completes it, then continues with the <strong>validated</strong> Document Data. <em>Create Validation Task and Wait</em> is documented for Studio from Automation Cloud and works only together with Extract Document Data. (<strong>Present Validation Station</strong>, for attended review on the robot's machine, belongs to the IntelligentOCR package for Windows projects and does not take Document Data, so it does not fit this workflow.)</div><div class="lab-step__expected"><strong>Expected result:</strong> Validation only happens when needed.</div></div></li><li class="lab-step" data-step-id="lab-4-2:t0:7"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 10 done</span></label><div class="lab-step__num">10</div><div class="lab-step__body"><div class="lab-step__text">Write the final values to an output (e.g. a DataTable, an Excel file or a JSON (JavaScript Object Notation) file). Log the end timestamp.</div><div class="why-box"><div class="why-box__title">Watch out</div>If a validation task ran, write the <strong>validated</strong> Document Data, not the original extraction – otherwise the reviewer's corrections are lost. Document Data can also expose its results as data tables that you write with Excel or CSV activities. Keeping a confidence column in the output makes it easy to audit later why a document was or was not reviewed.</div><div class="lab-step__expected"><strong>Expected result:</strong> Output file and total runtime in the log.</div></div></li><li class="lab-step" data-step-id="lab-4-2:t0:8"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 11 done</span></label><div class="lab-step__num">11</div><div class="lab-step__body"><div class="lab-step__text">Run with <a download="" href="../assets/samples/bank_statement_A_4_accounts.pdf"><code>bank_statement_A_4_accounts.pdf</code></a>. Then lower the threshold to 0.5 and raise it to 0.95, and run again each time.</div><div class="why-box"><div class="why-box__title">How to read the result</div>With one document you are watching whether <em>this</em> document flips into review, and which field caused it – log the field name that triggered the flag. In production the same experiment over a representative sample gives you the validation rate per threshold. If the confidence values barely vary between fields, changing the threshold changes little, so lean on business rules.</div><div class="lab-step__expected"><strong>Expected result:</strong> You see how the threshold changes how many documents go to people.</div></div></li></ol></div>
+<div class="lesson"><h2 class="lesson-title">🔨 Part 3 – Validation Station</h2><div class="steps-progress" data-for="lab-4-3-t0"><span class="steps-count"></span><div class="progress-bar-wrap"><div class="progress-bar-fill steps-fill" style="width:0%"></div></div></div><ol class="lab-steps" id="lab-4-3-t0"><li class="lab-step" data-step-id="lab-4-3:t0:0"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 12 done</span></label><div class="lab-step__num">12</div><div class="lab-step__body"><div class="lab-step__text">Open a validation task. Review the <code>Account</code> group as a table (for IXP Unstructured and complex documents, all extractions are validated as tables), use <strong>Confirm all cells</strong> to confirm a whole table, and use <strong>field filters</strong> (e.g. the <strong>Hide fields</strong> menu with <strong>Confirmed</strong> ticked, to see only what is left to check; compact view only).</div><div class="foundation-box"><div class="foundation-box__title">Validation Station</div>Open the task from <strong>Action Center</strong>. The document is on one side and the extracted values on the other; click a value to see where it came from on the page, correct it if needed, then confirm. Confidence is colour-coded: below 50% red, 50–85% yellow, 86–99% light green, 100% green. These bands are display guidance, not recommended thresholds. Completing the task sends the validated data back to the waiting robot. Corrections here do <strong>not</strong> retrain the IXP model; to improve it, refine the instructions in IXP and publish a new version.</div><div class="lab-step__expected"><strong>Expected result:</strong> You know the review features that save time on repeating data.</div></div></li></ol></div>
+<div class="lesson"><h2 class="lesson-title">🔨 Part 4 – Timing</h2><p>Fill in from your logs:</p>
+<div class="table-wrap"><table class="comparison-table">
+<thead>
+<tr>
+<th>Step</th>
+<th>Time (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start → extraction done</td>
+<td></td>
+</tr>
+<tr>
+<td>Extraction → rules done</td>
+<td></td>
+</tr>
+<tr>
+<td>Validation (if any)</td>
+<td></td>
+</tr>
+<tr>
+<td>Total</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Compare with your colleagues and with the same document in your current DU framework project, if you have one.</p></div>
+<div class="admonition admonition--note"><div class="admonition-title">❓ Checkpoint questions</div><div class="admonition-body"><ol>
+<li>Why use business rules as well as confidence?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body">Confidence is not a calibrated probability: high-but-wrong and low-but-right values both happen, and 0 can also mean the token limit was exceeded. Business rules (required fields present, at least one account, a currency on every account) are deterministic. They catch errors that confidence misses, and they behave the same after a model or instruction change.</div></details></li>
+<li>What threshold would you start with in production, and how would you adjust it over time?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body">Start around <strong>0.8</strong> for key fields, stricter for amounts and IDs and looser for descriptive text. Run a representative sample and track two numbers: the validation rate (share sent to people) and the errors that get through without review. Raise a field's threshold if wrong values slip through; lower it if people mostly confirm correct values. Re-check after every model or instruction change.</div></details></li>
+<li>Which parts of the full DU framework does your customer actually need (retries, exception handling, logging – and queue-based dispatching, which is the dispatcher's job, not the template's)? Which can you leave out?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body">There is no single right answer; it depends on the customer. Usually you keep retries for transient errors, exception handling and logging (including timings). Queue-based dispatching belongs to the dispatcher. For one document type with Extract Document Data you can usually leave out the separate digitize and classify steps and the taxonomy in the workflow.</div></details></li>
+</ol></div></div>
+<div class="admonition admonition--important"><div class="admonition-title">⚠️ Common mistakes</div><div class="admonition-body"><ul>
+<li><strong>One threshold for every field.</strong> Critical fields (amounts, IDs) usually need a stricter threshold than descriptive ones.</li>
+<li><strong>Trusting confidence alone.</strong> Always add simple business rules (required fields, totals adding up, valid currencies).</li>
+<li><strong>Treating confidence as a probability that's calibrated for your documents.</strong> Check how confidence behaves on your documents before you pick thresholds. If you route on <strong>OCR (optical character recognition) confidence</strong>, recheck those thresholds when the OCR engine is updated.</li>
+<li><strong>Not checking how the chosen model reports confidence.</strong> Exceeding the token limit returns a confidence of 0, which is not the same as "very uncertain". Run a sample first; if confidence barely varies, routing on it adds little.</li>
+<li><strong>Looking for confidence in the IXP screens.</strong> It is only returned at runtime (in the model response and in Action Center). Pick thresholds from a sample run through the published model, and recheck them after model, instruction or OCR changes.</li>
+<li><strong>Sending every document to validation "to be safe".</strong> That loses most of the value of automation.</li>
+<li><strong>Forgetting to publish the new model version and mark it as production</strong> after improving instructions. The workflow keeps using the old one.</li>
+</ul></div></div>
+<div class="admonition admonition--tip"><div class="admonition-title">🚀 Stretch goals</div><div class="admonition-body"><ul>
+<li>Add a retry and an error branch (file can't be read, extraction fails).<details class="cp-answer"><summary>Show how</summary><div class="cp-answer__body"><p>Activity names may differ slightly by version.</p><ol><li>Put a <strong>Retry Scope</strong> around <strong>Extract Document Data</strong> (for example 3 retries, a few seconds apart). This covers temporary errors such as a timeout or a busy service.</li><li>Put a <strong>Try Catch</strong> around the processing of each document. In the catch: log the error with the file name, mark or move the file as failed, and continue with the next file.</li><li>Don't retry errors that won't go away by themselves: a missing, locked, corrupt or password-protected file, or a failed business rule. Send these straight to the error branch or to validation.</li></ol><p><strong>Test it:</strong> rename one input file so it can't be found, and check that the workflow logs it and continues.</p></div></details></li>
+<li>Run 10 documents in parallel and compare the total time with running them one after another.<details class="cp-answer"><summary>Show how</summary><div class="cp-answer__body"><ol><li>Make 10 copies of the bank statements (for example 5 of A and 5 of B) in one folder.</li><li>Run them once with <strong>For Each</strong> (one after another) and once with <strong>Parallel For Each</strong>. Log the start and end time per document and in total.</li><li>Skip the validation branch for this run, or use <strong>Create Validation Task</strong> without waiting, so open tasks don't hold up the run.</li></ol><p><strong>What to expect:</strong> the parallel run finishes sooner, but not 10 times sooner. Service limits and the slowest document set the pace. In production, the usual way to scale is a queue that several robots work through.</p></div></details></li>
+</ul></div></div>
+<div class="admonition admonition--success"><div class="admonition-title">✅ What you should take away</div><div class="admonition-body"><ul>
+<li>You don't always need the full DU framework: <strong>extract → rules → validate only when needed → output</strong> covers many cases.</li>
+<li>Confidence thresholds plus business rules decide how much work goes to people. Tune them with real data.</li>
+<li>Measure time per step before you try to optimize.</li>
+</ul></div></div>
+<p class="source-list"><strong>Sources:</strong>
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/building-and-consuming-a-workflow" target="_blank" rel="noopener">IXP – Building and consuming a workflow</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-runtime" target="_blank" rel="noopener">IXP – Runtime FAQ</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/managing-published-projects" target="_blank" rel="noopener">IXP – Managing published versions</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-document-processing-limits" target="_blank" rel="noopener">IXP – Document processing limits</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/extract-document-data" target="_blank" rel="noopener">Extract Document Data</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/document-data" target="_blank" rel="noopener">Document Data</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/document-understanding-create-document-validation-action" target="_blank" rel="noopener">Create Validation Task</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/wait-for-document-validation-task-and-resume" target="_blank" rel="noopener">Wait for Validation Task and Resume</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/create-validation-task-and-wait" target="_blank" rel="noopener">Create Validation Task and Wait</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/present-validation-station" target="_blank" rel="noopener">Present Validation Station</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/compact-validation-station" target="_blank" rel="noopener">Compact Validation Station</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/classic-validation-station" target="_blank" rel="noopener">Classic Validation Station</a> ·
+<a href="https://docs.uipath.com/action-center/automation-cloud/latest/user-guide/validation-station-field-filters" target="_blank" rel="noopener">Field filters in the Validation Station</a> ·
+<a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/du-process" target="_blank" rel="noopener">Document Understanding Process template</a></p>
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="theory-lean-workflow.html" class="btn btn-outline">← Theory · Lean workflow &amp; confidence</a>
+      <div class="module-nav__complete"><button id="mark-complete-btn" class="mark-complete-btn">Mark as complete</button></div>
+      <a href="wrapup-session-1.html" class="btn btn-primary">Session 1 wrap-up →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('lab-4');</script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Lab 3 – Multi-document files | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <a href="session-1.html">Session 1: Design &amp; quality</a> <span aria-hidden="true">›</span> <span>Lab 3 · Multi-document files</span></nav>
+    <div class="page-header">
+      <h1>Lab 3 · Multi-document files</h1>
+      <div class="page-header__meta"><span>⏱ ~30 min</span><span>🔨 Hands-on</span><span>Session 1</span></div>
+    </div>
+
+<div class="read-first">📖 <strong>Read first:</strong> <a href="theory-multi-document.html">Session 1 theory – Multi-document files (packets)</a> explains what a packet is, why IXP (Intelligent Xtraction and Processing) extraction doesn't split a packet, and when to classify and split first instead of sending the whole packet to one project.</div>
+
+<div class="why-box"><div class="why-box__title">What you are doing and why</div>
+<p>Customers rarely send one clean document per file. A loan or onboarding request often arrives as one PDF with an invoice, a bank statement and a payslip stuck together. In this lab you process such a file in two ways and measure which one works better.</p>
+<p><strong>At the end you will have:</strong> one IXP project that reads the whole packet (approach B), separate per-type extractions from a split packet (approach A), and a filled-in comparison table you can turn into a decision rule.</p>
+<p><strong>In a real project</strong> this is the first design decision for any document intake that receives mixed files: do we put a classification and splitting step in front of extraction, or not? Getting it wrong costs either accuracy (values mixed between documents) or complexity you did not need.</p>
+</div>
+
+<div class="foundation-box" id="terms"><div class="foundation-box__title">Terms used in this lab</div>
+<p>Already explained earlier, so not repeated here: IXP and DU (Document Understanding) in <a href="theory-foundations.html">Session 1 – Foundations</a>; field group and field group instructions in <a href="theory-foundations.html#glossary">Session 1 – Glossary</a>; packets, classification, splitting and page ranges in <a href="theory-multi-document.html">Multi-document files</a>. New in this lab:</p>
+<dl class="glossary">
+<dt>Mix-up</dt><dd>A value taken from the wrong document, for example an account number from the payslip landing in the <code>Bank Account</code> group.</dd>
+<dt>Consumption</dt><dd>IXP and DU processing consume units from your organization's UiPath license. IXP extraction is metered per page; the licensing FAQ has the details for your plan.</dd>
+</dl></div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 360" role="img" aria-labelledby="l3-diag-title" font-family="Inter, Arial, sans-serif">
+<title id="l3-diag-title">Approach B sends the whole packet to one IXP project with one field group per type. Approach A first uses a DU classifier to find the type and page range of each document, then sends each range to the IXP project for that type.</title>
+<defs><marker id="l3-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<text x="20" y="26" font-size="15" font-weight="700" fill="#182126">Approach B – one IXP project on the whole packet</text>
+<rect x="20" y="44" width="140" height="56" fill="#F6F6F6" stroke="#D9D9D9"/>
+<text x="90" y="68" font-size="14" font-weight="600" fill="#182126" text-anchor="middle">Packet PDF</text>
+<text x="90" y="88" font-size="13" fill="#616161" text-anchor="middle">3 documents</text>
+<line x1="160" y1="72" x2="198" y2="72" stroke="#3C464B" stroke-width="1.5" marker-end="url(#l3-arrow)"/>
+<rect x="200" y="44" width="300" height="56" fill="#FDE8E1" stroke="#FA4616"/>
+<text x="350" y="68" font-size="14" font-weight="600" fill="#182126" text-anchor="middle">One IXP project</text>
+<text x="350" y="88" font-size="13" fill="#3C464B" text-anchor="middle">3 field groups, one per type</text>
+<line x1="500" y1="72" x2="538" y2="72" stroke="#3C464B" stroke-width="1.5" marker-end="url(#l3-arrow)"/>
+<rect x="540" y="44" width="320" height="56" fill="#F6F6F6" stroke="#D9D9D9"/>
+<text x="700" y="68" font-size="14" font-weight="600" fill="#182126" text-anchor="middle">One result</text>
+<text x="700" y="88" font-size="13" fill="#616161" text-anchor="middle">values for all 3 types</text>
+<text x="200" y="122" font-size="13" fill="#CE340B">Risk: values mixed between groups</text>
+<line x1="20" y1="142" x2="860" y2="142" stroke="#D9D9D9"/>
+<text x="20" y="172" font-size="15" font-weight="700" fill="#182126">Approach A – classify and split first, then one IXP project per type</text>
+<rect x="20" y="215" width="140" height="56" fill="#F6F6F6" stroke="#D9D9D9"/>
+<text x="90" y="239" font-size="14" font-weight="600" fill="#182126" text-anchor="middle">Packet PDF</text>
+<text x="90" y="259" font-size="13" fill="#616161" text-anchor="middle">3 documents</text>
+<line x1="160" y1="243" x2="188" y2="243" stroke="#3C464B" stroke-width="1.5" marker-end="url(#l3-arrow)"/>
+<rect x="190" y="205" width="230" height="76" fill="#A5E2F0" stroke="#0BA2B3"/>
+<text x="305" y="232" font-size="14" font-weight="600" fill="#182126" text-anchor="middle">DU classifier</text>
+<text x="305" y="252" font-size="13" fill="#182126" text-anchor="middle">returns type + page range</text>
+<text x="305" y="270" font-size="13" fill="#182126" text-anchor="middle">for each document</text>
+<line x1="420" y1="243" x2="468" y2="201" stroke="#3C464B" stroke-width="1.5" marker-end="url(#l3-arrow)"/>
+<line x1="420" y1="243" x2="468" y2="243" stroke="#3C464B" stroke-width="1.5" marker-end="url(#l3-arrow)"/>
+<line x1="420" y1="243" x2="468" y2="285" stroke="#3C464B" stroke-width="1.5" marker-end="url(#l3-arrow)"/>
+<rect x="470" y="184" width="200" height="34" fill="#FDE8E1" stroke="#FA4616"/>
+<text x="570" y="206" font-size="13" fill="#182126" text-anchor="middle">IXP Invoice project</text>
+<rect x="470" y="226" width="200" height="34" fill="#FDE8E1" stroke="#FA4616"/>
+<text x="570" y="248" font-size="13" fill="#182126" text-anchor="middle">IXP Bank Account project</text>
+<rect x="470" y="268" width="200" height="34" fill="#FDE8E1" stroke="#FA4616"/>
+<text x="570" y="290" font-size="13" fill="#182126" text-anchor="middle">IXP Payslip project</text>
+<line x1="670" y1="201" x2="708" y2="228" stroke="#3C464B" stroke-width="1.5" marker-end="url(#l3-arrow)"/>
+<line x1="670" y1="243" x2="708" y2="243" stroke="#3C464B" stroke-width="1.5" marker-end="url(#l3-arrow)"/>
+<line x1="670" y1="285" x2="708" y2="258" stroke="#3C464B" stroke-width="1.5" marker-end="url(#l3-arrow)"/>
+<rect x="710" y="205" width="150" height="76" fill="#F6F6F6" stroke="#D9D9D9"/>
+<text x="785" y="232" font-size="14" font-weight="600" fill="#182126" text-anchor="middle">3 results</text>
+<text x="785" y="252" font-size="13" fill="#616161" text-anchor="middle">keyed by</text>
+<text x="785" y="270" font-size="13" fill="#616161" text-anchor="middle">page range</text>
+<text x="190" y="324" font-size="13" fill="#CE340B">Risk: a wrong page boundary sends</text>
+<text x="190" y="342" font-size="13" fill="#CE340B">pages to the wrong project</text>
+</svg>
+<figcaption>The two approaches you compare. Errors enter at different points: in B through values mixed between field groups, in A through wrong page boundaries that carry into extraction.</figcaption>
+</figure>
+
+<div class="objectives-box"><h3>🎯 Objective</h3><p>Process one PDF that has several document types in it (invoice + bank statement + payslip). Compare two approaches and decide when you really need to split first.</p>
+<div class="table-wrap"><table class="comparison-table">
+<thead>
+<tr>
+<th></th>
+<th>Approach A – Classify + split, then IXP per type</th>
+<th>Approach B – One IXP project on the whole packet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>How</td>
+<td>A DU classifier finds the document type and page range of each document, then each part goes to the IXP project for its type</td>
+<td>One project with a field group per document type (<code>Invoice</code>, <code>Bank Account</code>, <code>Payslip</code>)</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>Clean separation, one model per type, easy to reuse</td>
+<td>Fewer moving parts, one call</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>More steps and calls, splitting errors carry over (including over-splitting: one multi-page document cut into separate parts)</td>
+<td>Large taxonomy, fields can get mixed between types, harder to maintain</td>
+</tr>
+</tbody>
+</table></div></div>
+
+<div class="foundation-box"><div class="foundation-box__title">Four facts to know before you start</div>
+<ul>
+<li><strong>IXP extraction doesn't split or classify.</strong> The Unstructured and complex documents capability returns your fields. It doesn't tell you where one document ends and the next begins, and the Advanced strategy's multiple passes don't change that. In approach A, the splitting must come from a DU classifier.</li>
+<li><strong>IXP can read stacks without splitting.</strong> The docs list extracting data from several document types combined in one file, without splitting them first, as a use case for this capability. That is approach B.</li>
+<li><strong>Page limit depends on the extraction model.</strong> Per the IXP model configuration page, GPT-4o processes up to 50 pages per document and Gemini 2.5 Flash up to 500 pages in a single call; pages beyond the limit are not processed. Check which model your project uses. For packets over the limit, classify and split first.</li>
+<li><strong>Consumption is per page, not per call.</strong> A classifier in front of IXP is metered separately. When every page is extracted, A and B consume about the same; A saves only when it lets you skip pages you do not need (cover pages, blank pages, terms). Check the licensing FAQ for your plan.</li>
+</ul>
+<p class="source-list">Sources: <a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/faq-choosing-the-correct-ixp-capability" target="_blank" rel="noopener">Choosing the correct IXP capability (FAQ)</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/choosing-the-correct-capability" target="_blank" rel="noopener">Choosing the correct capability</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/configuring-the-model" target="_blank" rel="noopener">Model configuration</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/faq-licensing-and-pricing" target="_blank" rel="noopener">Licensing and pricing (FAQ)</a> · <a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/metering-charging-logic" target="_blank" rel="noopener">DU metering and charging logic (Flex plan)</a></p>
+</div>
+
+<div class="info-card" style="margin-top:1.5rem;"><h4 style="margin-bottom:.25rem;">📋 Before you begin</h4><h4>✔️ Prerequisites</h4><ul>
+<li>Lab 2 done (the <code>Account</code> group is reused)</li>
+<li>For approach A: the pre-split PDFs in <a download="" href="../assets/samples/lab3_split_parts.zip"><code>lab3_split_parts.zip</code></a> (one PDF per document). The trainer demos the classify-and-split step; in Studio desktop (Windows) projects this is typically the <a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/intelligent-keyword-classifier" target="_blank" rel="noopener">Intelligent Keyword Classifier</a> inside a Classify Document Scope. The IXP project itself cannot split.</li>
+</ul><h4>📎 Input files</h4><p><a download="" href="../assets/samples/customer_packet_1.pdf"><code>customer_packet_1.pdf</code></a>, <a download="" href="../assets/samples/customer_packet_2.pdf"><code>customer_packet_2.pdf</code></a>, <a download="" href="../assets/samples/customer_packet_3.pdf"><code>customer_packet_3.pdf</code></a> (challenge, step 4), <a download="" href="../assets/samples/lab3_split_parts.zip"><code>lab3_split_parts.zip</code></a> (approach A)</p></div>
+<div class="lesson"><h2 class="lesson-title">🔨 Steps</h2><div class="steps-progress" data-for="lab-3-1-t0"><span class="steps-count"></span><div class="progress-bar-wrap"><div class="progress-bar-fill steps-fill" style="width:0%"></div></div></div><ol class="lab-steps" id="lab-3-1-t0"><li class="lab-step" data-step-id="lab-3-1:t0:0"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 1 done</span></label><div class="lab-step__num">1</div><div class="lab-step__body"><div class="lab-step__text">Open <a download="" href="../assets/samples/customer_packet_1.pdf"><code>customer_packet_1.pdf</code></a> and write down the page ranges for each document type.</div><div class="lab-step__extra"><strong>Why:</strong> this is your ground truth, the correct answer you check both approaches against. Do the same for <a download="" href="../assets/samples/customer_packet_2.pdf"><code>customer_packet_2.pdf</code></a>. Tip: each document starts with a title at the top of the page.</div><div class="lab-step__expected"><strong>Expected result:</strong> Your "ground truth" (packet 1 has 3 pages; packet 2 has 4 pages in a different order, and its statement runs over 2 pages).</div></div></li><li class="lab-step" data-step-id="lab-3-1:t0:1"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 2 done</span></label><div class="lab-step__num">2</div><div class="lab-step__body"><div class="lab-step__text"><strong>Approach B first.</strong> Create project <code>Lab3_Packet_&lt;initials&gt;</code>. Add 3 field groups: <code>Invoice</code> (invoice number, date, supplier, total), <code>Bank Account</code> (one extraction per account, like the <code>Account</code> group in Lab 2), <code>Payslip</code> (employee name, period, net pay). In each <strong>group instruction</strong>, describe how to recognize that document type.</div><div class="foundation-box"><div class="foundation-box__title">Field groups as document types</div><p>A field group bundles fields that belong together. In approach B each group stands for one document type, and its instruction (together with the overall extraction instructions) is what tells the model which pages to read for it. Create the project from the IXP <strong>Unstructured and complex documents</strong> capability, then in the <strong>Build</strong> tab select <strong>Manage taxonomy</strong> to add field groups, fields and instructions.</p><p>A useful group instruction names the visible clues and what to ignore, for example: <em>"Use only the document titled TAX INVOICE. Ignore bank statements and payslips in the same file."</em></p></div><div class="lab-step__expected"><strong>Expected result:</strong> One project, 3 groups.</div><details class="instr-block"><summary>📋 Ready-to-use instructions</summary><div class="instr-block__body"><p>Group and field instructions for approach B. For the Bank Account fields, reuse the field instructions from Lab 2. For approach A (step 6), use the same group and field instructions in each per-type project.</p><div class="instr-item"><div class="instr-item__label">Overall extraction instructions</div><pre><code>Each file is a packet that combines several documents of different types, such as tax invoices, bank statements and payslips, in any order. One document can continue over more than one page. Each field group stands for one document type. Take the values for a group only from the pages of that document type.</code></pre></div><div class="instr-item"><div class="instr-item__label">Field group · Invoice</div><pre><code>A tax invoice: a page titled "TAX INVOICE", with the supplier's name and address at the top, an invoice number, invoice and due dates, a "Bill to" block, a table of line items and a "Total due". Use only the pages of this invoice. Bank statements and payslips in the same file are other document types.</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Invoice Number (Exact Text)</div><pre><code>The identifier of the invoice, shown next to "Invoice number" in the invoice header, below the "TAX INVOICE" title. Example: "KOS-2026-01142".</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Invoice Date (Date)</div><pre><code>The date the invoice was issued, shown next to "Invoice date" in the invoice header. This is the issue date, which comes before the due date. Example: "14/09/2026".</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Supplier (Exact Text)</div><pre><code>The company that issued the invoice, printed as the title at the top of the invoice page, above its address and VAT number. The company under "Bill to" is the customer. Example: "Kinneret Office Supplies Ltd.".</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Total (Monetary Quantity)</div><pre><code>The final amount to pay, including VAT, shown next to "Total due" below the line items and the VAT line. Example: "22,484.90 ILS".</code></pre></div><div class="instr-item"><div class="instr-item__label">Field group · Bank Account</div><pre><code>A bank statement: pages that start with a bank's name and a statement header (customer, statement period, statement number), followed by one section per account. One occurrence per account section. An account's transaction table can continue onto the next page; that continuation belongs to the same account. Use only the pages of the bank statement.</code></pre></div><div class="instr-item"><div class="instr-item__label">Field group · Payslip</div><pre><code>A payslip: a page titled "PAYSLIP", with the employer's name at the top, the employee's name and ID, the pay period and payment date, a table of earnings and deductions, and the net pay. Use only the payslip page.</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Employee Name (Exact Text)</div><pre><code>The person the payslip is for, shown next to "Employee" in the payslip header, below the "PAYSLIP" title. The name at the very top is the employer. Example: "Amir Haddad (fictional)".</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Pay Period (Inferred Text)</div><pre><code>The month the salary is paid for, shown next to "Pay period" in the payslip header. This is the period, not the payment date. Example: "August 2026".</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Net Pay (Monetary Quantity)</div><pre><code>The amount paid to the employee after all deductions, shown next to "Net pay" at the bottom of the payslip, below "Gross pay" and "Total deductions". Example: "18,094.80 ILS".</code></pre></div></div></details></div></li><li class="lab-step" data-step-id="lab-3-1:t0:2"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 3 done</span></label><div class="lab-step__num">3</div><div class="lab-step__body"><div class="lab-step__text">Upload both packets and run the extraction.</div><div class="lab-step__extra"><strong>What to expect:</strong> predictions are generated automatically after upload. If you changed the taxonomy after uploading, open <strong>Validate predictions</strong> and select <strong>Predict extractions</strong> to refresh them (<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/generating-and-reviewing-predictions" target="_blank" rel="noopener">Reviewing predictions</a>). Both packets are well within the page limit of either extraction model.</div><div class="lab-step__expected"><strong>Expected result:</strong> Values for all 3 types in one result.</div></div></li><li class="lab-step" data-step-id="lab-3-1:t0:3"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 4 done</span></label><div class="lab-step__num">4</div><div class="lab-step__body"><div class="lab-step__text">Review: are invoice values only coming from the invoice pages? Are there any values from the wrong document?</div><div class="lab-step__extra"><strong>Why:</strong> in approach B there is no page range per document. The model decides from your instructions which pages belong to which group, so mix-ups only show up when you check. The highlighted references help you find where a value came from, but they can be imperfect, so judge the value itself. On the <strong>Validate predictions</strong> page, compare each predicted value with the document and your ground truth from step 1. Pay extra attention to packet 2, where the order is different.</div><div class="why-box"><div class="why-box__title">🧩 Challenge: a packet closer to real life</div><p>Packets 1 and 2 are clean: each holds exactly one invoice, one statement and one payslip. Real packets rarely are. Upload <a download="" href="../assets/samples/customer_packet_3.pdf"><code>customer_packet_3.pdf</code></a> (5 pages) to the same project, but first write down its ground truth as in step 1: which documents are in it, which pages belong together, and which of your three groups <strong>should</strong> get values.</p><p>Then review it the same way. Look for values that land in a group although no document of that type is in the file, and for occurrences that don't belong to a real account. Each mix-up you find is a gap in an instruction: fix the group or field instruction, select <strong>Predict extractions</strong> again and check whether packets 1 and 2 still come out right.</p></div><div class="lab-step__expected"><strong>Expected result:</strong> A list of mix-ups (if any), and for packet 3 at least one instruction you changed because of it.</div></div></li><li class="lab-step" data-step-id="lab-3-1:t0:4"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 5 done</span></label><div class="lab-step__num">5</div><div class="lab-step__body"><div class="lab-step__text">Evaluate and record the scores, plus <strong>how long one extraction took</strong>.</div><div class="foundation-box"><div class="foundation-box__title">What the scores mean</div><p>Scores compare the model's predictions with values you confirmed (annotations). So first confirm or correct every value on every packet on the <strong>Validate predictions</strong> page; documents that are not annotated are not counted. The <strong>Build</strong> tab shows the <strong>Project score</strong> (the average F1 score across all fields). The <strong>Measure</strong> tab shows scores per field group and field.</p><p>F1 combines precision (how often a predicted value is correct) and recall (how many of the real values were found). Higher is better. With only a few packets, treat the scores as indicative: the docs recommend at least 10 annotated examples per field. For time, note how long it takes from upload until the predictions appear.</p><p class="source-list">Sources: <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/evaluating-model-performance" target="_blank" rel="noopener">Evaluating model performance</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/gathering-validation-statistics" target="_blank" rel="noopener">Gathering validation statistics</a></p></div><div class="lab-step__expected"><strong>Expected result:</strong> Scores + time per packet.</div></div></li><li class="lab-step" data-step-id="lab-3-1:t0:5"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 6 done</span></label><div class="lab-step__num">6</div><div class="lab-step__body"><div class="lab-step__text"><strong>Approach A.</strong> Watch the trainer's classify-and-split demo, then use the pre-split PDFs in <a download="" href="../assets/samples/lab3_split_parts.zip"><code>lab3_split_parts.zip</code></a>: send each part to a project for its own type (reuse your Lab 2 project for the statement).</div><div class="foundation-box"><div class="foundation-box__title">How classify-and-split works</div><p>Approach A adds a step that IXP does not have. A DU classifier reads the packet and returns a list with one entry per document: its type and its page range (for example Payslip p1, Bank statement p2–3, Invoice p4). Your automation then sends each range to the IXP project for that type. In a Studio desktop (Windows) project this is typically a <strong>Classify Document Scope</strong> with the <strong>Intelligent Keyword Classifier</strong>, which is documented as able to split packages into document types. In this workshop the trainer demos that step and you start from the split files, so your lab time goes into extraction and the comparison.</p><ul><li><strong>Check the split before extraction.</strong> Compare the returned page ranges with your ground truth from step 1. A wrong boundary sends the wrong pages to the wrong project.</li><li><strong>Watch for over-splitting.</strong> The statement in packet 2 runs over 2 pages. If the classifier cuts it into two 1-page parts, each half is extracted without the other.</li><li><strong>You need one project per type.</strong> Reuse Lab 2 for the statement. For the invoice and payslip, create two small projects with just that one field group (same fields as step 2), or use the trainer's projects.</li><li><strong>The split files.</strong> The zip holds one PDF per document, named by packet, type and page range (for example <code>packet2_bank_statement_p2-3.pdf</code>): the same list a classifier returns. Upload each file to the matching project.</li></ul><p class="source-list">Sources: <a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/document-classification-overview" target="_blank" rel="noopener">Document classification overview</a> · <a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/intelligent-keyword-classifier" target="_blank" rel="noopener">Intelligent Keyword Classifier</a></p></div><div class="lab-step__expected"><strong>Expected result:</strong> 3 separate extractions.</div></div></li><li class="lab-step" data-step-id="lab-3-1:t0:6"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 7 done</span></label><div class="lab-step__num">7</div><div class="lab-step__body"><div class="lab-step__text">Compare with approach B. Fill in the table below.</div><div class="lab-step__extra"><strong>Pages row:</strong> count the pages each approach classifies and extracts. In these packets every page is relevant, so the two come out about the same. The difference appears only when A lets you skip pages.</div><div class="lab-step__expected"><strong>Expected result:</strong> Completed comparison.</div></div></li></ol>
+<div class="table-wrap"><table class="comparison-table">
+<thead>
+<tr>
+<th></th>
+<th>Approach A</th>
+<th>Approach B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy (scores, mix-ups)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Total processing time</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Number of calls / steps</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Pages processed (classified / extracted)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Effort to add a 4th document type</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Effort to maintain</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Human review effort</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div></div>
+<div class="admonition admonition--note"><div class="admonition-title">❓ Checkpoint questions</div><div class="admonition-body"><ol>
+<li>Your customer's packets always contain the same 2 document types in the same order. Which approach do you choose?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body"><strong>Approach B</strong>, one project with one field group per type. With few, fixed types no split is needed, and you keep one project and one call. Write group instructions that name each type's visible clues, and check for mix-ups between groups.</div></details></li>
+<li>Packets contain any of 15 document types in any order. Which approach do you choose?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body"><strong>Approach A</strong>, classify and split first, then one project per type. Fifteen groups in one project make a large taxonomy where values mix between types, and every new type means changing that one project. Splitting also lets you skip pages you don't need.</div></details></li>
+<li>If you ran approach A, what happens to extraction when the splitter puts a page in the wrong document?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body">The wrong pages go to the wrong project. Values go missing from one document and can turn up in another, and extraction can't repair a split error. Check the returned page ranges, or validate the classification, before you extract.</div></details></li>
+<li>In the challenge packet, what should the <code>Payslip</code> group return, and why is that hard for approach B?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body">Nothing: packet 3 has no payslip. A salary credit on a bank statement is not a payslip, but it carries a salary amount and an employer name, so a weak group instruction fills the group anyway. In approach B the model must decide from your instructions alone that a type is missing. In approach A the classifier simply returns no payslip range, and the payslip project is never called.</div></details></li>
+</ol></div></div>
+<div class="admonition admonition--important"><div class="admonition-title">⚠️ Common mistakes</div><div class="admonition-body"><ul>
+<li><strong>Splitting by default.</strong> If the packet is predictable and small, one project with good group instructions can be simpler.</li>
+<li><strong>Not splitting when you should.</strong> Many types, a variable order, or very long packets usually need classification first.</li>
+<li><strong>Expecting IXP to split the packet.</strong> IXP is extraction only. Document boundaries come from a DU classifier or from your group instructions.</li>
+<li><strong>Group instructions that don't say how to recognize the document</strong>, so fields get pulled from the wrong pages.</li>
+<li><strong>Not checking the split.</strong> Over-splitting (one multi-page document cut into parts) or a wrong boundary silently feeds the wrong pages to extraction. Validate splitting separately from extraction.</li>
+<li><strong>Sending packets over the page limit.</strong> The limit depends on the extraction model (50 pages for GPT-4o, up to 500 for Gemini 2.5 Flash). Pages beyond it are not processed.</li>
+<li><strong>Not measuring time, number of calls and pages processed.</strong> Cost and speed are part of the decision, not just accuracy.</li>
+</ul></div></div>
+<div class="admonition admonition--tip"><div class="admonition-title">🚀 Stretch goals</div><div class="admonition-body"><ul>
+<li>Add a 4th document type to approach B and see how scores change for the existing groups.<details class="cp-answer"><summary>Show how</summary><div class="cp-answer__body"><p>The packets contain only 3 types, so use the 4th type as a <strong>negative test</strong>: add a group for a type that is <em>not</em> in the files. Field group <code>Purchase Order</code>:</p><pre><code>A purchase order: a page titled "PURCHASE ORDER", issued by the buyer, with a PO number, an order date, the supplier and the ordered items. Use only the pages of a purchase order.</code></pre><p class="cp-answer__label">PO Number (Exact Text)</p><pre><code>The identifier of the purchase order, shown next to "PO number" or "Order number" in the purchase order header, below the "PURCHASE ORDER" title. Example: "PO-2026-0815".</code></pre><p class="cp-answer__label">Order Date (Date)</p><pre><code>The date the purchase order was issued, shown next to "Order date" in the purchase order header. Example: "10/09/2026".</code></pre><p><strong>Expected result:</strong> no values for Purchase Order. Any value that appears was taken from another document, most likely the invoice, which is a mix-up. Then compare the scores of the 3 existing groups with your earlier run: a bigger taxonomy should not make them worse.</p><p>Optional: upload one anonymized document of a real 4th type from your own projects and repeat.</p></div></details></li>
+<li>Write a short "decision rule" for your team: <em>"We split first when …"</em>.<details class="cp-answer"><summary>Show how</summary><div class="cp-answer__body"><p>Start from this template and adapt it to your customers:</p><pre><code>We split first when:
+- packets can contain many document types, or the types change often;
+- different types need their own project, owner or release cycle;
+- packets are long and we can skip pages we don't need, or they can exceed the model's page limit;
+- the next system needs a page range per document (for example, to archive each one separately).
+Otherwise we start with one project on the whole packet and check for mix-ups between groups.</code></pre><p>Back each point with what you measured in step 7 (scores, mix-ups, time, effort to add a type).</p></div></details></li>
+</ul></div></div>
+<div class="admonition admonition--success"><div class="admonition-title">✅ What you should take away</div><div class="admonition-body"><ul>
+<li>Splitting first isn't always required. Decide based on <strong>how many types, how predictable the order is, how long the documents are, and how much review is needed</strong>.</li>
+<li>IXP extracts; if you need splitting, it comes from a DU classifier in front of it.</li>
+<li>Write down your decision rule and reuse it on every project.</li>
+</ul></div></div>
+<p class="source-list">Sources: <a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/faq-choosing-the-correct-ixp-capability" target="_blank" rel="noopener">Choosing the correct IXP capability (FAQ)</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/choosing-the-correct-capability" target="_blank" rel="noopener">Choosing the correct capability</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/configuring-the-model" target="_blank" rel="noopener">Model configuration</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/faq-licensing-and-pricing" target="_blank" rel="noopener">Licensing and pricing (FAQ)</a> · <a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/metering-charging-logic" target="_blank" rel="noopener">DU metering and charging logic (Flex plan)</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/generating-and-reviewing-predictions" target="_blank" rel="noopener">Reviewing predictions</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/validating-extractions" target="_blank" rel="noopener">Validating extraction predictions</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/evaluating-model-performance" target="_blank" rel="noopener">Evaluating model performance</a> · <a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/document-classification-overview" target="_blank" rel="noopener">Document classification overview</a> · <a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/intelligent-keyword-classifier" target="_blank" rel="noopener">Intelligent Keyword Classifier</a></p>
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="theory-multi-document.html" class="btn btn-outline">← Theory · Multi-document files</a>
+      <div class="module-nav__complete"><button id="mark-complete-btn" class="mark-complete-btn">Mark as complete</button></div>
+      <a href="theory-lean-workflow.html" class="btn btn-primary">Theory · Lean workflow &amp; confidence →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('lab-3');</script>
+</body>
+</html>

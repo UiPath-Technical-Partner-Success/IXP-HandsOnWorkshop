@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Lab 1 – Instructions &amp; taxonomy design | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <a href="session-1.html">Session 1: Design &amp; quality</a> <span aria-hidden="true">›</span> <span>Lab 1 · Instructions &amp; taxonomy design</span></nav>
+    <div class="page-header">
+      <h1>Lab 1 · Instructions &amp; taxonomy design</h1>
+      <div class="page-header__meta"><span>⏱ ~35 min</span><span>🔨 Hands-on</span><span>Session 1</span></div>
+    </div>
+
+<div class="read-first">📖 <strong>Read first:</strong> <a href="theory-instructions.html">Session 1 theory – Instructions &amp; taxonomy design</a>. It explains the instruction levels, the data types and how the scores are calculated, so each step below makes sense.</div>
+
+<div class="why-box"><div class="why-box__title">What you are doing and why</div>
+<p>IXP (Intelligent Xtraction and Processing) uses an LLM (large language model) to read a document and fill in a structure you define, called the <strong>taxonomy</strong>. You steer the model with plain-language <strong>instructions</strong>, not with code and not by training it on examples.</p>
+<p>In this lab you build a small taxonomy for bank statements, record a baseline score, then improve the weakest field by rewriting one instruction at the right level and measuring again.</p>
+<p><strong>At the end you have:</strong> an IXP project with a statement-header taxonomy, two reviewed statements, a baseline score, an improved score, and one written reason for the change you made.</p>
+<p><strong>In a real project</strong> this is the core build loop: agree which values the downstream process needs, extract, review the results against the true values, fix instructions one at a time, and show measured scores before go-live.</p></div>
+
+<div class="objectives-box"><h3>🎯 Objective</h3><p>Learn what each instruction level does and where a fix belongs:</p>
+<div class="table-wrap"><table class="comparison-table">
+<thead>
+<tr>
+<th>Level</th>
+<th>What it's for</th>
+<th>Seen by the model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Overall extraction instructions</strong></td>
+<td>Rules that hold for <strong>every</strong> field in the project (document context, language, general conventions)</td>
+<td>On every extraction</td>
+</tr>
+<tr>
+<td><strong>Field group instructions</strong></td>
+<td>What this group/section is and where it is in the document</td>
+<td>For all fields in the group</td>
+</tr>
+<tr>
+<td><strong>Field instructions</strong></td>
+<td>What exactly this one field is, where it appears, an example value</td>
+<td>For that field</td>
+</tr>
+<tr>
+<td><strong>Field type instructions</strong></td>
+<td>Rules shared by every field that uses this field type (e.g. "all amounts are in USD"). Only text that is true for all of those fields.</td>
+<td>For every field of that type</td>
+</tr>
+</tbody>
+</table></div>
+<p>The model sees all levels <strong>together</strong>. A rule at one level that contradicts another level gives the model mixed signals. This lab uses the first three levels; the field type level is there so you know it exists.</p></div>
+
+<div class="foundation-box" id="terms"><div class="foundation-box__title">Terms used in this lab</div>
+<p>Already explained in <a href="theory-foundations.html#glossary">Session 1 – Glossary</a>, so not repeated here: project, taxonomy, field group, field, data type, prediction and annotation. Intelligent pre-processing is covered in <a href="theory-instructions.html">Instructions &amp; taxonomy design</a>. New in this lab:</p>
+<dl class="glossary">
+<dt>Precision / recall</dt><dd>Precision: the share of predicted values that are correct. Recall: the share of true values the model found.</dd>
+<dt>F1 score</dt><dd>One number that combines precision and recall. It is high only when both are high.</dd>
+<dt>Project score</dt><dd>The average F1 across all fields, shown on the Build tab.</dd>
+</dl>
+<p>New to UiPath? General terms such as DU (Document Understanding) and Automation Cloud are explained in <a href="theory-foundations.html">Session 1 – Foundations</a>.</p></div>
+
+<div class="info-card"><h4>✔️ Before you begin: prerequisites</h4><ul>
+<li>Signed in to IXP (Intelligent Xtraction and Processing) in UiPath Automation Cloud</li>
+<li>Sample files ready (listed below)</li>
+</ul><h4>📎 Input files</h4><p><a download="" href="../assets/samples/bank_statement_B_3_accounts.pdf"><code>bank_statement_B_3_accounts.pdf</code></a>, <a download="" href="../assets/samples/bank_statement_C_2_accounts.pdf"><code>bank_statement_C_2_accounts.pdf</code></a> (or one of your own documents)</p></div>
+<div class="lesson"><h2 class="lesson-title">🔨 Steps</h2><div class="steps-progress" data-for="lab-1-1-t0"><span class="steps-count"></span><div class="progress-bar-wrap"><div class="progress-bar-fill steps-fill" style="width:0%"></div></div></div><ol class="lab-steps" id="lab-1-1-t0"><li class="lab-step" data-step-id="lab-1-1:t0:0"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 1 done</span></label><div class="lab-step__num">1</div><div class="lab-step__body"><div class="lab-step__text">Create a new IXP project for unstructured &amp; complex documents. Name it <code>Lab1_&lt;your initials&gt;</code>. Upload both statements.</div><div class="lab-step__expected"><strong>Expected result:</strong> Project created, 2 documents uploaded.</div><div class="lab-step__extra"><strong>Why:</strong> a project holds your documents, taxonomy, instructions and scores in one place. "Unstructured and complex documents" is the IXP option for documents whose layout varies, such as bank statements from different banks.</div></div></li><li class="lab-step" data-step-id="lab-1-1:t0:1"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 2 done</span></label><div class="lab-step__num">2</div><div class="lab-step__body"><div class="lab-step__text">Create one field group <code>Statement Header</code> with fields: <code>Bank Name</code> (Exact Text), <code>Account Holder</code> (Exact Text), <code>Statement Period</code> (Inferred Text). Statement B prints only a month and C a free-text period, so a Date range would have nothing to match.</div><div class="lab-step__expected"><strong>Expected result:</strong> A taxonomy with one group and 3+ fields.</div><div class="foundation-box"><div class="foundation-box__title">Your first field group</div><p>A field group collects values that belong together. <code>Statement Header</code> holds the values that appear once per statement; think of it as a one-row table with a column per field.</p><p><strong>Where:</strong> <strong>Build</strong> tab → <strong>Manage Taxonomy</strong> → <strong>Fields and field groups</strong>. Select <strong>Field group</strong>, enter a name and instructions, then under the group select <strong>Add</strong> → <strong>New field</strong> for each field. Fields can only be added inside an existing group. Select <strong>Save</strong>: all changes are applied at once.</p></div></div></li><li class="lab-step" data-step-id="lab-1-1:t0:2"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 3 done</span></label><div class="lab-step__num">3</div><div class="lab-step__body"><div class="lab-step__text">Check the field <strong>data types</strong>. Use the pre-configured field types wherever possible: <code>Exact Text</code>, <code>Inferred Text</code>, <code>Number</code>, <code>Date</code>, <code>Monetary Quantity</code>, <code>Boolean</code>. Create a custom <code>Choice</code> type only for a closed set of values.</div><div class="lab-step__expected"><strong>Expected result:</strong> Every field has a pre-configured type, unless you have a clear reason.</div><div class="foundation-box"><div class="foundation-box__title">Choosing a data type</div><ul>
+<li><strong>Exact Text</strong> – the value appears word for word in the document (names, account numbers, IBANs, phone numbers). A phone number is Exact Text, not Number.</li>
+<li><strong>Inferred Text</strong> – the value can be derived from context, e.g. the language of the statement.</li>
+<li><strong>Number</strong>, <strong>Date</strong>, <strong>Monetary Quantity</strong> – the type normalises the value and fixes the output format.</li>
+<li><strong>Choice</strong> – the value is mapped to a fixed list. Each option has a display value and can have alternate values.</li>
+</ul><p><strong>Settle types now, before you review.</strong> A field type's data type cannot be changed once configured (you delete and recreate it), and switching a field to another field type later loses that field's existing annotations.</p></div></div></li><li class="lab-step" data-step-id="lab-1-1:t0:3"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 4 done</span></label><div class="lab-step__num">4</div><div class="lab-step__body"><div class="lab-step__text"><strong>Leave the instructions short on purpose</strong> (e.g. "Extract the bank name"). Run the extraction and look at the predictions on both documents.</div><div class="lab-step__expected"><strong>Expected result:</strong> A baseline. Some fields are likely wrong or empty.</div><div class="lab-step__extra"><strong>Why:</strong> you need a weak starting point to prove later that your rewrite helped. <strong>Where:</strong> <strong>Build</strong> tab → <strong>Validate predictions</strong>. If no predictions appear, select <strong>Predict extractions</strong>.</div><details class="instr-block"><summary>📋 Ready-to-use instructions</summary><div class="instr-block__body"><p>Weak on purpose: paste these to get your baseline. Leave the overall extraction instructions empty for now.</p><div class="instr-item"><div class="instr-item__label">Field group · Statement Header</div><pre><code>Statement header.</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Bank Name (Exact Text)</div><pre><code>Extract the bank name.</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Account Holder (Exact Text)</div><pre><code>Extract the account holder.</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Statement Period (Inferred Text)</div><pre><code>Extract the statement period.</code></pre></div></div></details></div></li><li class="lab-step" data-step-id="lab-1-1:t0:4"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 5 done</span></label><div class="lab-step__num">5</div><div class="lab-step__body"><div class="lab-step__text">Review the predictions <strong>field by field</strong>. Confirm only the values that are correct. <strong>Correct</strong> wrong values to the true value (mark a field as missing only if the value is not in the document), then submit each document.</div><div class="lab-step__expected"><strong>Expected result:</strong> Both documents fully reviewed: correct values confirmed, wrong values corrected.</div><div class="foundation-box"><div class="foundation-box__title">You are writing the reference answers</div><p>Your confirmed and corrected values are the <strong>annotations</strong>. The scores compare the model's predictions against them. The model does not learn from them, so reviewing does not improve extraction; only instructions and model settings do.</p><p>Two rules follow. Do not confirm a value without checking it: a wrong value you confirm counts as "correct" and inflates the score. Review every field and submit the document: unsubmitted changes stay as draft annotations, and partially annotated documents are left out of the scores.</p><p>This review happens at design time on the <strong>Validate predictions</strong> page. Validation Station is the separate review screen people use in production; you meet it in Lab 4.</p></div></div></li><li class="lab-step" data-step-id="lab-1-1:t0:5"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 6 done</span></label><div class="lab-step__num">6</div><div class="lab-step__body"><div class="lab-step__text">Check the <strong>scores</strong> and write down the overall project score and each field's F1, precision and recall. The <strong>Build</strong> tab shows the project score; the <strong>Measure</strong> tab shows each field and field group.</div><div class="lab-step__expected"><strong>Expected result:</strong> Baseline scores recorded.</div><div class="foundation-box"><div class="foundation-box__title">Reading the scores</div><ul>
+<li><strong>Low precision</strong> – the model returns values, but wrong ones. The instruction is too broad or ambiguous; tighten it with the label and location.</li>
+<li><strong>Low recall</strong> – the model misses values that are there. The instruction is too narrow or misses a format variant.</li>
+<li><strong>F1</strong> combines both. Read it per field, not only the project score.</li>
+</ul><p>With two documents each field has at most two values, so scores jump in big steps. That is fine for learning; for a real project the docs recommend at least 10 annotated examples per field. Scores appear once enough documents are validated; if the Measure tab is still empty, use the per-document error rate on the Build tab.</p></div></div></li><li class="lab-step" data-step-id="lab-1-1:t0:6"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 7 done</span></label><div class="lab-step__num">7</div><div class="lab-step__body"><div class="lab-step__text">Pick the <strong>worst field</strong>. Decide: is the problem specific to this field (→ field instruction), the whole section (→ group instruction), or the whole document (→ overall instruction)?</div><div class="lab-step__expected"><strong>Expected result:</strong> A written decision, with one sentence explaining why.</div><div class="lab-step__extra"><strong>Why:</strong> put each rule at the lowest level where it is always true. A field-level fix cannot break other fields; an overall rule reaches every field.</div>
+<figure class="diagram">
+<svg viewBox="0 0 880 284" role="img" aria-label="Decision flow: where to fix a badly scoring field – field, field group, field type or overall instruction, then change one thing and compare with the baseline" aria-labelledby="lab1-fixlevel-title" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="lab1-fixlevel-title">Decision flow: where a fix for a badly scoring field belongs – field, field group, field type or overall instruction – followed by change one thing, refresh predictions, compare with baseline</title>
+<defs><marker id="lab1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<text x="20" y="26" font-size="15" font-weight="700" fill="#182126">A field scores badly – where does the fix go?</text>
+<rect x="20" y="44" width="170" height="60" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="105" y="70" font-size="13" text-anchor="middle" fill="#182126">Only this one</text>
+<text x="105" y="88" font-size="13" text-anchor="middle" fill="#182126">field is wrong?</text>
+<rect x="245" y="44" width="170" height="60" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="330" y="70" font-size="13" text-anchor="middle" fill="#182126">Whole section wrong,</text>
+<text x="330" y="88" font-size="13" text-anchor="middle" fill="#182126">or instances mixed?</text>
+<rect x="470" y="44" width="170" height="60" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="555" y="70" font-size="13" text-anchor="middle" fill="#182126">Same rule for all</text>
+<text x="555" y="88" font-size="13" text-anchor="middle" fill="#182126">fields of one type?</text>
+<rect x="695" y="44" width="170" height="60" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="780" y="70" font-size="13" text-anchor="middle" fill="#182126">Document context</text>
+<text x="780" y="88" font-size="13" text-anchor="middle" fill="#182126">or language issue?</text>
+<line x1="190" y1="74" x2="243" y2="74" stroke="#3C464B" stroke-width="1.5" marker-end="url(#lab1-arrow)"/>
+<text x="216" y="66" font-size="13" text-anchor="middle" fill="#616161">no</text>
+<line x1="415" y1="74" x2="468" y2="74" stroke="#3C464B" stroke-width="1.5" marker-end="url(#lab1-arrow)"/>
+<text x="441" y="66" font-size="13" text-anchor="middle" fill="#616161">no</text>
+<line x1="640" y1="74" x2="693" y2="74" stroke="#3C464B" stroke-width="1.5" marker-end="url(#lab1-arrow)"/>
+<text x="666" y="66" font-size="13" text-anchor="middle" fill="#616161">no</text>
+<line x1="105" y1="104" x2="105" y2="146" stroke="#3C464B" stroke-width="1.5" marker-end="url(#lab1-arrow)"/>
+<text x="114" y="130" font-size="13" fill="#616161">yes</text>
+<line x1="330" y1="104" x2="330" y2="146" stroke="#3C464B" stroke-width="1.5" marker-end="url(#lab1-arrow)"/>
+<text x="339" y="130" font-size="13" fill="#616161">yes</text>
+<line x1="555" y1="104" x2="555" y2="146" stroke="#3C464B" stroke-width="1.5" marker-end="url(#lab1-arrow)"/>
+<text x="564" y="130" font-size="13" fill="#616161">yes</text>
+<line x1="780" y1="104" x2="780" y2="146" stroke="#3C464B" stroke-width="1.5" marker-end="url(#lab1-arrow)"/>
+<text x="789" y="130" font-size="13" fill="#616161">yes</text>
+<rect x="20" y="148" width="170" height="56" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="105" y="172" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">Field</text>
+<text x="105" y="191" font-size="13" text-anchor="middle" fill="#3C464B">instruction</text>
+<rect x="245" y="148" width="170" height="56" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="330" y="172" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">Field group</text>
+<text x="330" y="191" font-size="13" text-anchor="middle" fill="#3C464B">instruction</text>
+<rect x="470" y="148" width="170" height="56" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="555" y="172" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">Field type</text>
+<text x="555" y="191" font-size="13" text-anchor="middle" fill="#3C464B">instruction</text>
+<rect x="695" y="148" width="170" height="56" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="780" y="172" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">Overall</text>
+<text x="780" y="191" font-size="13" text-anchor="middle" fill="#3C464B">instruction</text>
+<rect x="20" y="226" width="845" height="40" fill="#182126"/>
+<text x="442" y="251" font-size="14" text-anchor="middle" fill="#FFFFFF">Then: change one thing → refresh predictions → compare with your baseline</text>
+</svg>
+<figcaption>Check the questions from left to right and stop at the first "yes". When in doubt, start at field level.</figcaption>
+</figure></div></li><li class="lab-step" data-step-id="lab-1-1:t0:7"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 8 done</span></label><div class="lab-step__num">8</div><div class="lab-step__body"><div class="lab-step__text">Rewrite the instruction at the level you chose. Follow the pattern <strong>what + where + real example</strong>, e.g. <em>"The customer the statement is addressed to, a company or a person. It is shown next to the label 'Customer' in the header block on page 1, directly above the address. Example: 'Beresheet Logistics Ltd.'"</em></div><div class="lab-step__expected"><strong>Expected result:</strong> Instruction updated.</div><div class="lab-step__extra"><strong>Where:</strong> <strong>Build</strong> → <strong>Manage Taxonomy</strong> (edit in the table, then <strong>Save</strong>), or on <strong>Validate predictions</strong> select the ellipsis (…) next to the field → <strong>Edit field</strong>. Describe the right value positively; leave date and amount formats to the data type.</div><details class="instr-block"><summary>📋 Ready-to-use instructions</summary><div class="instr-block__body"><p>Paste only the instruction for the level you chose in step 7, so you can see what that one change does. Add the others after step 9 if you want to see the full set working together.</p><div class="instr-item"><div class="instr-item__label">Overall extraction instructions</div><pre><code>These documents are bank statements from different banks. Each statement starts with the bank's name and a header block with the customer, address, statement period and statement number, followed by one section per account. Labels differ between banks (for example "Account number" or "Acct No."), so identify each value by its meaning, not by one specific label. Return text values as they are written in the document.</code></pre></div><div class="instr-item"><div class="instr-item__label">Field group · Statement Header</div><pre><code>The statement header: the details printed once per statement at the top of page 1, between the bank's name and the first account section. It holds the customer, the address, the statement period and the statement number. Extract one occurrence per statement.</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Bank Name (Exact Text)</div><pre><code>The name of the bank that issued the statement, printed as the large title at the top of page 1, above the bank's address line. Example: "Carmel Ridge Bank".</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Account Holder (Exact Text)</div><pre><code>The customer the statement is addressed to, a company or a person. It is shown next to the label "Customer" in the header block on page 1, directly above the address. Return the name only. Example: "Beresheet Logistics Ltd.".</code></pre></div><div class="instr-item"><div class="instr-item__label">Field · Statement Period (Inferred Text)</div><pre><code>The period the statement covers, shown next to the label "Statement period" in the header block on page 1. It can be a month, a date range or free text; return it as written. Examples: "September 2026", "Q3 2026 – September".</code></pre></div></div></details></div></li><li class="lab-step" data-step-id="lab-1-1:t0:8"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 9 done</span></label><div class="lab-step__num">9</div><div class="lab-step__body"><div class="lab-step__text">Refresh the predictions and check the scores again. Compare with your baseline.</div><div class="lab-step__expected"><strong>Expected result:</strong> Score for that field improves; other fields stay about the same.</div><div class="lab-step__extra"><strong>How it works:</strong> open <strong>Validate predictions</strong> to see the new predictions (select <strong>Predict extractions</strong> if they do not refresh). Your annotations from step 5 stay in place, so the new predictions are scored against the same reference answers. LLM output varies slightly between runs, so do not read small changes as real. To compare with or restore an earlier instruction, select the ellipsis (…) → <strong>View change history</strong>.</div></div></li><li class="lab-step" data-step-id="lab-1-1:t0:9"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 10 done</span></label><div class="lab-step__num">10</div><div class="lab-step__body"><div class="lab-step__text"><strong>Experiment:</strong> put a rule in the overall instructions that is not true for every field (e.g. "All values are on page 1"). Evaluate again.</div><div class="lab-step__expected"><strong>Expected result:</strong> At least one field gets worse. That's why project-wide rules must hold for <strong>every</strong> field. Remove the rule.</div><div class="lab-step__extra"><strong>Why:</strong> the overall instructions are sent with every field, so one wrong project-wide rule misleads the model on all of them.</div></div></li><li class="lab-step" data-step-id="lab-1-1:t0:10"><label class="lab-step__check"><input type="checkbox"/><span class="sr-only">Mark step 11 done</span></label><div class="lab-step__num">11</div><div class="lab-step__body"><div class="lab-step__text"><strong>Optional:</strong> open <strong>Build</strong> → <strong>Model configuration</strong> and try the other extraction model (<code>GPT-4o</code> or <code>Gemini</code>), or change intelligent pre-processing (<code>None</code> / <code>Table model - mini</code> / <code>Table model</code>). Evaluate.</div><div class="lab-step__expected"><strong>Expected result:</strong> You see how much model choice changes quality and speed for this document type.</div><div class="foundation-box"><div class="foundation-box__title">Model configuration</div><p>Change one setting at a time and select <strong>Save</strong>. Switching the extraction model and saving creates a new project version and generates new predictions automatically, so you can compare against your previous scores.</p><ul>
+<li><strong>Gemini</strong> is the recommended extraction model and handles up to 500 pages per call; <strong>GPT-4o</strong> is limited to 50 pages.</li>
+<li><strong>Table model - mini</strong> suits simple or several tables and is optimised for speed. <strong>Table model</strong> handles complex tables (nested tables, merged cells, tables across pages), adds latency and relies on Gemini models through the AI Trust Layer (UiPath's governance layer for calls to LLMs).</li>
+<li>Instructions tuned for one model can score lower on another. Switch only if the other model fixes a real problem.</li>
+</ul></div></div></li></ol></div>
+<div class="admonition admonition--note"><div class="admonition-title">❓ Checkpoint questions</div><div class="admonition-body"><ol>
+<li>Where would you put "The document is in French and English. Return values as written."? Why?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body">In the <strong>overall extraction instructions</strong>. Language applies to the whole document and to every field, so the overall level is the lowest level where the rule is always true.</div></details></li>
+<li>A field returns the closing balance instead of the opening balance. Which level do you fix?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body">The <strong>field instruction</strong> of that one field. Only one field is wrong, so a field-level fix can't break anything else. Describe the right value with what + where + example, e.g. "The balance at the start of the statement period, shown next to 'Opening balance' or 'Balance b/f' in the account section. Example: '62,480.00 ILS'." Then refresh the predictions and compare with your baseline.</div></details></li>
+<li>Why shouldn't you write "Format: DD/MM/YYYY" in a Date field instruction?<details class="cp-answer"><summary>Show answer</summary><div class="cp-answer__body">The <strong>Date</strong> data type already normalizes the value and fixes the output format (<code>YYYY-MM-DDT00:00:00Z</code>). A format rule adds nothing and can conflict with the type. Use the instruction to say which date and where it is.</div></details></li>
+</ol></div></div>
+<div class="admonition admonition--important"><div class="admonition-title">⚠️ Common mistakes</div><div class="admonition-body"><ul>
+<li><strong>Writing format rules in instructions.</strong> The data type (<code>Date</code>, <code>Monetary Quantity</code>, <code>Number</code>) already sets the output format, and an instruction cannot change it. A format rule in the instruction conflicts with it. <code>Inferred Text</code> is the exception: there an instruction can normalise the output (e.g. a phone number as <code>+1 (XXX) XXX-XXXX</code>).</li>
+<li><strong>Very short instructions</strong> like "Extract the date". Say what the value means, where it is and give an example.</li>
+<li><strong>Saying what not to return</strong> ("Do NOT return the account number"). Describe the right value by label, role and location instead.</li>
+<li><strong>Creating custom types that copy a pre-configured one</strong> (e.g. a text-based <code>Currency Amount</code> type instead of <code>Monetary Quantity</code>). A text type does not normalise amounts the way <code>Monetary Quantity</code> does. Create a custom type only when no pre-configured type fits.</li>
+<li><strong>Changing several instructions at once.</strong> You can't tell which change helped.</li>
+<li><strong>Very long instructions.</strong> Each instruction has a character limit: up to 4,096 characters for every taxonomy element, raised from 2,048 in January 2026 (<a href="https://docs.uipath.com/ixp/automation-cloud/latest/release-notes/ucd-january-2026" target="_blank" rel="noopener">release notes</a>; the design-time FAQ may still show the older figure). Shorter, focused instructions are easier to debug.</li>
+</ul></div></div>
+<div class="admonition admonition--tip"><div class="admonition-title">🚀 Stretch goals</div><div class="admonition-body"><ul>
+<li>Add an <code>Inferred Text</code> field such as <code>Statement Language</code> and see how it behaves compared with <code>Exact Text</code>.<details class="cp-answer"><summary>Show how</summary><div class="cp-answer__body"><p>Add a field <code>Statement Language</code> (Inferred Text) to the Statement Header group, with this instruction:</p><pre><code>The language the statement is written in, judged from the headings and labels of the whole document, not from one value. Return the language name in English. Example: "English".</code></pre><p><strong>Expected result:</strong> "English" on both statements, because all samples are in English.</p><p><strong>What to compare:</strong> an Exact Text field copies a value that is printed word for word. The language is printed nowhere, so Exact Text has nothing to copy. Inferred Text derives the value from context, which is why its highlighted reference can be weak or missing. Judge the value, not the highlight.</p></div></details></li>
+<li>Create a <code>Choice</code> data type for <code>Account Type</code> (e.g. Current, Savings, Deposit) and compare the results.<details class="cp-answer"><summary>Show how</summary><div class="cp-answer__body"><p>Account type is a closed set, so a custom <strong>Choice</strong> type fits. Create it with these options (display value, then alternate values):</p><ul><li><strong>Current</strong>: current account, business account</li><li><strong>Savings</strong></li><li><strong>Deposit</strong></li><li><strong>Foreign Currency</strong>: foreign currency account</li></ul><p>Add a field <code>Account Type</code> with that type to the Statement Header group, with this instruction:</p><pre><code>The type of account the statement covers, taken from the statement title or the account heading, for example "Monthly Statement – Business Accounts" or "Foreign currency account (USD)". Pick the option that matches.</code></pre><p><strong>Expected result:</strong> statement B → Current ("Business Accounts"), statement C → Foreign Currency.</p><p><strong>Why it's a good test:</strong> the samples never print "Savings" or "Deposit", and B never prints "Current". You see how a Choice maps the document's own wording to your list, and how alternate values help. A Choice type belongs to this project only, so you create it again in other projects.</p></div></details></li>
+</ul></div></div>
+<div class="admonition admonition--success"><div class="admonition-title">✅ What you should take away</div><div class="admonition-body"><ul>
+<li><strong>Field level is the default place to fix a field.</strong> Go to group or overall level only when the rule truly applies to the whole group or document.</li>
+<li>Good instructions say <strong>what, where and an example</strong>, and leave formatting to the data type.</li>
+<li>Your annotations are the reference answers: they produce the scores, they do not train the model.</li>
+<li>Measure before and after every change.</li>
+</ul></div></div>
+<p class="source-list"><strong>Sources:</strong> <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/creating-and-configuring-fields" target="_blank" rel="noopener">Creating and configuring fields</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/generating-and-reviewing-predictions" target="_blank" rel="noopener">Generating and reviewing predictions</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/best-practices" target="_blank" rel="noopener">Best practices</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/validating-extractions" target="_blank" rel="noopener">Validating extractions</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/evaluating-model-performance" target="_blank" rel="noopener">Evaluating model performance</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/configuring-the-model" target="_blank" rel="noopener">Configuring the model</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-design-time" target="_blank" rel="noopener">FAQ – design time</a> · <a href="https://docs.uipath.com/ixp/automation-cloud/latest/release-notes/ucd-january-2026" target="_blank" rel="noopener">Release notes – January 2026</a></p>
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="theory-instructions.html" class="btn btn-outline">← Theory · Instructions &amp; taxonomy</a>
+      <div class="module-nav__complete"><button id="mark-complete-btn" class="mark-complete-btn">Mark as complete</button></div>
+      <a href="theory-repeating-data.html" class="btn btn-primary">Theory · Repeating data →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('lab-1');</script>
+</body>
+</html>

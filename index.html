@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>IXP Hands-on Workshop | UiPath</title>
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/course.css" />
+  <link rel="stylesheet" href="./assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="./index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation">
+    <a href="./index.html">Home</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#labs">Labs</a>
+    <a href="./modules/resources.html">Downloads</a>
+  </nav>
+</header>
+
+<section class="hero" role="banner">
+  <h1>UiPath <span>IXP</span><br/>Hands-on Workshop</h1>
+  <p>Hands-on best practices for IXP developers: designing IXP projects, getting extraction quality right, and building a lean workflow around them. Every agenda block comes with theory and diagrams.</p>
+  <div class="hero-badges" aria-label="Workshop details">
+    <span class="badge">🖥 Remote, hands-on</span>
+    <span class="badge">⏱ 2 × 2 hours</span>
+    <span class="badge">🔨 4 labs</span>
+  </div>
+  <div class="hero-cta">
+    <a href="./modules/setup.html" class="btn btn-primary">▶ Start with setup</a>
+    <a href="#labs" class="btn btn-outline">Browse labs</a>
+  </div>
+</section>
+
+<main class="container">
+
+  <section class="section" aria-label="Before the workshop">
+    <div style="background:var(--callout-bg);border-left:4px solid #FA4616;padding:1rem 1.4rem;display:flex;align-items:flex-start;gap:.9rem;box-shadow:0 2px 6px rgba(0,0,0,.06);">
+      <span style="font-size:1.4rem;flex-shrink:0;">⚠️</span>
+      <div>
+        <strong style="color:var(--callout-title);font-size:.95rem;">Before Day 1: complete the setup</strong>
+        <p style="margin:.4rem 0 0;font-size:.875rem;color:var(--callout-text);">The workshop is hands-on. Please finish <a href="./modules/setup.html"><strong>Setup &amp; access</strong></a> and its <strong>5-minute self-check</strong> the working day before, and download the <a href="./modules/resources.html">sample documents</a>. We won't have time to fix access issues during the session.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="New to UiPath">
+    <div class="foundation-box" style="margin:0;">
+      <div class="foundation-box__title">New to UiPath?</div>
+      <p style="margin:0;">Start with the <a href="./modules/theory-foundations.html"><strong>Session 1 Foundations</strong></a>: what UiPath, DU (Document Understanding) and IXP (Intelligent Xtraction &amp; Processing) are, how a document flows through extraction and validation, and a glossary of the terms used in the labs.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Your progress">
+    <div class="progress-summary">
+      <div class="progress-summary-text">
+        <h3>Your progress</h3>
+        <p>Mark each lab as complete when you finish it. Progress is saved in this browser only.</p>
+        <div class="progress-bar-wrap" role="progressbar" aria-label="Workshop completion" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="progress-numbers">
+        <div class="stat"><div class="num" id="completed-count">0</div><div class="label">Completed</div></div>
+        <div class="stat"><div class="num">5</div><div class="label">Setup + labs</div></div>
+        <div class="stat"><div class="num" id="progress-percent">0%</div><div class="label">Progress</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Common <span>questions</span>, and where we answer them</h2>
+    <p class="section-subtitle">The workshop is built around the questions IXP teams ask most. New to UiPath, DU (Document Understanding) or IXP? Each session page starts with a Foundations section, so you can catch up before the labs.</p>
+    <div class="q-grid"><a class="q-card" href="modules/lab-4-lean-workflow.html"><div class="q-card__q">“What's the best way to use IXP? Is there something lighter than the DU framework?”</div><div class="q-card__where">→ Day 2 · Lab 4</div></a><a class="q-card" href="modules/lab-1-instructions.html"><div class="q-card__q">“What does each prompt level do: overall, field group, field?”</div><div class="q-card__where">→ Day 1 · Lab 1</div></a><a class="q-card" href="modules/lab-2-repeating-data.html"><div class="q-card__q">“The same information appears several times (4 bank accounts, one per currency). How do we extract it?”</div><div class="q-card__where">→ Day 1 · Lab 2</div></a><a class="q-card" href="modules/lab-3-multi-document.html"><div class="q-card__q">“Several documents in one file: DU splitter then IXP, or a better way?”</div><div class="q-card__where">→ Day 2 · Lab 3</div></a><a class="q-card" href="modules/lab-4-lean-workflow.html"><div class="q-card__q">“How is confidence calculated in IXP, compared with classic DU?”</div><div class="q-card__where">→ Day 2 · Lab 4</div></a><a class="q-card" href="#agenda"><div class="q-card__q">“Processing takes ~1 minute per document and training takes long. Why, and how do we speed it up?”</div><div class="q-card__where">→ Follow-up session (not covered in this workshop)</div></a><a class="q-card" href="#agenda"><div class="q-card__q">“When should we call the API instead of using activities in code?”</div><div class="q-card__where">→ Follow-up session (not covered in this workshop)</div></a><a class="q-card" href="#agenda"><div class="q-card__q">“Can a UiPath Agent work as a classifier?”</div><div class="q-card__where">→ Follow-up session (not covered in this workshop)</div></a><a class="q-card" href="#agenda"><div class="q-card__q">“How do we move customers from Modern DU to IXP?”</div><div class="q-card__where">→ Follow-up session (not covered in this workshop)</div></a></div>
+  </section>
+
+  <section class="section" id="agenda">
+    <h2 class="section-title">Workshop <span>agenda</span></h2>
+    <p class="section-subtitle">Two 2-hour sessions, remote.</p>
+    <div class="tabs">
+      <div class="tabs__nav" role="tablist">
+        <button class="tabs__btn active" data-tab="d1" role="tab" aria-selected="true">Day 1</button>
+        <button class="tabs__btn" data-tab="d2" role="tab" aria-selected="false">Day 2</button>
+      </div>
+      <div class="tabs__panel active" data-tab-panel="d1"><div class="table-wrap"><table class="comparison-table"><thead><tr><th style="width:15%;">Time</th><th>Block</th><th style="width:22%;">Type</th></tr></thead><tbody><tr><td style="white-space:nowrap;">0:00–0:10</td><td><strong>Kickoff</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Goals, agenda, a short overview of your projects</span><br><a class="theory-link" href="modules/theory-kickoff.html#kickoff">Read the theory →</a></td><td>Discussion</td></tr><tr><td style="white-space:nowrap;">0:10–0:30</td><td><strong>Using IXP well</strong><br><span style="font-size:.84rem;color:var(--gray-600);">IXP-first approach; IXP vs. sending a PDF straight to an LLM; the generally available (GA) ways to consume IXP today</span><br><a class="theory-link" href="modules/theory-kickoff.html#ixp-well">Read the theory →</a></td><td>Theory + discussion</td></tr><tr><td style="white-space:nowrap;">0:30–1:15</td><td><strong>Instructions &amp; taxonomy design</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Overall, field group and field instructions; data types; model choice; reading the scores (precision, recall, F1)</span><br><a class="theory-link" href="modules/theory-instructions.html">Read the theory →</a></td><td>Theory + Lab 1</td></tr><tr><td style="white-space:nowrap;">1:15–1:20</td><td><strong>Break</strong></td><td></td></tr><tr><td style="white-space:nowrap;">1:20–1:55</td><td><strong>Repeating data</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Several accounts in one document with one field group; reviewing them in Validation Station</span><br><a class="theory-link" href="modules/theory-repeating-data.html">Read the theory →</a></td><td>Theory + Lab 2</td></tr><tr><td style="white-space:nowrap;">1:55–2:00</td><td><strong>Recap</strong><br><span style="font-size:.84rem;color:var(--gray-600);">What we changed, what the scores showed, homework for Day 2</span></td><td>Discussion</td></tr></tbody></table></div></div>
+      <div class="tabs__panel" data-tab-panel="d2" hidden><div class="table-wrap"><table class="comparison-table"><thead><tr><th style="width:15%;">Time</th><th>Block</th><th style="width:22%;">Type</th></tr></thead><tbody><tr><td style="white-space:nowrap;">0:00–0:05</td><td><strong>Recap</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Questions from Day 1</span></td><td>Discussion</td></tr><tr><td style="white-space:nowrap;">0:05–0:45</td><td><strong>Multi-document files</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Classify and split first, or not? Trade-offs in effort, accuracy and complexity</span><br><a class="theory-link" href="modules/theory-multi-document.html">Read the theory →</a></td><td>Theory + Lab 3</td></tr><tr><td style="white-space:nowrap;">0:45–0:50</td><td><strong>Break</strong></td><td></td></tr><tr><td style="white-space:nowrap;">0:50–1:45</td><td><strong>Lean workflow, confidence &amp; validation</strong><br><span style="font-size:.84rem;color:var(--gray-600);">IXP without the full DU framework; confidence; thresholds; validation only when needed</span><br><a class="theory-link" href="modules/theory-lean-workflow.html">Read the theory →</a></td><td>Theory + Lab 4</td></tr><tr><td style="white-space:nowrap;">1:45–2:00</td><td><strong>Wrap-up</strong><br><span style="font-size:.84rem;color:var(--gray-600);">Best-practice checklist, open questions, what a follow-up could cover</span><br><a class="theory-link" href="modules/wrapup-session-1.html#wrap-up">Read the theory →</a></td><td>Discussion</td></tr></tbody></table></div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Ground rules for <span>all labs</span></h2>
+    <div class="feature-grid">
+      <div class="feature-card feature-card--orange"><div class="icon-wrap">🔍</div><h4>Never blind-confirm</h4><p>IXP scores measure agreement with the labels you confirmed. A wrong confirmed value becomes the "right" answer.</p></div>
+      <div class="feature-card feature-card--teal"><div class="icon-wrap">1️⃣</div><h4>Change one thing at a time</h4><p>Evaluate after each change. Otherwise you can't tell what helped.</p></div>
+      <div class="feature-card feature-card--blue"><div class="icon-wrap">📝</div><h4>Write down every score</h4><p>Keep a simple before/after table. You'll use it in the wrap-up.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="labs">
+    <h2 class="section-title">Setup, labs <span>&amp; handouts</span></h2>
+    <p class="section-subtitle">Each lab has step cards you can tick off as you go.</p>
+    <div class="modules-grid">
+      <article class="module-card" data-module="setup">
+        <div class="module-card__band"></div>
+        <div class="module-card__body">
+          <span class="module-card__tag module-card__tag--teal">🛠 Setup</span>
+          <div class="module-card__number">Before you start</div>
+          <div class="module-card__title">Setup &amp; access</div>
+          <div class="module-card__desc">Access, Studio, packages and sample documents, plus a 5-minute self-check.</div>
+          <div class="module-card__meta"><span>⏱ 30–45 min</span><span>📅 Before Day 1</span></div>
+        </div>
+        <div class="module-card__footer">
+          <span class="module-card__status module-card__status--not-started">● Not started</span>
+          <a href="./modules/setup.html" class="btn btn-primary btn-sm">Open →</a>
+        </div>
+      </article>
+      <article class="module-card">
+        <div class="module-card__band"></div>
+        <div class="module-card__body">
+          <span class="module-card__tag module-card__tag--teal">📖 Theory</span>
+          <div class="module-card__number">Both days</div>
+          <div class="module-card__title">Design &amp; extraction quality – theory</div>
+          <div class="module-card__desc">Foundations, using IXP well, instructions and taxonomy, repeating data, multi-document files, confidence and validation.</div>
+          <div class="module-card__meta"><span>⏱ ~90 min read</span><span>🧭 Diagrams</span></div>
+        </div>
+        <div class="module-card__footer">
+          <span class="module-card__status">Read before the labs</span>
+          <a href="./modules/session-1.html" class="btn btn-primary btn-sm">Open →</a>
+        </div>
+      </article>
+      <article class="module-card" data-module="lab-1">
+        <div class="module-card__band"></div>
+        <div class="module-card__body">
+          <span class="module-card__tag">🔨 Hands-on</span>
+          <div class="module-card__number">Lab 1 · Day 1</div>
+          <div class="module-card__title">Instructions &amp; taxonomy design</div>
+          <div class="module-card__desc">What each instruction level does, where a fix belongs, and how to measure it.</div>
+          <div class="module-card__meta"><span>⏱ ~35 min</span></div>
+        </div>
+        <div class="module-card__footer">
+          <span class="module-card__status module-card__status--not-started">● Not started</span>
+          <a href="./modules/lab-1-instructions.html" class="btn btn-primary btn-sm">Open →</a>
+        </div>
+      </article>
+      <article class="module-card" data-module="lab-2">
+        <div class="module-card__band"></div>
+        <div class="module-card__body">
+          <span class="module-card__tag">🔨 Hands-on</span>
+          <div class="module-card__number">Lab 2 · Day 1</div>
+          <div class="module-card__title">Repeating data</div>
+          <div class="module-card__desc">Several bank accounts in one document with one field group.</div>
+          <div class="module-card__meta"><span>⏱ ~25 min</span></div>
+        </div>
+        <div class="module-card__footer">
+          <span class="module-card__status module-card__status--not-started">● Not started</span>
+          <a href="./modules/lab-2-repeating-data.html" class="btn btn-primary btn-sm">Open →</a>
+        </div>
+      </article>
+      <article class="module-card" data-module="lab-3">
+        <div class="module-card__band"></div>
+        <div class="module-card__body">
+          <span class="module-card__tag">🔨 Hands-on</span>
+          <div class="module-card__number">Lab 3 · Day 2</div>
+          <div class="module-card__title">Multi-document files</div>
+          <div class="module-card__desc">Classify and split first, or one project on the whole packet? Compare both.</div>
+          <div class="module-card__meta"><span>⏱ ~30 min</span></div>
+        </div>
+        <div class="module-card__footer">
+          <span class="module-card__status module-card__status--not-started">● Not started</span>
+          <a href="./modules/lab-3-multi-document.html" class="btn btn-primary btn-sm">Open →</a>
+        </div>
+      </article>
+      <article class="module-card" data-module="lab-4">
+        <div class="module-card__band"></div>
+        <div class="module-card__body">
+          <span class="module-card__tag">🔨 Hands-on</span>
+          <div class="module-card__number">Lab 4 · Day 2</div>
+          <div class="module-card__title">Lean workflow, confidence &amp; validation</div>
+          <div class="module-card__desc">IXP in Studio without the full framework, with confidence-based validation.</div>
+          <div class="module-card__meta"><span>⏱ ~40 min</span><span>🛠 Studio required</span></div>
+        </div>
+        <div class="module-card__footer">
+          <span class="module-card__status module-card__status--not-started">● Not started</span>
+          <a href="./modules/lab-4-lean-workflow.html" class="btn btn-primary btn-sm">Open →</a>
+        </div>
+      </article>
+      <article class="module-card" data-module="best-practices">
+        <div class="module-card__band"></div>
+        <div class="module-card__body">
+          <span class="module-card__tag module-card__tag--gray">📋 Handout</span>
+          <div class="module-card__number">Checklist</div>
+          <div class="module-card__title">IXP best practices</div>
+          <div class="module-card__desc">A printable checklist for design, build, test and run.</div>
+          <div class="module-card__meta"><span>⏱ 10 min</span><span>🖨 Printable</span></div>
+        </div>
+        <div class="module-card__footer">
+          <span class="module-card__status module-card__status--not-started">● Not started</span>
+          <a href="./modules/best-practices.html" class="btn btn-primary btn-sm">Open →</a>
+        </div>
+      </article>
+      <article class="module-card" data-module="migration">
+        <div class="module-card__band"></div>
+        <div class="module-card__body">
+          <span class="module-card__tag module-card__tag--gray">📋 Handout</span>
+          <div class="module-card__number">Checklist</div>
+          <div class="module-card__title">Modern DU → IXP migration</div>
+          <div class="module-card__desc">Step-by-step migration checklist with mapping and acceptance templates.</div>
+          <div class="module-card__meta"><span>⏱ 10 min</span><span>🖨 Printable</span></div>
+        </div>
+        <div class="module-card__footer">
+          <span class="module-card__status module-card__status--not-started">● Not started</span>
+          <a href="./modules/migration-checklist.html" class="btn btn-primary btn-sm">Open →</a>
+        </div>
+      </article>
+      <article class="module-card" data-module="resources">
+        <div class="module-card__band"></div>
+        <div class="module-card__body">
+          <span class="module-card__tag module-card__tag--gray">📥 Downloads</span>
+          <div class="module-card__number">Reference</div>
+          <div class="module-card__title">Resources &amp; downloads</div>
+          <div class="module-card__desc">Sample documents, recent IXP updates and documentation links.</div>
+          <div class="module-card__meta"><span>⏱ 5 min</span><span>📄 PDFs</span></div>
+        </div>
+        <div class="module-card__footer">
+          <span class="module-card__status module-card__status--not-started">● Not started</span>
+          <a href="./modules/resources.html" class="btn btn-primary btn-sm">Open →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="./assets/js/progress.js"></script>
+<script src="./assets/js/nav.js"></script>
+</body>
+</html>

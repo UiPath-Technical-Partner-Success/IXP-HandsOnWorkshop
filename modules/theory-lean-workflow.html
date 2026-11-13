@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Theory · Lean workflow, confidence & validation | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <a href="session-1.html">Session 1</a> <span aria-hidden="true">›</span> <span>Theory · Lean workflow, confidence &amp; validation</span></nav>
+    <div class="page-header">
+      <h1>Theory · Lean workflow, confidence &amp; validation</h1>
+      <div class="page-header__meta"><span>📅 Day 2</span><span>📖 Theory</span><span>Then: Lab 4</span></div>
+    </div>
+
+<section class="lesson theory-block" id="lean-workflow">
+<h2 class="lesson-title">⚙️ Lean workflow, confidence &amp; validation</h2>
+<p class="theory-block__meta">⏱ Day 2 · 0:50–1:45 · Theory + <a href="lab-4-lean-workflow.html">Lab 4</a></p>
+<p><strong>Takeaway:</strong> for one document type, a Studio workflow with <em>Extract Document Data → your checks → validation only when a check fails → output</em> is enough. Route on per-field confidence <strong>and</strong> business rules, and pick thresholds from runtime results on your own documents.</p>
+
+<div class="concept">
+<h3>The lean IXP workflow vs. the DU Process template</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>The lean chain: get file → <strong>Extract Document Data</strong> (pointed at your IXP project and tag) → read values and confidence from <em>Document Data</em> → business rules + thresholds → <strong>Create Validation Task and Wait</strong> only if needed → write output. The <strong>Document Understanding Process</strong> template is the full Studio project template with logging, retries and exception handling.</div>
+<div><strong>What it does</strong>Extract Document Data handles digitization and extraction in one activity and reads the field list straight from your IXP model, so you do not define a taxonomy in the workflow. The template adds production structure: one job per input file, with a dispatcher in front. It is Visual Basic only.</div>
+<div class="concept-grid__when"><strong>When to use</strong><em>Lean:</em> one document type per file, one model, a clear trigger upstream. <em>Template:</em> you need classification and splitting, several extractors or training loops, or you want its retries and logging as a starting point. <em>When not:</em> do not adopt the full template for a single-type IXP extraction just because "that is how DU is done".</div>
+<div><strong>How to use</strong><ol><li>Install UiPath.DocumentUnderstanding.Activities in a version that supports IXP models (the IXP docs list the minimum).</li><li>Extract Document Data: project, version (tag), document type, input file.</li><li>Loop over field groups and fields; read value and Extraction Confidence Score.</li><li>Set a <code>needsReview</code> flag from thresholds + rules; create a validation task only if it is true.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Forgetting to publish and re-tag the improved model: the workflow keeps using the old version.</li><li>Mixing the Windows IntelligentOCR path (Data Extraction Scope + DU Project Extractor) with the cross-platform activities in one workflow.</li><li>Writing the original extraction to the output after a reviewer corrected it.</li><li>Removing parts of the template piecemeal and breaking its retry and exception paths.</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 290" role="img" aria-labelledby="s1d9-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d9-t">Decision tree: lean chain or DU Process template. If you need classify or split first, several extractors or training loops, or the template's retries and logging, consider the DU Process template. If all answers are no, use the lean chain: extract, rules, review if needed.</title>
+<defs><marker id="s1d9-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<text x="20" y="24" font-size="15" font-weight="700" fill="#182126">Lean chain or the full DU Process template?</text>
+<rect x="20" y="44" width="190" height="72" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="115" y="75" font-size="13" text-anchor="middle" fill="#182126">Need classify or</text>
+<text x="115" y="94" font-size="13" text-anchor="middle" fill="#182126">split first?</text>
+<rect x="240" y="44" width="190" height="72" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="335" y="75" font-size="13" text-anchor="middle" fill="#182126">Several extractors</text>
+<text x="335" y="94" font-size="13" text-anchor="middle" fill="#182126">or training loops?</text>
+<rect x="460" y="44" width="190" height="72" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="555" y="75" font-size="13" text-anchor="middle" fill="#182126">Want the template's</text>
+<text x="555" y="94" font-size="13" text-anchor="middle" fill="#182126">retries + logging?</text>
+<rect x="680" y="44" width="190" height="72" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="775" y="68" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Lean chain</text>
+<text x="775" y="88" font-size="13" text-anchor="middle" fill="#3C464B">extract, rules,</text>
+<text x="775" y="106" font-size="13" text-anchor="middle" fill="#3C464B">review if needed</text>
+<line x1="210" y1="80" x2="238" y2="80" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d9-a)"/>
+<text x="224" y="72" font-size="13" text-anchor="middle" fill="#616161">no</text>
+<line x1="430" y1="80" x2="458" y2="80" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d9-a)"/>
+<text x="444" y="72" font-size="13" text-anchor="middle" fill="#616161">no</text>
+<line x1="650" y1="80" x2="678" y2="80" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d9-a)"/>
+<text x="664" y="72" font-size="13" text-anchor="middle" fill="#616161">no</text>
+<line x1="115" y1="116" x2="115" y2="168" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d9-a)"/>
+<text x="124" y="146" font-size="13" fill="#616161">yes</text>
+<line x1="335" y1="116" x2="335" y2="168" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d9-a)"/>
+<text x="344" y="146" font-size="13" fill="#616161">yes</text>
+<line x1="555" y1="116" x2="555" y2="168" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d9-a)"/>
+<text x="564" y="146" font-size="13" fill="#616161">yes</text>
+<rect x="20" y="170" width="630" height="62" fill="#F6F6F6" stroke="#3C464B" stroke-width="1.5"/>
+<text x="335" y="196" font-size="14" font-weight="700" text-anchor="middle" fill="#182126">Consider the DU Process template</text>
+<text x="335" y="218" font-size="13" text-anchor="middle" fill="#3C464B">Visual Basic only, one job per file, needs a dispatcher</text>
+<text x="20" y="266" font-size="13" fill="#616161">One "yes" is enough to look at the template – then keep only the parts you need.</text>
+</svg>
+<figcaption>Lab 4 builds the lean chain; its "lab in one picture" diagram shows every activity in order.</figcaption>
+</figure>
+
+<div class="foundation-box"><div class="foundation-box__title">Why confidence is runtime-only</div><p>IXP returns a confidence per field and per extraction when the model actually runs on a document. You see it in the extraction response and in Action Center, not on the IXP design-time screens, where you work with predictions and your annotations instead.</p></div>
+
+<div class="concept">
+<h3>How confidence works: IXP vs. classic DU</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>A 0–1 score per extracted value. <em>IXP:</em> returned per field at runtime in the model response and shown in Action Center, not in the IXP design-time UI. <em>Classic DU ML extractors:</em> come from a model trained on your labelled data; the DU docs describe them as a measure of the model's familiarity with the input, not true probabilities.</div>
+<div><strong>What it does</strong>Gives you one signal for deciding whether a person should look. The DU docs say confidence correlates only weakly with correctness and recommend business rules first; apply the same caution to IXP confidence. Different origin means different distributions: the DU docs note that thresholds differ per model, so a threshold that worked for a classic extractor or for OCR does not transfer to IXP.</div>
+<div class="concept-grid__when"><strong>When to use</strong>Per field, together with business rules, to route documents to review. <em>When not:</em> never as proof of correctness, and never with thresholds copied from another model or from OCR.</div>
+<div><strong>How to use</strong><ol><li>Run a representative sample through the published model.</li><li>Log value + Extraction Confidence Score per field (Lab 4 step 6).</li><li>Compare confidence on correct vs wrong values; set each field's threshold where errors start.</li><li>Re-check thresholds after any model, instruction or OCR change.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Looking for confidence on the IXP screens: it is runtime only.</li><li>Reading 0 as "very uncertain": the docs note that when a model's token limit is exceeded, occurrence and extraction confidence come back as 0 and predictions may be incomplete.</li><li>Routing on confidence when it barely varies across fields on your sample – then rules carry the load.</li><li>Treating 1.00 as "certainly right": high-but-wrong values happen, which is why totals and ID checks matter.</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 290" role="img" aria-labelledby="s1d10-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d10-t">Where confidence comes from. Classic DU: labelled documents train an ML model that outputs a familiarity score from 0 to 1. IXP: document plus taxonomy go to the generative extraction, which returns a field confidence from 0 to 1, available at runtime only. Both feed your workflow's per-field thresholds and business rules, which send only failing documents to review.</title>
+<defs><marker id="s1d10-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<text x="20" y="24" font-size="15" font-weight="700" fill="#182126">Same 0–1 scale, different origin</text>
+<text x="20" y="84" font-size="14" font-weight="700" fill="#182126">Classic DU</text>
+<text x="20" y="102" font-size="13" fill="#616161">(ML extractor)</text>
+<rect x="140" y="56" width="150" height="62" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+<text x="215" y="83" font-size="13" text-anchor="middle" fill="#182126">Your labelled</text>
+<text x="215" y="101" font-size="13" text-anchor="middle" fill="#182126">documents</text>
+<rect x="315" y="56" width="150" height="62" fill="#F6F6F6" stroke="#616161" stroke-width="2"/>
+<text x="390" y="83" font-size="13" text-anchor="middle" fill="#182126">Trained</text>
+<text x="390" y="101" font-size="13" text-anchor="middle" fill="#182126">ML model</text>
+<rect x="490" y="56" width="150" height="62" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+<text x="565" y="83" font-size="13" text-anchor="middle" fill="#182126">Familiarity</text>
+<text x="565" y="101" font-size="13" text-anchor="middle" fill="#182126">score 0–1</text>
+<line x1="290" y1="87" x2="313" y2="87" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d10-a)"/>
+<line x1="465" y1="87" x2="488" y2="87" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d10-a)"/>
+<text x="20" y="194" font-size="14" font-weight="700" fill="#182126">IXP</text>
+<text x="20" y="212" font-size="13" fill="#616161">(generative)</text>
+<rect x="140" y="166" width="150" height="62" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="215" y="193" font-size="13" text-anchor="middle" fill="#182126">Document +</text>
+<text x="215" y="211" font-size="13" text-anchor="middle" fill="#182126">taxonomy</text>
+<rect x="315" y="166" width="150" height="62" fill="#F6F6F6" stroke="#0BA2B3" stroke-width="2"/>
+<text x="390" y="193" font-size="13" text-anchor="middle" fill="#182126">Generative</text>
+<text x="390" y="211" font-size="13" text-anchor="middle" fill="#182126">extraction</text>
+<rect x="490" y="166" width="150" height="62" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="565" y="193" font-size="13" text-anchor="middle" fill="#182126">Field confidence</text>
+<text x="565" y="211" font-size="13" text-anchor="middle" fill="#182126">0–1, runtime only</text>
+<line x1="290" y1="197" x2="313" y2="197" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d10-a)"/>
+<line x1="465" y1="197" x2="488" y2="197" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d10-a)"/>
+<rect x="690" y="56" width="180" height="172" fill="#182126"/>
+<text x="780" y="90" font-size="14" font-weight="700" text-anchor="middle" fill="#FFFFFF">Your workflow</text>
+<text x="780" y="120" font-size="13" text-anchor="middle" fill="#FFFFFF">per-field threshold</text>
+<text x="780" y="140" font-size="13" text-anchor="middle" fill="#FFFFFF">+ business rules</text>
+<text x="780" y="174" font-size="13" text-anchor="middle" fill="#FFFFFF">only failures go</text>
+<text x="780" y="194" font-size="13" text-anchor="middle" fill="#FFFFFF">to a person</text>
+<line x1="640" y1="87" x2="688" y2="110" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d10-a)"/>
+<line x1="640" y1="197" x2="688" y2="175" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d10-a)"/>
+<text x="20" y="270" font-size="13" fill="#616161">Never copy a classic or OCR threshold to IXP – pick each field's threshold from a runtime sample.</text>
+</svg>
+<figcaption>Same scale and same use (routing to a person), but the numbers come from different mechanisms and are distributed differently.</figcaption>
+</figure>
+
+<div class="foundation-box"><div class="foundation-box__title">Business rules</div><p>A business rule is a fixed check on the extracted data that does not depend on the model's confidence: a required field is present, net + tax = total, an IBAN has the right length, every account has a currency. Rules behave the same after a model or instruction change; confidence does not.</p></div>
+
+<div class="concept">
+<h3>Thresholds, business rules and validation only when needed</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>Routing logic you write in the workflow: a threshold per field (stricter for amounts and IDs, looser for descriptions) plus business rules. Any failure sets <code>needsReview</code>. Validation is not automatic: the IXP workflow docs describe human validation as triggered by decision logic in the workflow, using confidence thresholds and business rules.</div>
+<div><strong>What it does</strong>Sends only risky documents to a person. <em>Create Validation Task and Wait</em> (or <em>Create Validation Task</em> + <em>Wait for Validation Task and Resume</em>) creates an Action Center task; the robot pauses and continues with the validated Document Data. Validation Station colours confidence: below 50% red, 50–85% yellow, 86–99% light green, 100% green – display guidance, not recommended thresholds.</div>
+<div class="concept-grid__when"><strong>When to use</strong>Always in production lean workflows; track the share of documents that go to a person as your key metric. <em>When not:</em> do not send every document "to be safe" – that removes most of the value of automation.</div>
+<div><strong>How to use</strong><ol><li>List critical fields; start from a sample, not a global number.</li><li>Add rules that do not depend on confidence.</li><li>If <code>needsReview</code>: create the task with a clear Action Title and priority; <em>Extracted fields validation confidence %</em> filters which fields reviewers see.</li><li>Export the validated Document Data (its results are also available as data tables); keep a confidence column for audit.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>One threshold for every field.</li><li>Trusting confidence alone, without rules.</li><li>Expecting reviewer corrections to improve the IXP model: there is no feedback loop from Action Center validation; improve instructions and publish a new version instead.</li><li>On the Windows path, forgetting that Export Extraction Results drops confidence unless <em>IncludeConfidence</em> is set (default False).</li></ul></div>
+</div>
+</div>
+
+<div class="why-box"><div class="why-box__title">💬 "What's the best way to use IXP? Is there something lighter than the DU framework?"</div>
+<p>Yes. For one document type, build a short Studio workflow: Extract Document Data pointed at your published IXP model, a few checks on per-field confidence and business rules, a validation task in Action Center only when a check fails, then write the output. Keep the full Document Understanding Process template for cases that need classification and splitting, several extractors or training loops, or its built-in retries, logging and exception handling.</p></div>
+<div class="why-box"><div class="why-box__title">💬 "How is confidence calculated in IXP, compared with classic DU?"</div>
+<p>IXP returns confidence at runtime, per field and per extraction, and you see it in the model response and Action Center – not in the IXP design screens. Classic DU confidence comes from a model trained on your labelled documents and describes how familiar the input looks to that model. Same 0–1 scale, different origin, so never reuse a classic threshold for IXP. In both cases, build business rules first, use per-field confidence as a supplement, and re-tune after any model, OCR or instruction change.</p></div>
+
+<div class="admonition admonition--tip"><div class="admonition-title">💡 Key takeaways</div><div class="admonition-body"><ul>
+<li>Extract → rules → validate only when needed → output covers most single-type cases.</li>
+<li>IXP confidence is runtime-only; pick thresholds from your own runtime sample.</li>
+<li>Per-field thresholds plus business rules decide how much work goes to people.</li>
+<li>Validation corrects the data, not the model.</li>
+</ul></div></div>
+<p class="source-list"><strong>Sources:</strong>
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/building-and-consuming-a-workflow" target="_blank" rel="noopener">Building and consuming a workflow</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-runtime" target="_blank" rel="noopener">FAQ – runtime</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-document-processing-limits" target="_blank" rel="noopener">Document processing limits</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/managing-published-projects" target="_blank" rel="noopener">Managing published versions</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/extract-document-data" target="_blank" rel="noopener">Extract Document Data</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/document-data" target="_blank" rel="noopener">Document Data</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/document-understanding-create-document-validation-action" target="_blank" rel="noopener">Create Validation Task</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/create-validation-task-and-wait" target="_blank" rel="noopener">Create Validation Task and Wait</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/classic-validation-station" target="_blank" rel="noopener">Classic Validation Station</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/export-extraction-results" target="_blank" rel="noopener">Export Extraction Results</a> ·
+<a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/du-process" target="_blank" rel="noopener">Document Understanding Process template</a> ·
+<a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/training-high-performing-models" target="_blank" rel="noopener">Training high-performing models (classic confidence)</a>
+</p>
+</section>
+
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="lab-3-multi-document.html" class="btn btn-outline">← Lab 3 · Multi-document files</a>
+      <div></div>
+      <a href="lab-4-lean-workflow.html" class="btn btn-primary">Lab 4 · Lean workflow &amp; confidence →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('theory-lean-workflow');</script>
+</body>
+</html>

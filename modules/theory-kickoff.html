@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Kickoff & using IXP well | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <a href="session-1.html">Session 1</a> <span aria-hidden="true">›</span> <span>Kickoff &amp; using IXP well</span></nav>
+    <div class="page-header">
+      <h1>Kickoff &amp; using IXP well</h1>
+      <div class="page-header__meta"><span>📅 Day 1</span><span>⏱ 0:00–0:30</span><span>Theory + discussion</span></div>
+    </div>
+
+<section class="lesson theory-block" id="kickoff">
+<h2 class="lesson-title">🚀 Kickoff</h2>
+<p class="theory-block__meta">⏱ Day 1 · 0:00–0:10 · Discussion · Next: <a href="#ixp-well">Using IXP well</a></p>
+<p><strong>Goal of Session 1:</strong> leave with an IXP project you can defend with numbers, and a short list of design rules you will apply to your own projects.</p>
+<div class="concept">
+<h3>What you will be able to do after today</h3>
+<div class="concept-grid">
+<div><strong>Design</strong>Write a taxonomy and instructions at the right level, and pick data types that do the formatting for you (Lab 1).</div>
+<div><strong>Model repeating data</strong>Extract any number of accounts, line items or parties with one field group (Lab 2).</div>
+<div><strong>Decide on packets</strong>Choose between one project for the whole file and classify-and-split first, with a written rule (Lab 3).</div>
+<div><strong>Run it lean</strong>Call IXP from Studio, route only risky documents to a person, and measure time per step (Lab 4).</div>
+</div>
+</div>
+<p><strong>What to bring</strong></p>
+<ul>
+<li>Setup done and the self-check passed (<a href="setup.html">Setup &amp; access</a>). There is no time to fix access during the session.</li>
+<li>The sample documents downloaded (<a href="resources.html">Resources</a>).</li>
+<li>One real document type from your current projects in mind: what fields you need, how varied the layouts are, and whether files contain several documents.</li>
+<li>A place to write scores (a spreadsheet or the <a href="wrapup-session-1.html">wrap-up worksheet</a>).</li>
+</ul>
+<p><strong>Checklist for today</strong> – the <a href="best-practices.html">best-practice checklist</a> is the reference behind every block. Sections you will use: <em>Choosing the approach</em>, <em>Taxonomy design</em>, <em>Instruction writing</em>, <em>Repeating data</em>, <em>Labelling &amp; measurement</em>, <em>Multi-document files</em>, <em>Confidence &amp; validation</em>.</p>
+<div class="admonition admonition--tip"><div class="admonition-title">💡 Key takeaways</div><div class="admonition-body"><ul>
+<li>Every lab ends with a measured score, not an impression.</li>
+<li>Bring one real case: the discussion is worth more with your own documents.</li>
+</ul></div></div>
+<p><a href="#ixp-well" class="btn btn-primary btn-sm">Next: Using IXP well ↓</a></p>
+</section>
+
+<section class="lesson theory-block" id="ixp-well">
+<h2 class="lesson-title">🧭 Using IXP well</h2>
+<p class="theory-block__meta">⏱ Day 1 · 0:10–0:30 · Theory + discussion · Applied in <a href="lab-1-instructions.html">Lab 1</a> (build) and <a href="lab-4-lean-workflow.html">Lab 4</a> (consume)</p>
+<p><strong>Takeaway:</strong> start new document projects in IXP, pick the capability by document type, and treat IXP as "measurable, governable extraction" – not as a smarter model. The value is everything around the LLM call.</p>
+
+<div class="concept">
+<h3>IXP-first approach</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>A design stance: for a new document project, start by choosing the IXP capability that matches the documents, instead of writing your own LLM prompt or building a custom model.</div>
+<div><strong>What it does</strong>It solves the problems teams hit when they build LLM extraction by hand: testing several models, slow prompt iteration, no ground truth, no metrics, no way to compare a change, schemas that are hard to maintain, and no version control over what runs in production.</div>
+<div class="concept-grid__when"><strong>When to use</strong>Layouts vary, values must be inferred, tables are complex, several document types sit in one file, or you need measurement and governance from day one. <em>When not:</em> fixed-layout, high-volume documents with a strong DU out-of-the-box model (for example invoices) may fit DU Modern better. Check the page limit of your extraction model for very long documents.</div>
+<div><strong>How to use</strong><ol><li>Run the docs' capability decision guide for the use case.</li><li>Prototype on a representative sample: review 2–3 documents first, then grow to the 20–30 the docs recommend.</li><li>Iterate instructions, measure, publish and tag a version.</li><li>Consume from a workflow and validate only exceptions.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Starting from the tool ("we have IXP, let's use it") instead of from the data and the decision it feeds.</li><li>Prototyping on one "nice" document and discovering layout variation in production.</li><li>Promising speed or accuracy before measuring on the customer's own documents.</li></ul></div>
+</div>
+</div>
+
+<div class="concept">
+<h3>IXP vs. sending a PDF straight to an LLM</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>A comparison between a governed extraction capability and a raw completion call (file + prompt → LLM → JSON, a plain-text data format). Both use an LLM underneath.</div>
+<div><strong>What it does</strong>IXP adds: digitization (OCR), a typed schema (the taxonomy), a Measure page with precision, recall and F1 per field, a confidence per value at runtime, Validation Station and Action Center for review, published versions with Staging and Production tags, change history per field, and governance through the AI Trust Layer (UiPath's control layer for LLM calls).</div>
+<div class="concept-grid__when"><strong>When to use</strong>IXP whenever the result feeds a business process, needs an audit trail, or must be measured before go-live. <em>When a plain LLM call is fine:</em> one-off, low-risk, low-volume tasks with no audit or review need.</div>
+<div><strong>How to use</strong><ol><li>Frame it as "the same kind of model, plus what production needs".</li><li>Run both on the same 20–30 documents if a customer asks, and compare accuracy, time and review effort.</li><li>Check metering on the licensing pages; IXP is charged per page per operation.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Claiming IXP is always more accurate or always cheaper. Measure on your own documents; a bare LLM call can be faster.</li><li>Forgetting the hidden work of the raw approach: schema validation, a review UI, metrics and version control all have to be built and maintained.</li><li>Quoting prices from memory instead of the customer's licensing plan.</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 300" role="img" aria-labelledby="s1d2-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d2-t">Raw LLM call versus IXP. Raw: PDF and prompt, LLM, free-form JSON, checks you build yourself; evaluation, versions and review UI not included. IXP: digitize with OCR, taxonomy, LLM, typed values with confidence, Validation Station; plus Measure, Staging and Production tags, change history and AI Trust Layer.</title>
+<defs><marker id="s1d2-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<text x="20" y="24" font-size="15" font-weight="700" fill="#182126">Same kind of model, different amount of production support</text>
+<text x="20" y="80" font-size="14" font-weight="700" fill="#182126">Raw LLM</text>
+<text x="20" y="98" font-size="13" fill="#616161">call</text>
+<rect x="140" y="52" width="130" height="62" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+<text x="205" y="88" font-size="13" text-anchor="middle" fill="#182126">PDF + prompt</text>
+<rect x="290" y="52" width="130" height="62" fill="#F6F6F6" stroke="#616161" stroke-width="2"/>
+<text x="355" y="88" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">LLM</text>
+<rect x="440" y="52" width="130" height="62" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+<text x="505" y="79" font-size="13" text-anchor="middle" fill="#182126">Free-form</text>
+<text x="505" y="97" font-size="13" text-anchor="middle" fill="#182126">JSON</text>
+<rect x="590" y="52" width="130" height="62" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+<text x="655" y="79" font-size="13" text-anchor="middle" fill="#182126">Checks you</text>
+<text x="655" y="97" font-size="13" text-anchor="middle" fill="#182126">build yourself</text>
+<rect x="740" y="52" width="130" height="62" fill="#FFFFFF" stroke="#CE340B" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="805" y="72" font-size="13" text-anchor="middle" fill="#CE340B">Not included:</text>
+<text x="805" y="89" font-size="13" text-anchor="middle" fill="#CE340B">eval, versions,</text>
+<text x="805" y="106" font-size="13" text-anchor="middle" fill="#CE340B">review UI</text>
+<line x1="270" y1="83" x2="288" y2="83" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d2-a)"/>
+<line x1="420" y1="83" x2="438" y2="83" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d2-a)"/>
+<line x1="570" y1="83" x2="588" y2="83" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d2-a)"/>
+<text x="20" y="196" font-size="14" font-weight="700" fill="#182126">IXP</text>
+<rect x="140" y="166" width="130" height="62" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="205" y="193" font-size="13" text-anchor="middle" fill="#182126">Digitize</text>
+<text x="205" y="211" font-size="13" text-anchor="middle" fill="#182126">(OCR)</text>
+<rect x="290" y="166" width="130" height="62" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="355" y="193" font-size="13" text-anchor="middle" fill="#182126">Taxonomy</text>
+<text x="355" y="211" font-size="13" text-anchor="middle" fill="#182126">schema + prompt</text>
+<rect x="440" y="166" width="130" height="62" fill="#F6F6F6" stroke="#0BA2B3" stroke-width="2"/>
+<text x="505" y="202" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">LLM</text>
+<rect x="590" y="166" width="130" height="62" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="655" y="193" font-size="13" text-anchor="middle" fill="#182126">Typed values</text>
+<text x="655" y="211" font-size="13" text-anchor="middle" fill="#182126">+ confidence</text>
+<rect x="740" y="166" width="130" height="62" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="805" y="193" font-size="13" text-anchor="middle" fill="#182126">Validation</text>
+<text x="805" y="211" font-size="13" text-anchor="middle" fill="#182126">Station (HITL)</text>
+<line x1="270" y1="197" x2="288" y2="197" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d2-a)"/>
+<line x1="420" y1="197" x2="438" y2="197" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d2-a)"/>
+<line x1="570" y1="197" x2="588" y2="197" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d2-a)"/>
+<line x1="720" y1="197" x2="738" y2="197" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d2-a)"/>
+<text x="20" y="270" font-size="13" font-weight="700" fill="#182126">Around it:</text>
+<rect x="140" y="250" width="175" height="32" fill="#182126"/>
+<text x="227" y="271" font-size="13" text-anchor="middle" fill="#FFFFFF">Measure: P / R / F1</text>
+<rect x="325" y="250" width="175" height="32" fill="#182126"/>
+<text x="412" y="271" font-size="13" text-anchor="middle" fill="#FFFFFF">Staging/Production tag</text>
+<rect x="510" y="250" width="175" height="32" fill="#182126"/>
+<text x="597" y="271" font-size="13" text-anchor="middle" fill="#FFFFFF">Change history</text>
+<rect x="695" y="250" width="175" height="32" fill="#182126"/>
+<text x="782" y="271" font-size="13" text-anchor="middle" fill="#FFFFFF">AI Trust Layer</text>
+</svg>
+<figcaption>Both pipelines call an LLM. IXP wraps the call with digitization, a typed schema, measurement (P = precision, R = recall), versioning and human review.</figcaption>
+</figure>
+
+<div class="concept">
+<h3>The GA ways to consume an IXP model</h3>
+<div class="concept-grid">
+<div><strong>What it is</strong>A published, tagged IXP model can be called from several places. GA (generally available, meaning supported for production) and documented: the <strong>Extract Document Data</strong> activity in Studio and Studio Web (UiPath.DocumentUnderstanding.Activities), the <strong>Document Understanding Project Extractor</strong> in the Windows IntelligentOCR package, and the <strong>Document Understanding Cloud API</strong> (API: application programming interface, a way for one program to call another). The <strong>IXP tool in Agents</strong> is announced in the Agents release notes as <span class="pill pill--preview">Preview</span>.</div>
+<div><strong>What it does</strong>Each caller picks the project and a tag (Staging or Production) and gets back the structured result with confidence. Publishing freezes a snapshot of your instructions; the tag tells callers which snapshot to use, so later edits in IXP do not change production until you publish and re-tag.</div>
+<div class="concept-grid__when"><strong>When to use</strong><em>Activities:</em> the default for RPA (robotic process automation) developers. <em>DU Cloud API:</em> callers outside UiPath; synchronous calls handle up to 5 pages, use asynchronous calls (start + poll) for longer documents and volume. <em>Agents IXP tool</em> (<span class="pill pill--preview">Preview</span>): an agent needs structured data from a document; access also depends on your cloud platform, so do not base a production plan on it.</div>
+<div><strong>How to use</strong><ol><li>In IXP, publish a version and mark it as Staging or Production.</li><li>In the caller, select the project and the tag.</li><li>Read values and confidence from the result.</li><li>Add validation only where your rules require it.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Forgetting to publish and re-tag after improving instructions: the robot keeps running the old version.</li><li>Pinning a package version from a blog post. The IXP docs list the minimum package versions; check them in Manage Packages.</li><li>Using the synchronous API for long documents.</li><li>Building on <span class="pill pill--preview">Preview</span> paths for production plans. The docs label the Agents IXP tool, coded workflows (DU coded automation APIs) and IXP in Maestro Flow as Preview.</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 330" role="img" aria-labelledby="s1d3-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d3-t">One published IXP model tagged Staging or Production, called by Extract Document Data, the DU Project Extractor and the DU Cloud API (GA), and by the Agents IXP tool, coded workflows and IXP in Maestro Flow (Preview, dashed).</title>
+<text x="20" y="24" font-size="15" font-weight="700" fill="#182126">One published model, several ways to call it</text>
+<rect x="330" y="135" width="220" height="70" fill="#182126"/>
+<text x="440" y="165" font-size="14" font-weight="700" text-anchor="middle" fill="#FFFFFF">Published IXP model</text>
+<text x="440" y="187" font-size="13" text-anchor="middle" fill="#FFFFFF">tag: Staging or Production</text>
+<rect x="20" y="50" width="240" height="60" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="140" y="75" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">Extract Document Data</text>
+<text x="140" y="96" font-size="13" text-anchor="middle" fill="#3C464B">Studio and Studio Web</text>
+<rect x="20" y="140" width="240" height="60" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="140" y="165" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">DU Project Extractor</text>
+<text x="140" y="186" font-size="13" text-anchor="middle" fill="#3C464B">IntelligentOCR, Windows</text>
+<rect x="20" y="230" width="240" height="60" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="140" y="255" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">DU Cloud API</text>
+<text x="140" y="276" font-size="13" text-anchor="middle" fill="#3C464B">sync up to 5 pages, else async</text>
+<rect x="620" y="50" width="240" height="60" fill="#F6F6F6" stroke="#616161" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="740" y="75" font-size="14" font-weight="600" text-anchor="middle" fill="#3C464B">Agents IXP tool</text>
+<text x="740" y="96" font-size="13" text-anchor="middle" fill="#616161">Preview</text>
+<rect x="620" y="140" width="240" height="60" fill="#F6F6F6" stroke="#616161" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="740" y="165" font-size="14" font-weight="600" text-anchor="middle" fill="#3C464B">Coded workflows</text>
+<text x="740" y="186" font-size="13" text-anchor="middle" fill="#616161">Preview</text>
+<rect x="620" y="230" width="240" height="60" fill="#F6F6F6" stroke="#616161" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="740" y="255" font-size="14" font-weight="600" text-anchor="middle" fill="#3C464B">IXP in Maestro Flow</text>
+<text x="740" y="276" font-size="13" text-anchor="middle" fill="#616161">Preview</text>
+<line x1="260" y1="80" x2="330" y2="150" stroke="#0BA2B3" stroke-width="2"/>
+<line x1="260" y1="170" x2="330" y2="170" stroke="#0BA2B3" stroke-width="2"/>
+<line x1="260" y1="260" x2="330" y2="190" stroke="#0BA2B3" stroke-width="2"/>
+<line x1="550" y1="150" x2="620" y2="80" stroke="#616161" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="550" y1="170" x2="620" y2="170" stroke="#616161" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="550" y1="190" x2="620" y2="260" stroke="#616161" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="440" y="318" font-size="13" text-anchor="middle" fill="#616161">Solid = GA, documented on docs.uipath.com · Dashed = Preview, not for production plans</text>
+</svg>
+<figcaption>Callers resolve the model by its tag. Publishing a new version and moving the tag is what changes production behaviour.</figcaption>
+</figure>
+
+<div class="foundation-box"><div class="foundation-box__title">Publish, tag, consume</div><p>A <strong>published version</strong> is a frozen copy of your project's configuration. A <strong>tag</strong> (Staging or Production) is a label on one version. Callers ask for "the Production version of project X", so you can keep editing in IXP without affecting the robot, then move the tag when the new version scores better.</p></div>
+
+<div class="why-box"><div class="why-box__title">💬 "Why IXP, and not just send the PDF straight to an LLM?"</div>
+<p>Both use the same kind of model. The difference is what surrounds it. With IXP you get a schema the model must fill, OCR for scanned pages, scores per field so you can prove quality before go-live, a confidence per value so you can send only doubtful documents to a person, a ready-made review screen, and versions you can roll back. With a raw LLM call you build all of that yourself. Be honest about the trade-offs: IXP extraction doesn't classify or split packets, does not learn from corrections, and can be slower than a bare call. Measure both on your own documents.</p></div>
+
+<div class="admonition admonition--tip"><div class="admonition-title">💡 Key takeaways</div><div class="admonition-body"><ul>
+<li>Pick the IXP capability by document type; Unstructured and complex documents is for variable, complex or stacked documents.</li>
+<li>IXP's value over a raw LLM is measurement, validation and governance, not a "better model".</li>
+<li>GA consumption: Extract Document Data, DU Project Extractor, DU Cloud API. The Agents IXP tool, coded workflows and IXP in Flow are Preview.</li>
+<li>Production runs the tagged version: publish and re-tag after every improvement.</li>
+</ul></div></div>
+<p class="section-subtitle">You build with this in Lab 1 and consume it in Lab 4.</p>
+<p class="source-list"><strong>Sources:</strong>
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/introduction" target="_blank" rel="noopener">Unstructured and complex documents – introduction</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/choosing-the-correct-capability" target="_blank" rel="noopener">Choosing the correct capability</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/faq-choosing-the-correct-ixp-capability" target="_blank" rel="noopener">FAQ – choosing the correct IXP capability</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-runtime" target="_blank" rel="noopener">FAQ – runtime</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/evaluating-model-performance" target="_blank" rel="noopener">Evaluating model performance</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/managing-published-projects" target="_blank" rel="noopener">Managing published versions</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/building-and-consuming-a-workflow" target="_blank" rel="noopener">Building and consuming a workflow</a> ·
+<a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/api-guide/api-overview" target="_blank" rel="noopener">DU Cloud API overview</a> ·
+<a href="https://docs.uipath.com/agents/automation-cloud/latest/user-guide/ixp" target="_blank" rel="noopener">Agents – IXP tool</a> ·
+<a href="https://docs.uipath.com/agents/automation-cloud/latest/release-notes/october-2025" target="_blank" rel="noopener">Agents release notes – October 2025 (IXP tool, preview)</a> ·
+<a href="https://docs.uipath.com/activities/other/latest/document-understanding/documentunderstanding-coded-automation-apis" target="_blank" rel="noopener">DU coded automation APIs (preview)</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/faq-licensing-and-pricing" target="_blank" rel="noopener">FAQ – licensing and pricing</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/flow-user-guide/faq-access-and-availability" target="_blank" rel="noopener">IXP in Flow – access and availability</a>
+</p>
+</section>
+
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="theory-foundations.html" class="btn btn-outline">← Foundations</a>
+      <div></div>
+      <a href="theory-instructions.html" class="btn btn-primary">Theory · Instructions &amp; taxonomy →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('theory-kickoff');</script>
+</body>
+</html>

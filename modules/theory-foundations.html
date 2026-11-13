@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(localStorage.getItem('tps-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+  <title>Foundations: UiPath, DU and IXP | IXP Hands-on Workshop</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/course.css" />
+  <link rel="stylesheet" href="../assets/css/workshop.css" />
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="../index.html" class="logo" aria-label="Workshop home">
+    <div class="logo-icon" aria-hidden="true">U</div>
+    <span class="logo-text"><span>UiPath</span> IXP Hands-on Workshop</span>
+  </a>
+  <nav aria-label="Site navigation"><a href="../index.html">← Workshop home</a><a href="resources.html">Downloads</a></nav>
+</header>
+
+<div class="course-layout">
+
+  <aside class="course-sidebar" aria-label="Workshop navigation">
+    <nav class="sidebar-nav" aria-label="Page list">
+      <div class="sidebar-nav__title">IXP Hands-on Workshop</div>
+      <ul class="sidebar-nav__list">
+        <li><a href="../index.html">⌂ Workshop home</a></li>
+        <li><a href="setup.html" data-page="setup">00 · Setup &amp; access</a></li>
+        <li><a href="session-1.html" data-page="session-1">01 · Session 1 overview</a></li>
+        <li><a href="theory-foundations.html" data-page="theory-foundations" class="sidebar-nav__sub">📖 Foundations (refresher)</a></li>
+        <li class="sidebar-nav__day">Day 1</li>
+        <li><a href="theory-kickoff.html" data-page="theory-kickoff" class="sidebar-nav__sub">📖 Kickoff &amp; using IXP well</a></li>
+        <li><a href="theory-instructions.html" data-page="theory-instructions" class="sidebar-nav__sub">📖 Theory · Instructions &amp; taxonomy</a></li>
+        <li><a href="lab-1-instructions.html" data-page="lab-1" class="sidebar-nav__sub">🔨 Lab 1 · Instructions &amp; taxonomy</a></li>
+        <li><a href="theory-repeating-data.html" data-page="theory-repeating-data" class="sidebar-nav__sub">📖 Theory · Repeating data</a></li>
+        <li><a href="lab-2-repeating-data.html" data-page="lab-2" class="sidebar-nav__sub">🔨 Lab 2 · Repeating data</a></li>
+        <li class="sidebar-nav__day">Day 2</li>
+        <li><a href="theory-multi-document.html" data-page="theory-multi-document" class="sidebar-nav__sub">📖 Theory · Multi-document files</a></li>
+        <li><a href="lab-3-multi-document.html" data-page="lab-3" class="sidebar-nav__sub">🔨 Lab 3 · Multi-document files</a></li>
+        <li><a href="theory-lean-workflow.html" data-page="theory-lean-workflow" class="sidebar-nav__sub">📖 Theory · Lean workflow &amp; confidence</a></li>
+        <li><a href="lab-4-lean-workflow.html" data-page="lab-4" class="sidebar-nav__sub">🔨 Lab 4 · Lean workflow &amp; confidence</a></li>
+        <li><a href="wrapup-session-1.html" data-page="wrapup-1" class="sidebar-nav__sub">🏁 Session 1 wrap-up</a></li>
+        <li><a href="best-practices.html" data-page="best-practices">02 · Best-practice checklist</a></li>
+        <li><a href="migration-checklist.html" data-page="migration">03 · Migration checklist</a></li>
+        <li><a href="resources.html" data-page="resources">04 · Resources &amp; downloads</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-progress">
+      <div class="label">Lab progress</div>
+      <div class="progress-bar-wrap" style="margin-top:6px;" role="progressbar" aria-label="Lab progress">
+        <div class="progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+  <main class="course-content" id="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">›</span> <a href="session-1.html">Session 1</a> <span aria-hidden="true">›</span> <span>Foundations: UiPath, DU and IXP</span></nav>
+    <div class="page-header">
+      <h1>Foundations: UiPath, DU and IXP</h1>
+      <div class="page-header__meta"><span>📖 Refresher (optional)</span><span>⏱ ~15 min read</span><span>Before Day 1</span></div>
+    </div>
+
+<section class="lesson theory-block" id="foundations">
+<h2 class="lesson-title">🌱 Foundations: UiPath, DU and IXP</h2>
+<p class="theory-block__meta">⏱ Self-study before the session (~15 min) · Used in every lab, starting with <a href="lab-1-instructions.html">Lab 1</a></p>
+<p><strong>In one sentence:</strong> UiPath is an automation platform; Document Understanding (DU) is its framework for turning files into checked data; IXP (Intelligent Xtraction and Processing) is the newer extraction service you will build and tune in this workshop, using a large language model (LLM) that you steer with plain-language instructions.</p>
+
+<h3>The platform pieces you will touch</h3>
+<div class="table-wrap"><table class="comparison-table">
+<thead><tr><th style="width:22%;">Piece</th><th>What it is</th><th style="width:30%;">Where you meet it here</th></tr></thead>
+<tbody>
+<tr><td><strong>Automation Cloud</strong></td><td>UiPath's cloud platform. Your organization has one or more tenants; each tenant hosts services such as Orchestrator, Action Center and IXP.</td><td>You sign in here and open IXP (all labs).</td></tr>
+<tr><td><strong>Studio / Studio Web</strong></td><td>The tools where you build automations (called workflows or processes) by combining activities. Studio is the desktop tool, Studio Web runs in the browser.</td><td>Lab 4: the lean workflow; Lab 3 approach A.</td></tr>
+<tr><td><strong>Robot</strong></td><td>The runtime that executes a published automation, attended (next to a person) or unattended (on a server).</td><td>Runs your Lab 4 workflow.</td></tr>
+<tr><td><strong>Orchestrator</strong></td><td>The web application that manages robots, deploys automation packages, runs jobs and holds shared resources. Resources live in <em>folders</em>, which also control who can use them.</td><td>Lab 4: folder and storage bucket for validation tasks.</td></tr>
+<tr><td><strong>Action Center</strong></td><td>Where people pick up and complete tasks that a robot creates, for example "check these extracted values". The robot pauses until the task is done, then resumes.</td><td>Lab 4: validation tasks.</td></tr>
+<tr><td><strong>Document Understanding (DU)</strong></td><td>UiPath's framework and activities for processing documents: digitization, classification, extraction, validation and export.</td><td>Classifiers (Lab 3), activities and Validation Station (Lab 4).</td></tr>
+<tr><td><strong>IXP</strong></td><td>UiPath's extraction service for unstructured data, with three capabilities: Communications data, Structured and semi-structured documents (DU models), and Unstructured and complex documents (generative, prompt-driven).</td><td>Labs 1–4 use <strong>Unstructured and complex documents</strong>.</td></tr>
+</tbody>
+</table></div>
+
+<div class="concept">
+<h3>Document Understanding: the five steps every document goes through</h3>
+<p><strong>Takeaway:</strong> whatever tool you use, a document goes digitize → classify → extract → validate → export. IXP replaces the extract step; the other steps still need a decision from you.</p>
+<div class="concept-grid">
+<div><strong>What it is</strong>The DU framework's four fundamental capabilities – digitization, classification, extraction and validation – plus data consumption (exporting the result to the system that needs it).</div>
+<div><strong>What it does</strong><em>Digitize:</em> turn a file into machine-readable text and layout; OCR (optical character recognition) reads scanned pages and has its own confidence. <em>Classify:</em> decide the document type (and, for packets, the page range of each document). <em>Extract:</em> pull out the values you need. <em>Validate:</em> a person checks low-confidence or rule-failing values. <em>Export:</em> hand the data to Excel, a database or an ERP (enterprise resource planning) system.</div>
+<div class="concept-grid__when"><strong>When to use</strong>As the mental model for any document project. Use the full framework (classification, splitting, several extractors, training) only when the process needs it. <em>When not:</em> for one document type extracted by IXP, a much shorter chain is enough (see <a href="theory-lean-workflow.html">Lean workflow</a>).</div>
+<div><strong>How to use</strong><ol><li>Ask: does every file hold exactly one document type? If yes, skip classification.</li><li>Pick the extractor (in this workshop: an IXP model).</li><li>Decide when a person must check the result (thresholds + business rules).</li><li>Decide where the data goes.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Assuming IXP extraction classifies or splits packets. The Unstructured and complex documents capability returns fields, not document types or boundaries.</li><li>Building the full framework "because that is how DU is done" when the process needs only extract + check + export.</li><li>Mixing up OCR confidence (how sure the text reader was) with extraction confidence (how sure the model was about a value).</li></ul></div>
+</div>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 880 320" role="img" aria-labelledby="s1d1-t" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif">
+<title id="s1d1-t">End-to-end document flow: digitize, classify, extract, validate, export. IXP covers the extract step; a DU classifier is optional for packets; validation runs in Action Center; export is done by your workflow.</title>
+<defs><marker id="s1d1-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3C464B"/></marker></defs>
+<text x="20" y="26" font-size="15" font-weight="700" fill="#182126">From file to usable data – where IXP sits</text>
+<rect x="20" y="48" width="150" height="70" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="95" y="77" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">1 · Digitize</text>
+<text x="95" y="99" font-size="13" text-anchor="middle" fill="#3C464B">OCR: text + layout</text>
+<rect x="194" y="48" width="150" height="70" fill="#FFFFFF" stroke="#616161" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="269" y="77" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">2 · Classify</text>
+<text x="269" y="99" font-size="13" text-anchor="middle" fill="#3C464B">type + page range</text>
+<rect x="368" y="48" width="150" height="70" fill="#FDE8E1" stroke="#FA4616" stroke-width="2.5"/>
+<text x="443" y="77" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">3 · Extract</text>
+<text x="443" y="99" font-size="13" text-anchor="middle" fill="#3C464B">fields → JSON</text>
+<rect x="542" y="48" width="150" height="70" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="617" y="77" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">4 · Validate</text>
+<text x="617" y="99" font-size="13" text-anchor="middle" fill="#3C464B">a person checks</text>
+<rect x="716" y="48" width="150" height="70" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="791" y="77" font-size="14" font-weight="600" text-anchor="middle" fill="#182126">5 · Export</text>
+<text x="791" y="99" font-size="13" text-anchor="middle" fill="#3C464B">to the next system</text>
+<line x1="170" y1="83" x2="192" y2="83" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d1-a)"/>
+<line x1="344" y1="83" x2="366" y2="83" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d1-a)"/>
+<line x1="518" y1="83" x2="540" y2="83" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d1-a)"/>
+<line x1="692" y1="83" x2="714" y2="83" stroke="#3C464B" stroke-width="1.5" marker-end="url(#s1d1-a)"/>
+<text x="95" y="146" font-size="13" text-anchor="middle" fill="#616161">Inside Extract</text>
+<text x="95" y="164" font-size="13" text-anchor="middle" fill="#616161">Document Data</text>
+<text x="269" y="146" font-size="13" text-anchor="middle" fill="#616161">DU classifier,</text>
+<text x="269" y="164" font-size="13" text-anchor="middle" fill="#616161">only for packets</text>
+<text x="443" y="146" font-size="13" text-anchor="middle" fill="#CE340B">IXP model</text>
+<text x="443" y="164" font-size="13" text-anchor="middle" fill="#CE340B">(your taxonomy)</text>
+<text x="617" y="146" font-size="13" text-anchor="middle" fill="#616161">Validation Station</text>
+<text x="617" y="164" font-size="13" text-anchor="middle" fill="#616161">in Action Center</text>
+<text x="791" y="146" font-size="13" text-anchor="middle" fill="#616161">Your workflow</text>
+<text x="791" y="164" font-size="13" text-anchor="middle" fill="#616161">(Excel, API, ERP)</text>
+<rect x="20" y="192" width="16" height="16" fill="#FDE8E1" stroke="#FA4616" stroke-width="2"/>
+<text x="44" y="205" font-size="13" fill="#3C464B">IXP does this</text>
+<rect x="200" y="192" width="16" height="16" fill="#FFFFFF" stroke="#0BA2B3" stroke-width="2"/>
+<text x="224" y="205" font-size="13" fill="#3C464B">UiPath activities / your workflow</text>
+<rect x="520" y="192" width="16" height="16" fill="#FFFFFF" stroke="#616161" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="544" y="205" font-size="13" fill="#3C464B">Optional step</text>
+<rect x="20" y="236" width="846" height="62" fill="#182126"/>
+<text x="443" y="262" font-size="14" text-anchor="middle" fill="#FFFFFF">IXP (Unstructured and complex documents) covers step 3 only – it doesn't classify or split packets.</text>
+<text x="443" y="284" font-size="14" text-anchor="middle" fill="#FFFFFF">Its result carries a confidence per value; steps 2, 4 and 5 are decisions you build around it.</text>
+</svg>
+<figcaption>The five DU steps. In a lean IXP workflow, Extract Document Data handles digitization and extraction in one activity; you add validation only where needed.</figcaption>
+</figure>
+
+<div class="concept">
+<h3>IXP and its Unstructured and complex documents capability</h3>
+<p><strong>Takeaway:</strong> when this workshop says "IXP", it means the Unstructured and complex documents capability: you define what to extract (the taxonomy) and describe it in words (instructions), and an LLM fills it in. You improve results by changing instructions or model settings, not by training.</p>
+<div class="concept-grid">
+<div><strong>What it is</strong>One entry point in Automation Cloud for three extraction capabilities, chosen by data type: Communications data (emails, tickets), Structured and semi-structured documents (DU models), and Unstructured and complex documents (generative extraction). DU remains a standalone service that you can also reach through IXP.</div>
+<div><strong>What it does</strong>The Unstructured and complex documents capability reads the digitized document and returns your fields as structured output, each with a confidence at runtime. It handles free-form text, complex tables, high layout variation and several document types in one file without splitting.</div>
+<div class="concept-grid__when"><strong>When to use</strong>New document projects with varying layouts, values that must be inferred, complex tables, or stacks of documents in one file. <em>When not:</em> if a specialized out-of-the-box DU model fits (for example invoices) or you need a model you can fine-tune and retrain, DU Modern or Classic can fit better. It doesn't classify or split packets, and it doesn't learn from your annotations.</div>
+<div><strong>How to use</strong><ol><li>Open IXP in Automation Cloud and create a project with the Unstructured and complex documents capability.</li><li>Upload a representative sample.</li><li>Define the taxonomy and instructions, review predictions, measure.</li><li>Publish a version and call it from a workflow or the DU API.</li></ol></div>
+<div class="concept-grid__wide"><strong>Common mistakes</strong><ul><li>Saying IXP "replaces" DU. DU stays a standalone service; IXP Unstructured and complex documents is one more extraction option.</li><li>Expecting the model to get better because you confirmed many values. It does not learn from annotations; your annotations only make the scores trustworthy.</li><li>Choosing the capability before looking at the documents. Use the docs' capability decision guide first.</li></ul></div>
+</div>
+</div>
+
+<div class="foundation-box"><div class="foundation-box__title">What "LLM" and "prompt" mean here</div><p>An LLM (large language model) is an AI model that reads text and generates text. A <strong>prompt</strong> is the text you send it. In IXP you never write the full prompt yourself: your taxonomy, data types and instructions are assembled into the prompt for you, and the answer comes back already shaped into your fields.</p></div>
+
+<h3 id="glossary">Glossary</h3>
+<p>Keep this list open in a tab during the labs.</p>
+<dl class="glossary">
+<dt>Project</dt><dd>The IXP container for one use case: uploaded documents, taxonomy, instructions, your annotations, scores and model versions.</dd>
+<dt>Taxonomy</dt><dd>The extraction schema: field groups, fields, data types and instructions. In IXP it is both the prompt and the shape of the output.</dd>
+<dt>Field group</dt><dd>A set of related fields, for example <em>Statement Header</em> or <em>Account</em>. It behaves like a table (fields are its columns) and can be returned once per occurrence in the document. Every field belongs to a group.</dd>
+<dt>Field</dt><dd>One value to extract, such as <em>Closing Balance</em>, with a name, a data type and an instruction.</dd>
+<dt>Data type / field type</dt><dd>What kind of value a field holds and how it is formatted. Pre-configured types include Exact Text, Inferred Text, Number, Date and Monetary Quantity; Boolean (true/false) is also available as a data type. You can create your own field types, for example a Choice type with a closed list of values.</dd>
+<dt>Instructions</dt><dd>Plain-language descriptions at four levels: overall (whole project), field group, field and field type. Together they tell the model what to extract and where.</dd>
+<dt>Prediction</dt><dd>A value the model extracted.</dd>
+<dt>Annotation</dt><dd>A value you confirmed or corrected. It is the reference answer for scoring. It does not train the model.</dd>
+<dt>Evaluation (Measure)</dt><dd>Comparing predictions with annotations to get precision, recall and F1 per field and field group, shown on the Measure page.</dd>
+<dt>Confidence</dt><dd>A 0–1 estimate of how sure the model was about a value. For IXP it is returned per field at runtime. A signal, not proof of correctness.</dd>
+<dt>OCR</dt><dd>Optical character recognition: reading text from scanned images. Part of digitization, with its own confidence score.</dd>
+<dt>Digitization</dt><dd>Turning a file (native, scanned or mixed PDF, image) into machine-readable text and layout before extraction.</dd>
+<dt>Model version</dt><dd>A published snapshot of the project configuration (taxonomy, instructions, model settings). You tag a version Staging or Production, and callers use the tag.</dd>
+<dt>Validation Station</dt><dd>The review screen: document on one side, extracted values on the other, with confidence colours, so a person can confirm or correct.</dd>
+<dt>Action Center</dt><dd>The place where people complete tasks created by robots, including validation tasks. The robot waits, then continues with the checked data.</dd>
+<dt>Document Data</dt><dd>The variable that the Extract Document Data activity returns in Studio: field values plus extraction and OCR confidence per field.</dd>
+<dt>HITL</dt><dd>Human in the loop: only risky items go to a person for review.</dd>
+</dl>
+
+<div class="why-box"><div class="why-box__title">💬 "What is IXP, and how does it relate to the DU we already use?"</div>
+<p>IXP is UiPath's umbrella for extraction. Its Unstructured and complex documents capability uses an LLM that you steer with instructions, so you can start without training data and handle layouts that vary a lot. DU is still there: its classifiers, Validation Station and activities are what you use around IXP to split packets, review results and run the process. Think of IXP as a new extractor that plugs into the DU way of working.</p></div>
+
+<div class="admonition admonition--tip"><div class="admonition-title">💡 Key takeaways</div><div class="admonition-body"><ul>
+<li>Every document project is digitize → classify → extract → validate → export. IXP does the extract step.</li>
+<li>IXP Unstructured and complex documents extracts fields; it doesn't classify, split packets or learn from annotations.</li>
+<li>Your taxonomy and instructions are the prompt. Better instructions, not more annotations, give better results.</li>
+<li>Confidence exists at runtime only and is a signal, not a guarantee.</li>
+</ul></div></div>
+<p class="source-list"><strong>Sources:</strong>
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/introduction" target="_blank" rel="noopener">IXP overview</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/capability-types" target="_blank" rel="noopener">IXP capability types</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/overview/choosing-the-correct-capability" target="_blank" rel="noopener">Choosing the correct capability</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/introduction" target="_blank" rel="noopener">Unstructured and complex documents – introduction</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-design-time" target="_blank" rel="noopener">FAQ – design time</a> ·
+<a href="https://docs.uipath.com/ixp/automation-cloud/latest/user-guide/faq-runtime" target="_blank" rel="noopener">FAQ – runtime</a> ·
+<a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/user-guide/fundamental-capabilities" target="_blank" rel="noopener">DU fundamental capabilities</a> ·
+<a href="https://docs.uipath.com/document-understanding/automation-cloud/latest/classic-user-guide/introduction" target="_blank" rel="noopener">DU framework introduction</a> ·
+<a href="https://docs.uipath.com/automation-cloud/automation-cloud/latest/admin-guide/introduction" target="_blank" rel="noopener">About Automation Cloud</a> ·
+<a href="https://docs.uipath.com/studio/standalone/latest/user-guide/introduction" target="_blank" rel="noopener">Studio</a> ·
+<a href="https://docs.uipath.com/orchestrator/automation-cloud/latest/user-guide/introduction" target="_blank" rel="noopener">Orchestrator</a> ·
+<a href="https://docs.uipath.com/action-center/automation-cloud/latest/user-guide/introduction" target="_blank" rel="noopener">Action Center</a>
+</p>
+</section>
+
+
+    <nav class="module-nav" aria-label="Page navigation">
+      <a href="session-1.html" class="btn btn-outline">← Session 1 overview</a>
+      <div></div>
+      <a href="theory-kickoff.html" class="btn btn-primary">Kickoff &amp; using IXP well →</a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo"><p>© 2026 UiPath · <a href="https://docs.uipath.com/ixp" target="_blank" rel="noopener">IXP docs</a> · <a href="https://uipath-practice.github.io/IXP-TrainingCourse/index.html" target="_blank" rel="noopener">IXP self-learning course</a> · IXP Hands-on Workshop</p></footer>
+
+<script src="../assets/js/progress.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script>initModulePage('theory-foundations');</script>
+</body>
+</html>
